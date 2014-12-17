@@ -38,8 +38,20 @@ GLOBAL:VAR|WIS
 GLOBAL:VAR|CHASCORE
 GLOBAL:VAR|CHA
 
+
+# RUles
+GLOBAL:RULE|DAMAGE_VW
+GLOBAL:RULE|USE_CMB
+
+GLOBAL:HP|WoundPoints
+GLOBAL:HP|HP
+GLOBAL:HP|AltHP
+
+
+FLAG|Tall		EXPLANATION:Set T/F whether a Race is TALL or not (not = long) - SIZE dictates BASE value for REACH and FACE, 
+
 # Class Specific Local
-LOCAL:CLASS|SkillPool		EXPLANATION:
+LOCAL:CLASS|SkillPool		EXPLANATION:???
 
 
 
@@ -102,6 +114,8 @@ GLOBAL:VAR|DomainLVL			EXPLANATION:Determines the Level of domain powers
 GLOBAL:VAR|ClericDomainCount		EXPLANATION:Determines how many Domains a Cleric may have				
 GLOBAL:VAR|Domain				EXPLANATION:PLACEHOLDER - Domain was BONUS:DOMAIN|NUMBER|x		
 
+GLOBAL:OS|TwoHandDamageDivisor
+GLOBAL:OS|OffHandLightBonus
 
 
 #Vars File:
@@ -136,7 +150,7 @@ EQUIPMENT.PART:VAR|ToHit.12		EXPLANATION:Sets the ToHit for attack 12 //For Ecli
 FLAG|FighterWeaponMastery		EXPLANATION:Sets 'Flag' called 'FighterWeaponMastery'
 FLAG|RacialVision				EXPLANATION:Sets 'Flag' (Boolean) called 'RacialVision'
 
-# Archetypes by Class
+# Class Archetype Flags
 # Barbarian
 FLAG|BarbarianRage
 FLAG|BarbarianFastMovement
@@ -148,14 +162,62 @@ FLAG|BarbarianIndomitableWill
 FLAG|BarbarianTirelessRage
 FLAG|BarbarianMightyRage
 
+# Cleric
+FLAG|ClericClassSkills	
+FLAG|ClericChannelEnergy
+FLAG|ClericOrisons
+FLAG|ClericSpontaneousCasting
+
+# Fighter
+FLAG|FighterClassSkills	
+FLAG|FighterProficiencies
+FLAG|FighterWeaponProficiencies
+FLAG|FighterHeavyArmorProficiency
+FLAG|FighterMediumArmorProficiency
+FLAG|FighterLightArmorProficiency
+FLAG|FighterShieldProficiency
+FLAG|FighterTowerShieldProficiency
+FLAG|FighterBonusFeats
+FLAG|FighterBravery
+FLAG|FighterArmorTraining_ALL
+FLAG|FighterWeaponTraining_ALL
+FLAG|FighterArmorMastery
 
 
+# Monk
+FLAG|MonkFlurryOfBlows
+FLAG|MonkBonusFeats					
+FLAG|MonkACBonus							
+FLAG|MonkStunningFist					
+FLAG|MonkEvasion							
+FLAG|MonkFastMovement					
+FLAG|MonkManeuverTraining			
+FLAG|MonkStillMind					
+FLAG|MonkKiPool							
+FLAG|MonkSlowFall						
+FLAG|MonkHighJump						
+FLAG|MonkPurityOfBody					
+FLAG|MonkWholenessOfBody			
+FLAG|MonkImprovedEvasion			
+FLAG|MonkDiamondBody					
+FLAG|MonkAbundantStep					
+FLAG|MonkDiamondSoul
+FLAG|MonkQuiveringPalm	
+FLAG|MonkTongueOfTheSunAndMoon
+FLAG|MonkTimelessBody
+FLAG|MonkEmptyBody
+FLAG|MonkPerfectSelf
 
-FLAG|
-FLAG|
-FLAG|
+# Wizard
+FLAG|WizardClassSkills
+FLAG|WizardArcaneSchool
+FLAG|WizardWeaponProficiencies
+FLAG|WizardWeaponProficiencies
+FLAG|WizardScribeScroll
+FLAG|WizardArcaneBond
+FLAG|WizardCantrips
+FLAG|WizardBonusFeats
 
-|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianRage
 
 
 # MODIFYOTHER:ABILITY=Archetype|GROUP=FighterWeaponMastery|FighterWeaponMastery|SET|True

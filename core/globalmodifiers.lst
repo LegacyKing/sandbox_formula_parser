@@ -26,25 +26,23 @@ MODIFY:Weapon.DamageMult.OneHand|SOLVE|1
 MODIFY:Weapon.DamageMult.TwoHand|SOLVE|1.5*(STR>=0)
 
 #STATNAME:Dexterity
-MODIFY:DEXSCORE|SOLVE|Value
-MODIFY:DEX|SOLVE|Mod
-MODIFY:Initiative.Stat|SET|DEX
-MODIFY:AC.Base|SET|10|PRIORITY=1000000
-MODIFY:AC.Attribute|SOLVE|min(AC.Stat,min(MaxDex,ModEquipMaxDex))
-MODIFY:AC.Stat|SET|DEX|PRIORITY=1000000
-MODIFY:MaxDex|SOLVE|if(encumbrance==0,1000,value())
-MODIFY:MaxDex|SOLVE|if(encumbrance==1,3,value())
-MODIFY:MaxDex|SOLVE|if(encumbrance==2,1,value())
-MODIFY:AC|SOLVE|max(FightingDefensivelyAC,TotalDefenseAC)
+MODIFY:DEXSCORE|SOLVE|Value								EXPLANATION:DEXSCORE = Stat "Dexterity" value.
+MODIFY:DEX|SOLVE|Mod									EXPLANATION:Sets 'DEX' to the Mod value for Dexterity.
+MODIFY:Initiative.Stat|SET|DEX							EXPLANATION:Initiative.Stat is the Modifier for Initiative based upon Dex Bonus
+MODIFY:AC.Base|SET|10|PRIORITY=1000000						EXPLANATION:D20 System - Default value is 10
+MODIFY:AC.Attribute|SOLVE|min(AC.Stat,min(MaxDex,ModEquipMaxDex))		EXPLANATION:D20 System - Sets the actual attribute modifier to the lowest value of Dex Mod, or penalties for Armor "MaxDex" or "Encumbrance".
+MODIFY:AC.Stat|SET|DEX|PRIORITY=1000000						EXPLANATION:D20 System - Sets the default AC.Stat to DEX mod, though this can be overriden using a PRIORITY >1000000
+MODIFY:MaxDex|SOLVE|if(encumbrance==0,1000,value())				EXPLANATION:D20 System - Sets MaxDex to be 1000, if encumbrance value is 0
+MODIFY:MaxDex|SOLVE|if(encumbrance==1,3,value())				EXPLANATION:D20 System - Sets MaxDex to be 3, if encumbrance value is 1
+MODIFY:MaxDex|SOLVE|if(encumbrance==2,1,value())				EXPLANATION:D20 System - Sets MaxDex to be 1, if encumbrance value is 2
+MODIFY:AC|SOLVE|max(FightingDefensivelyAC,TotalDefenseAC)			EXPLANATION:D20 System - Adds to AC the values of either Fighting Defensively or Total Defense AC. This is turned on by activating a TEMPBONUS/TEMPMOD.
 
 #STATNAME:Constitution	
 MODIFY:CONSCORE|SOLVE|Value
 MODIFY:CON|SOLVE|Mod
-MODIFY:HP=WoundPoints|SET|CON|PRIORITY=1000000
-MODIFY:HP=HP|SET|if(context("FLAG",FighterWeaponMastery),CON*TL,value())
+MODIFY:HP=WoundPoints|SET|CON|PRIORITY=1000000						
+MODIFY:HP=HP|SET|CON*TL
 MODIFY:HP=AltHP|SET|CONSCORE*2
-MODIFY:OS=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
-MODIFY:OS=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
 
 #STATNAME:Intelligence
 MODIFY:INTSCORE|SOLVE|Value
@@ -57,17 +55,20 @@ MODIFY:Skill.Bonus|SET|INT
 #STATNAME:Wisdom
 MODIFY:WISSCORE|SOLVE|Value
 MODIFY:WIS|SOLVE|Mod
+
 #STATNAME:Charisma
 MODIFY:CHASCORE|SOLVE|Value
 MODIFY:CHA|SOLVE|Mod
 
+
+#GENERAL RULES
 MODIFY:Companion.NormalMount|SET|1
 MODIFY:Companion.NormalFollower|SET|1
 
 # AC.Attribute = Actual Display, and ultimate value from the Stat, whereas AC.Stat will be the MOD (Dex or CHA)
 
 
-	BONUS:COMBAT|AC|min(CHA, min(MXDXEN,MODEQUIPMAXDEX))|TYPE=Ability|PREVAREQ:ACStatIsCha,1
+#	BONUS:COMBAT|AC|min(CHA, min(MXDXEN,MODEQUIPMAXDEX))|TYPE=Ability|PREVAREQ:ACStatIsCha,1
 	DEFINE:OversizeWeaponToHitBonus|0	
 
 
@@ -78,6 +79,13 @@ MODIFY:Save.Will.Stat|SOLVE|WIS				EXPLANATION:D20 System - Sets the Will Stat B
 # MODIFY:STR|SOLVE|stat("Strength")
 
 MODIFY:ENCUMBRANCE|SET|encumbrance()			EXPLANATION:D20 System - Sets the Encumbrance to the "Encumbrance" - ties into the Load.lst file
+
+
+
+# OS Flags
+MODIFY:OS=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
+MODIFY:OS=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
+
 
 
 #Global file:
@@ -112,7 +120,7 @@ MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|value()+ToHit.ModTotal|PRIORITY=100
 MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.9|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
 
 #For Flurry of Blows (SRD 3.5):
-MODIFY:BaseAB.Step|SET|3|PRIORITY=1000
+#MODIFY:BaseAB.Step|SET|3|PRIORITY=1000
 
 #For Flurry of Blows (PF) [on the Equipment]:
 
@@ -147,6 +155,6 @@ MODIFYOTHER:CLASS|ALL|TL|ADD|classlevel()
 #	BONUS:COMBAT|DAMAGE.Splash|-STR|TYPE=Ability
 
 # This is for the OS to determine Bonuses in the Sheet.
-MODIFY:TWOHANDDAMAGEDIVISOR|SET|2
-MODIFY:OFFHANDLIGHTBONUS|SET|2
+MODIFY:OS=TWOHANDDAMAGEDIVISOR|SET|2
+MODIFY:OS=OFFHANDLIGHTBONUS|SET|2
 

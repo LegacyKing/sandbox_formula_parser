@@ -14,16 +14,15 @@
 
 VARTYPEDEF:POINT|AREA				EXPLANATION:For objects like vectors 5,5
 
-
 VARTYPEDEF:BOOLEAN|FLAG				EXPLANATION:Boolean "Flag" for T/F - use in place of Archetypes and Race Traits
-
+VARTYPEDEF:BOOLEAN|RULE				EXPLANATION:Boolean "Rule" for the house rules
 
 VARTYPEDEF:NUMBER|OS				EXPLANATION:This is for controlling the OS
 VARTYPEDEF:NUMBER|VAR				EXPLANATION:This is our normal VARS
 VARTYPEDEF:NUMBER|ABILITYPOOL			EXPLANATION:This is for ability pools
 
 # Based upon new design talks with Tom
-VARTYPEDEF:NUMBER|CLASS				EXPLANATION:For Class
+VARTYPEDEF:NUMBER|CLASS				EXPLANATION:For Class specific items
 VARTYPEDEF:NUMBER|SKILL				EXPLANATION:For Skills, like Acrobatics
 VARTYPEDEF:NUMBER|STAT				EXPLANATION:For Attributes, like Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma.
 

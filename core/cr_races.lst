@@ -3,7 +3,35 @@ SOURCELONG:Core Rulebook	SOURCESHORT:CR	SOURCEWEB:http://paizo.com/store/downloa
 # Original Entry by: Stefan Radermacher
 
 # Race Name	SORTKEY		Skills/Level				Starting Feats	Size		Move			Face/Space	Reach		Serves As			Bonus Languages								Bonus Ability Pool			Save bonus							Stat bonus								Auto Language			Ability								Define				Main Race Type	Race Subtype		Type				Source Page
-Dwarf		SORTKEY:a_base_pc							STARTFEATS:1	SIZE:M	MOVE:Walk,20	FACE:5	REACH:5					LANGBONUS:Giant,Gnome,Goblin,Orc,Terran,Undercommon																BONUS:STAT|CON|2	BONUS:STAT|WIS|2	BONUS:STAT|CHA|-2						ABILITY:Internal|AUTOMATIC|Race Traits ~ Dwarf							RACETYPE:Humanoid	RACESUBTYPE:Dwarf		TYPE:Humanoid.Base.PC	SOURCEPAGE:p.21
+Dwarf		
+	MODIFY:ABILITYPOOL=Feat|ADD|1
+	MODIFY:MOVE=Walk|SET|20
+	MODIFY:AREA=Face|SET|5,5
+	MODIFY:Reach|SET|5
+	MODIFY:STAT=CONSCORE|ADD|2
+	MODIFY:STAT=WISSCORE|ADD|2
+	MODIFY:STAT=CHASCORE|ADD|-2
+	MODIFY:FLAG=Tall|SET|1
+	SIZE:M
+	RACETYPE:Humanoid
+	RACESUBTYPE:Dwarf
+	LANGBONUS:Giant,Gnome,Goblin,Orc,Terran,Undercommon
+	ABILITY:Internal|AUTOMATIC|Race Traits ~ Dwarf
+	
+	SORTKEY:a_base_pc
+	TYPE:Humanoid.Base.PC
+	SOURCEPAGE:p.21
+
+# FACT/SET Candidates:
+# SORTKEY - Value is static
+# TYPE - Typically remains static
+# SOURCEPAGE:p.x - Statis
+# Not a candidate
+# RACETYPE and RACESUBTYPE are altered in game by templates.
+# SIZE is set, but is altered outside of race
+
+
+
 Elf		SORTKEY:a_base_pc							STARTFEATS:1	SIZE:M	MOVE:Walk,30	FACE:5	REACH:5					LANGBONUS:Celestial,Draconic,Gnoll,Gnome,Goblin,Orc,Sylvan															BONUS:STAT|CON|-2	BONUS:STAT|DEX,INT|2			AUTO:LANG|Common|Elven		ABILITY:Internal|AUTOMATIC|Race Traits ~ Elf							RACETYPE:Humanoid	RACESUBTYPE:Elf		TYPE:Humanoid.Base.PC	SOURCEPAGE:p.22
 Gnome		SORTKEY:a_base_pc							STARTFEATS:1	SIZE:S	MOVE:Walk,20	FACE:5	REACH:5					LANGBONUS:Draconic,Dwarven,Elven,Giant,Goblin,Orc																BONUS:STAT|CON|2	BONUS:STAT|CHA|2	BONUS:STAT|STR|-2	AUTO:LANG|Common|Gnome|Sylvan	ABILITY:Internal|AUTOMATIC|Race Traits ~ Gnome							RACETYPE:Humanoid	RACESUBTYPE:Gnome		TYPE:Humanoid.Base.PC	SOURCEPAGE:p.23
 Half-Elf	SORTKEY:a_base_pc							STARTFEATS:1	SIZE:M	MOVE:Walk,30	FACE:5	REACH:5	SERVESAS:RACE|Elf|Human	LANGBONUS:ALL								BONUS:ABILITYPOOL|Ability Bonus|1																		AUTO:LANG|Common|Elven		ABILITY:Internal|AUTOMATIC|Race Traits ~ Half-Elf						RACETYPE:Humanoid	RACESUBTYPE:Elf|Human	TYPE:Humanoid.Base.PC	SOURCEPAGE:p.24
