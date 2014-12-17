@@ -1,0 +1,149 @@
+
+
+
+# Game System Vars -
+GLOBAL:VAR|Save.Fortitude		EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Fortitude"
+GLOBAL:VAR|Save.Reflex			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Reflex"
+GLOBAL:VAR|Save.Will			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Will"
+
+GLOBAL:VAR|Save.Fortitude.Base	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" as a Base value - this is from Classes
+GLOBAL:VAR|Save.Reflex.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" as a Base value - this is from Classes
+GLOBAL:VAR|Save.Will.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" as a Base value - this is from Classes
+
+GLOBAL:VAR|Save.Fortitude.Stat	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" from the designated Stat
+GLOBAL:VAR|Save.Reflex.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" from the designated Stat
+GLOBAL:VAR|Save.Will.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" from the designated Stat
+
+
+
+MODIFYOTHER:STAT|ALL|Mod|SOLVE|(Value/2)-5		EXPLANATION:D20 System - Sets the Mod for all "Stats" to the Value of the stat/2-5. 
+LOCAL:STAT|Value						EXPLANATION:D20 System - Sets the Value of a given "Stat"
+LOCAL:STAT|Mod						EXPLANATION:D20 System - Sets the Mod'ifier' of a given "Stat"
+
+MODIFY:Save.Fortitude.Stat|SOLVE|CON			EXPLANATION:D20 System - Sets the Fortitude Stat Bonus to the CON modifier value
+MODIFY:Save.Reflex.Stat|SOLVE|DEX				EXPLANATION:D20 System - Sets the 
+MODIFY:Save.Will.Stat|SOLVE|WIS				EXPLANATION:D20 System - Sets the 
+# getLocalVar("STAT","Constitution",Mod)	EXPLANATION:An Alternate method to get a Local Var.
+# MODIFY:STR|SOLVE|stat("Strength")
+
+MODIFY:ENCUMBRANCE|SET|encumbrance()		EXPLANATION:D20 System - Sets the Encumbrance to the "Encumbrance" - ties into the Load.lst file
+
+
+# Class Level Trackers
+GLOBAL:VAR|Class.BarbarianLVL		EXPLANATION:Captures the level of Class 'Barbarian'		
+GLOBAL:VAR|Class.ClericLVL		EXPLANATION:Captures the level of Class 'Cleric'		
+GLOBAL:VAR|Class.FighterLVL		EXPLANATION:Captures the level of Class 'Fighter'		
+GLOBAL:VAR|Class.MonkLVL		EXPLANATION:Captures the level of Class 'Monk'		
+GLOBAL:VAR|Class.WizardLVL		EXPLANATION:Captures the level of Class 'Wizard'		
+
+# Class Extras
+CLASS:VAR|Class.MaxLevel		EXPLANATION:This sets the Maximum Level on the Class - this is a local var and may be used on each class to have a Maxmimum defined level. CONVERSION NOTE: This should replace 'MAXLEVEL'
+
+
+
+# Cleric Items
+GLOBAL:VAR|DomainLVL			EXPLANATION:Determines the Level of domain powers		
+GLOBAL:VAR|ClericDomainCount		EXPLANATION:Determines how many Domains a Cleric may have				
+GLOBAL:VAR|Domain				EXPLANATION:PLACEHOLDER - Domain was BONUS:DOMAIN|NUMBER|x		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Vars File:
+GLOBAL:VAR|BaseAB				EXPLANATION:D20 System - Sets the "Base Attack Bonus" value for character.
+GLOBAL:VAR|BaseAB.Step			EXPLANATION:D20 System - Sets the "Base Attack Bonus" step - a Step is the interval between the first attack and each proceeding attack. This is called an attack iteration. Most classes are limited to 4 attacks in total, except the monk which gets 7 unarmed strikes.
+EQUIPMENT.PART:VAR|AB.1			EXPLANATION:Sets the AB (AttackBonus) for the 1st attack
+EQUIPMENT.PART:VAR|AB.2			EXPLANATION:Sets the AB (AttackBonus) for the 2nd attack
+EQUIPMENT.PART:VAR|AB.3			EXPLANATION:Sets the AB (AttackBonus) for the 3rd attack
+EQUIPMENT.PART:VAR|AB.4			EXPLANATION:Sets the AB (AttackBonus) for the 4th attack
+EQUIPMENT.PART:VAR|AB.5			EXPLANATION:Sets the AB (AttackBonus) for the 5th attack
+EQUIPMENT.PART:VAR|AB.6			EXPLANATION:Sets the AB (AttackBonus) for the 6th attack
+EQUIPMENT.PART:VAR|AB.7			EXPLANATION:Sets the AB (AttackBonus) for the 7th attack
+EQUIPMENT.PART:ToHit.ModTotal		EXPLANATION:Sets the ToHit.ModTotal
+EQUIPMENT.PART:VAR|ToHit.1		EXPLANATION:Sets the ToHit for attack 1	
+EQUIPMENT.PART:VAR|ToHit.2		EXPLANATION:Sets the ToHit for attack 2	
+EQUIPMENT.PART:VAR|ToHit.3		EXPLANATION:Sets the ToHit for attack 3	
+EQUIPMENT.PART:VAR|ToHit.4		EXPLANATION:Sets the ToHit for attack 4	
+EQUIPMENT.PART:VAR|ToHit.5		EXPLANATION:Sets the ToHit for attack 5	
+EQUIPMENT.PART:VAR|ToHit.6		EXPLANATION:Sets the ToHit for attack 6  //For Flurry of Blows [PF]
+EQUIPMENT.PART:VAR|ToHit.7		EXPLANATION:Sets the ToHit for attack 7  //For Flurry of Blows [PF]
+EQUIPMENT.PART:VAR|ToHit.8		EXPLANATION:Sets the ToHit for attack 8  //For Haste/Speed
+EQUIPMENT.PART:VAR|ToHit.9		EXPLANATION:Sets the ToHit for attack 9  //For Spear Wind
+EQUIPMENT.PART:VAR|ToHit.10		EXPLANATION:Sets the ToHit for attack 10 //For Eclipse
+EQUIPMENT.PART:VAR|ToHit.11		EXPLANATION:Sets the ToHit for attack 11 //For Eclipse (Haste/Speed/Spear Wind)
+EQUIPMENT.PART:VAR|ToHit.12		EXPLANATION:Sets the ToHit for attack 12 //For Eclipse (Haste/Speed/Spear Wind)
+
+#Global file:
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.1|SOLVE|BaseAB
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.2|SOLVE|max(0,BaseAB-BaseAB.Step)
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.3|SOLVE|max(0,BaseAB-2*BaseAB.Step)
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.4|SOLVE|max(0,BaseAB-3*BaseAB.Step)
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.5|SOLVE|max(0,BaseAB-4*BaseAB.Step)
+#//AB.6 and AB.7 default to zero
+#//Some other stuff to calculate ToHit.ModTotal correctly (stats, pluses, etc), content may appear elsewhere as well
+
+
+#//Set the default values of the ToHits to the ABs, can be overridden by equipment if necessary
+
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|AB.1
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|AB.2
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|AB.3
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|AB.4
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|AB.5
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|AB.6
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.7
+#//ToHit.8 and ToHit.9 default to zero since they would not have been used.
+
+#//Make sure all ToHits get the mod total applied (close to last)
+
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.9|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+
+#For Flurry of Blows (SRD 3.5):
+MODIFY:BaseAB.Step|SET|3|PRIORITY=1000
+
+#For Flurry of Blows (PF) [on the Equipment]:
+MODIFY:ToHit.ModTotal|ADD|-2|PRIORITY=1000
+MODIFY:AB.1|SOLVE|BaseAB|PRIORITY=1000
+MODIFY:AB.2|SOLVE|BaseAB|PRIORITY=1000
+MODIFY:AB.3|SOLVE|max(0,BaseAB-BaseAB.Step)|PRIORITY=1000
+MODIFY:AB.4|SOLVE|max(0,BaseAB-BaseAB.Step)|PRIORITY=1000
+MODIFY:AB.5|SOLVE|max(0,BaseAB-2*BaseAB.Step)|PRIORITY=1000
+MODIFY:AB.6|SOLVE|max(0,BaseAB-2*BaseAB.Step)|PRIORITY=1000
+MODIFY:AB.7|SOLVE|max(0,BaseAB-3*BaseAB.Step)|PRIORITY=1000
+
+#For Haste/Speed (these need to be applied as the equivalent of today's TEMPBONUS)
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|AB.1|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|AB.1|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|AB.2|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|AB.3|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|AB.4|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|AB.5|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.6|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|AB.7|PRIORITY=1000
+
+
+

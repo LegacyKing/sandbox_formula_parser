@@ -1,0 +1,365 @@
+# CVS $Revision: 21663 $ $Author: amaitland $ -- Tue Dec  2 17:52:53 2014 -- reformated by prettylst.pl v1.51 (build 25490)
+SOURCELONG:Core Rulebook	SOURCESHORT:CR	SOURCEWEB:http://paizo.com/store/downloads/pathfinder/pathfinderRPG/v5748btpy88yj	SOURCEDATE:2009-08
+# Original Entry by: Stefan Radermacher and Eric C. Smith (Maredudd); Archetype work by Andrew Maitland
+
+# Test classes: Barbarian; Cleric, Fighter, Monk and Wizard
+
+
+# Class Name	Hit Dice	Type			Class Type		Abbreviation	Max Level	Ex Class			Source Page		Ability																		Define			Combat bonus										Save bonus																						Modify VAR				Monster Role
+# Formula Changes
+CLASS:Barbarian
+CLASS:Barbarian	HD:12		
+CLASS:Barbarian	TYPE:Base.PC	
+CLASS:Barbarian	CLASSTYPE:PC	
+CLASS:Barbarian	ABB:Brb		
+CLASS:Barbarian	MAXLEVEL:20	//PRECLASSVARLT:Class.MaxLevel,20
+CLASS:Barbarian	MODIFY:Class.MaxLevel|SET|20|PRIORITY=1000000
+CLASS:Barbarian	EXCLASS:Ex-Barbarian	
+CLASS:Barbarian	SOURCEPAGE:p.31	
+CLASS:Barbarian	ABILITY:Internal|AUTOMATIC|Class Skills ~ Barbarian|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianClassSkills	
+CLASS:Barbarian	MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")				
+CLASS:Barbarian	MODIFY:Class.BarbarianLVL|SOLVE|classlevel()		
+CLASS:Barbarian	MODIFY:Save.Fortitude|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2		
+CLASS:Barbarian	MODIFY:Save.Reflex|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3			
+CLASS:Barbarian	MODIFY:Save.Will|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3			
+CLASS:Barbarian	ROLE:Combat.Skill
+
+# FACT Changes
+CLASS:Barbarian	FACTSET:TYPE|Base|PC
+CLASS:Barbarian	FACTSET:CLASSTYPE|PC
+CLASS:Barbarian	FACT:ABB|Brb
+CLASS:Barbarian	FACT:MAXLEVEL|20	//Not sure this is even necessary, but let's do some thought experiments:
+# Could be accomplished just as easily as
+CLASS:Barbarian	PRENEQVARLT:Class.MaxLevel,20	//Should work, since it's a local class var, and Class.MaxLevel can be set with
+
+
+#	HD:12 - Sets the HD of the whole class to 'd12'		FACT candidate
+#	TYPE:Base.PC - Labels the Class as a 'Base' and 'PC'	FACTSET candidate
+#	CLASSTYPE:PC - CLASSTYPE is a PC				FACT candidate
+#	ABB:Brb - the Abbreviation is Brb				FACT candidate
+#	MAXLEVEL:20 - Sets the top level allowed for this class to 20
+#	EXCLASS:Ex-Barbarian							Special Tag - if the PREALIGN is never matched, the class loses ALL "Barbarian" Levels, and gains those exact levels in "Ex-Barbarian"
+#	SOURCEPAGE:p.31								EXPLANATION:Sets the output to UI and OS to ',p.31'	FACT candidate
+#	ABILITY - grants the ability (Ignoring explanation)
+#	DEFINE:BarbarianLVL|0 - JEP tag converted to VAR File		recommended naming: Class.BarbarianLVL	(Alternative option 'Class.Barbarian' preferred, but for conversion, best to stick with current standards)
+#	BONUS:VAR|BarbarianLVL|CL - JEP tag converted to		MODIFY:Class.BarbarianLVL|SOLVE|this()
+#	BONUS:COMBAT|BASEAB|classlvel("APPLIEDAS=NONEPIC")|TYPE=Base.REPLACE - JEP values, converted to		MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")				classlevel is the old term, it may change to "this()"
+#	BONUS:SAVE|BASE.Fortitude|classlevel("APPLIEDAS=NONEPIC")/2+2	 - JEP values, converted to		MODIFY:Save.Fortitude|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2						
+#	BONUS:SAVE|BASE.Reflex,BASE.Will|classlevel("APPLIEDAS=NONEPIC")/3 - JEP values, converted to		MODIFY:Save.Reflex|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3
+#																		MODIFY:Save.Will|SOLVE|classlevel("APPLIEDAS=NONEPIC")
+#	ROLE:Combat.Skill	- Sets the Role as Combat and Skill	Candidate for FACTSET?
+
+# Class Name	Restricted AL
+CLASS:Barbarian	!PREALIGN:LG,LN,LE
+# Class Name	Skill Pts/Lvl
+CLASS:Barbarian	STARTSKILLPTS:4
+###Block:Proficiencies
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Weapon and Armor Proficiency|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianArmorProficiencies|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Shield Prof|TYPE=ArmorProfMedium|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianArmorProficiencies
+###Block: Level Progression
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Rage|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianRage|PREVARGTEQ:BarbarianLVL,1
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Fast Movement|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianFastMovement|PREVARGTEQ:BarbarianLVL,1
+2	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Rage Powers|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianRagePowers|PREVARGTEQ:BarbarianLVL,2
+2	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Uncanny Dodge Tracker|PREVARGTEQ:BarbarianLVL,2
+3	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Trap Sense|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianTrapSense|PREVARGTEQ:BarbarianLVL,3
+7	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Damage Reduction|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianDamageReduction|PREVARGTEQ:BarbarianLVL,7
+11	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Greater Rage|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianGreaterRage|PREVARGTEQ:BarbarianLVL,11
+14	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Indomitable Will|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianIndomitableWill|PREVARGTEQ:BarbarianLVL,14
+17	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Tireless Rage|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianTirelessRage|PREVARGTEQ:BarbarianLVL,17
+20	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Mighty Rage|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianMightyRage|PREVARGTEQ:BarbarianLVL,20
+
+# Class Name		Hit Dice	Type			Class Type		Abbreviation	Max Level	Ability																		Visible	Define			Combat bonus										Save bonus																						Modify VAR				Monster Role
+CLASS:Ex-Barbarian	HD:12		TYPE:Base.PC	CLASSTYPE:PC	ABB:Brb		MAXLEVEL:20	ABILITY:Internal|AUTOMATIC|Class Skills ~ Barbarian|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianClassSkills	VISIBLE:NO	DEFINE:BarbarianLVL|0	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")|TYPE=Base.REPLACE	BONUS:SAVE|BASE.Fortitude|classlevel("APPLIEDAS=NONEPIC")/2+2	BONUS:SAVE|BASE.Reflex,BASE.Will|classlevel("APPLIEDAS=NONEPIC")/3	BONUS:VAR|BarbarianLVL|CL	ROLE:Combat.Skill
+# Class Name		Skill Pts/Lvl
+CLASS:Ex-Barbarian	STARTSKILLPTS:4
+###Block:Proficiencies
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Weapon and Armor Proficiency|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianArmorProficiencies|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Shield Prof|TYPE=ArmorProfMedium|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianArmorProficiencies
+###Block: Level Progression
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Fast Movement|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianFastMovement
+2	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Uncanny Dodge Tracker
+3	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Trap Sense|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianTrapSense
+7	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Damage Reduction|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianDamageReduction
+14	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Indomitable Will|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianIndomitableWill
+
+
+
+# Class Name	Hit Dice	Type			Class Type		Abbreviation	Max Level	Source Page		Bonus Languages					Group of Prohibited Spells																																																																			Ability																	Define								Combat bonus											Add domain number					Save bonus																					Modify VAR													Monster Role
+CLASS:Cleric	
+	HD:8		
+	TYPE:Base.PC	
+	CLASSTYPE:PC	
+	ABB:Clr		
+	MAXLEVEL:20	
+	SOURCEPAGE:p.38	
+	LANGBONUS:Abyssal,Celestial,Infernal	
+	PROHIBITSPELL:ALIGNMENT.Good|PREALIGN:LE,NE,CE	
+	PROHIBITSPELL:ALIGNMENT.Good|PREDEITYALIGN:LE,NE,CE	
+	PROHIBITSPELL:ALIGNMENT.Evil|PREALIGN:LG,NG,CG	
+	PROHIBITSPELL:ALIGNMENT.Evil|PREDEITYALIGN:LG,NG,CG	
+	PROHIBITSPELL:ALIGNMENT.Lawful|PREALIGN:CG,CN,CE	
+	PROHIBITSPELL:ALIGNMENT.Lawful|PREDEITYALIGN:CG,CN,CE	
+	PROHIBITSPELL:ALIGNMENT.Chaotic|PREALIGN:LG,LN,LE	
+	PROHIBITSPELL:ALIGNMENT.Chaotic|PREDEITYALIGN:LG,LN,LE	
+	ABILITY:Internal|AUTOMATIC|Class Skills ~ Cleric|!PREABILITY:1,CATEGORY=Archetype,TYPE.ClericClassSkills	
+	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")*3/4|TYPE=Base.REPLACE	
+	BONUS:SAVE|BASE.Fortitude,BASE.Will|classlevel("APPLIEDAS=NONEPIC")/2+2	
+	BONUS:SAVE|BASE.Reflex|classlevel("APPLIEDAS=NONEPIC")/3	
+	BONUS:VAR|ClericLVL|CL	BONUS:VAR|DomainLVL|ClericLVL	
+	BONUS:VAR|ClericDomainCount|2	
+	ROLE:Cleric
+	MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")*3/4				
+	MODIFY:Save.Fortitude|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2		
+	MODIFY:Save.Reflex|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3			
+	MODIFY:Save.Will|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2			
+	MODIFY:Class.MaxLevel|SET|20|PRIORITY=1000000
+	MODIFY:Class.ClericLVL|SOLVE|classlevel()	
+	MODIFY:DomainLVL|SOLVE|Class.ClericLVL	
+	MODIFY:ClericDomainCount|ADD|2	
+	MODIFY:Domain|SOLVE|ClericDomainCount
+	BONUS:DOMAIN|NUMBER|ClericDomainCount	
+
+#	BONUS:DOMAIN|NUMBER|ClericDomainCount	converts to?
+#	
+
+
+
+
+
+
+
+# Class Name	Skill Pts/Lvl
+CLASS:Cleric	STARTSKILLPTS:2
+# Class Name	Spell Stat		Spell Type		Automatically Known Spell Levels											Caster level
+CLASS:Cleric	SPELLSTAT:WIS	SPELLTYPE:Divine	KNOWNSPELLS:LEVEL=0|LEVEL=1|LEVEL=2|LEVEL=3|LEVEL=4|LEVEL=5|LEVEL=6|LEVEL=7|LEVEL=8|LEVEL=9	BONUS:CASTERLEVEL|Cleric|CL
+###Block:Proficiencies
+1	ABILITY:Special Ability|AUTOMATIC|Cleric ~ Weapon and Armor Proficiency
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Aura
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Channel Energy|!PREABILITY:1,CATEGORY=Archetype,TYPE.ClericChannelEnergy
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Orisons|!PREABILITY:1,CATEGORY=Archetype,TYPE.ClericOrisons
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Spontaneous Casting|!PREABILITY:1,CATEGORY=Archetype,TYPE.ClericSpontaneousCasting
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Domains
+###Block:
+1:REPEATLEVEL:1	BONUS:SKILLPOOL|NUMBER|ClericSkillPts	DEFINE:ClericSkillPts|0
+###Block: Level progression
+1	CAST:3,1
+2	CAST:4,2
+3	CAST:4,2,1
+4	CAST:4,3,2
+5	CAST:4,3,2,1
+6	CAST:4,3,3,2
+7	CAST:4,4,3,2,1
+8	CAST:4,4,3,3,2
+9	CAST:4,4,4,3,2,1
+10	CAST:4,4,4,3,3,2
+11	CAST:4,4,4,4,3,2,1
+12	CAST:4,4,4,4,3,3,2
+13	CAST:4,4,4,4,4,3,2,1
+14	CAST:4,4,4,4,4,3,3,2
+15	CAST:4,4,4,4,4,4,3,2,1
+16	CAST:4,4,4,4,4,4,3,3,2
+17	CAST:4,4,4,4,4,4,4,3,2,1
+18	CAST:4,4,4,4,4,4,4,3,3,2
+19	CAST:4,4,4,4,4,4,4,4,3,3
+20	CAST:4,4,4,4,4,4,4,4,4,4
+
+
+
+
+# Class Name	Hit Dice	Type			Class Type		Abbreviation	Max Level	Source Page		Ability																	Define			Combat bonus										Save bonus																						Modify VAR			Monster Role
+CLASS:Fighter	
+	HD:10		
+	TYPE:Base.PC	
+	CLASSTYPE:PC	
+	ABB:Ftr		
+	MAXLEVEL:20	
+	SOURCEPAGE:p.55	
+	ABILITY:Internal|AUTOMATIC|Class Skills ~ Fighter|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterClassSkills	
+	DEFINE:FighterLVL|0	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")|TYPE=Base.REPLACE	
+	MODIFY:Save.Fortitude.Base|classlevel()/2+2	
+	MODIFY:Save.Reflex.Base|classlevel()/3
+	MODIFY:Save.Will.Base|classlevel()/3	
+	MODIFY:Class.FighterLVL|classlevel()
+	ROLE:Combat.Skill
+# Class Name	Skill Pts/Lvl
+CLASS:Fighter	STARTSKILLPTS:2
+###Block:Proficiencies
+1	ABILITY:Fighter Class Feature|AUTOMATIC|Weapon and Armor Proficiency ~ Fighter|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterWeaponProficiencies,TYPE.FighterArmorProficiencies,TYPE.FighterHeavyArmorProficiency,TYPE.FighterMediumArmorProficiency,TYPE.FighterLightArmorProficiency,TYPE.FighterShieldProficiency,TYPE.FighterTowerShieldProficiency
+1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Heavy|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterArmorProficiencies,TYPE.FighterHeavyArmorProficiency
+1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Medium|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterArmorProficiencies,TYPE.FighterMediumArmorProficiency
+1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Light|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterArmorProficiencies,TYPE.FighterLightArmorProficiency
+1	ABILITY:Internal|AUTOMATIC|Shield Prof|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterArmorProficiencies,TYPE.FighterShieldProficiency
+1	ABILITY:Internal|AUTOMATIC|Shield Prof ~ Tower|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterArmorProficiencies,TYPE.FighterTowerShieldProficiency
+###Block: Advanced Weapon Feat qualifications - Why are these not CATEGORY:Internal???
+1	ABILITY:Special Ability|AUTOMATIC|Fighter Level Advanced Feat Tracker
+1	ABILITY:Special Ability|AUTOMATIC|Weapon Specialization Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Disruptive Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Greater Shield Focus Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Greater Weapon Focus Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Spellbreaker Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Greater Weapon Specialization Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Penetrating Strike Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Critical Mastery Qualify
+1	ABILITY:Special Ability|AUTOMATIC|Greater Penetrating Strike Qualify
+###Block: Level progression
+2	BONUS:VAR|BraveryLVL|CL|TYPE=Class
+3	BONUS:VAR|ArmorTrainingLVL|CL|TYPE=Class
+5	BONUS:VAR|FighterWeaponTrainingLVL|CL|TYPE=Class
+1	BONUS:VAR|FighterWeaponQualifyLVL|CL|TYPE=Class
+###Block:
+1	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bonus Feats|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterBonusFeats
+2	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bravery|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterBravery
+3	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Armor Training|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterArmorTraining_ALL
+5	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Weapon Training|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterWeaponTraining_ALL
+19	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Armor Mastery|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterArmorMastery
+###Block:
+#20	BONUS:ABILITYPOOL|Weapon Mastery|1|!PREABILITY:1,CATEGORY=Archetype,TYPE.FighterWeaponMastery
+20	MODIFY:POOL.Weapon Mastery|SOLVE|if(COUNT("ABILITIES","CATEGORY=Archetype","TYPE=FighterWeaponMastery")<=1,1,value())
+
+# Class Name	Hit Dice	Type			Class Type		Abbreviation	Max Level	Source Page		Define															Combat bonus											Save bonus													Modify VAR																Monster Role
+CLASS:Monk		HD:8		TYPE:Base.PC	CLASSTYPE:PC	ABB:Mnk		MAXLEVEL:20	SOURCEPAGE:p.56	DEFINE:FlurryOfBlows|0	DEFINE:MonkLVL|0	DEFINE:KiPoolWis|0	DEFINE:MonkFeatQualify|0	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")*3/4|TYPE=Base.REPLACE	BONUS:SAVE|BASE.Fortitude,BASE.Reflex,BASE.Will|classlevel("APPLIEDAS=NONEPIC")/2+2	BONUS:VAR|FlurryOfBlows|1	BONUS:VAR|MonkLVL|CL	BONUS:VAR|KiPoolWis|1	BONUS:VAR|KiPool|1	ROLE:None
+# Class Name	Multiple Requirements
+CLASS:Monk		PREMULT:1,[PREALIGN:LG,LN,LE],[PREABILITY:1,CATEGORY=Archetype,TYPE.MonkAlignment]
+# Class Name	Skill Pts/Lvl
+CLASS:Monk		STARTSKILLPTS:4
+###Block:Proficiencies
+1	ABILITY:Special Ability|AUTOMATIC|Weapon and Armor Proficiency ~ Monk|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Weapon Proficiencies ~ Monk|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Class Skills ~ Monk|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkClassSkills
+#PREVAREQ:MonkDefaultSkill,0
+###Block: Vars
+1	BONUS:VAR|FlurryLVL|MonkLVL
+1	BONUS:VAR|MonkBAB|CL*3/4
+1	BONUS:VAR|MonkFeatQualify|MonkLVL
+1	BONUS:VAR|MonkBonusFeatLVL|CL							DEFINE:MonkBonusFeatLVL|0
+1	BONUS:VAR|MonkACLVL,MonkFastMovementLVL,StunningFistMonkLVL|CL
+3	BONUS:VAR|ManeuverTrainingLVL|CL
+3	BONUS:VAR|ManeuverTrainingBAB|CL*3/4
+4	BONUS:VAR|KiPoolLVL,SlowFallLVL|CL
+5	BONUS:VAR|HighJumpLVL|CL
+7	BONUS:VAR|WholenessOfBodyLVL|CL
+12	BONUS:VAR|AbundantStepLVL|CL
+13	BONUS:VAR|DiamondSoulLVL|CL
+###Block:
+1	KIT:1|Monk Flurry of Blows
+# MonkLVL tracks both Stunning Fist and all Flurry of Blows aspects for backwards compatibility.
+# Monk bonus feats are taken as CATEGORY=Special Ability objects of the same name because the Monk can ignore the feats prerequisites,
+#	The Special Ability then grants the actual feat as a virtual feat, See the rsrd_abilities_class.lst file to see how these are coded.
+# MonkBonusFeatLVL is used as a prerequisite for when a specific bonus feat can be taken
+###Block: Monk Bonus Feats
+1	AUTO:FEAT|Improved Unarmed Strike
+###Block:
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Flurry of Blows|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkFlurryOfBlows
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Monk Bonus Feat|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkBonusFeats
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ AC Bonus|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkACBonus
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Stunning Fist|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkStunningFist
+2	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Evasion|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkEvasion
+3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Fast Movement|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkFastMovement
+3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Maneuver Training|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkManeuverTraining
+3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Still Mind|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkStillMind
+4	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Ki Pool|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkKiPool
+4	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Slow Fall|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkSlowFall
+5	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ High Jump|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkHighJump
+5	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Purity of Body|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkPurityOfBody
+7	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Wholeness of Body|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkWholenessOfBody
+9	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Improved Evasion|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkImprovedEvasion
+11	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Diamond Body|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkDiamondBody
+12	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Abundant Step|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkAbundantStep
+13	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Diamond Soul|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkDiamondSoul
+15	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Quivering Palm|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkQuiveringPalm
+17	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Tongue of the Sun and Moon|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkTongueOfTheSunAndMoon
+17	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Timeless Body|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkTimelessBody
+19	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Empty Body|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkEmptyBody
+20	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Perfect Self|!PREABILITY:1,CATEGORY=Archetype,TYPE.MonkPerfectSelf
+###Block:
+17	TEMPLATE:CHOOSE:Timeless Body ~ Adult|Timeless Body ~ Middle Age|Timeless Body ~ Old|Timeless Body ~ Venerable
+###Block:
+1	ABILITY:Internal|AUTOMATIC|Monk ~ Unarmed Damage
+###Block: Level progression
+#           F   D   T   S   M   L   H   G   C
+1	UDAM:1d1,1d2,1d3,1d4,1d6,1d8,2d6,3d6,4d6		UMULT:2
+2	UDAM:1d1,1d2,1d3,1d4,1d6,1d8,2d6,3d6,4d6
+3	UDAM:1d1,1d2,1d3,1d4,1d6,1d8,2d6,3d6,4d6
+4	UDAM:1d2,1d3,1d4,1d6,1d8,2d6,3d6,4d6,6d6
+5	UDAM:1d2,1d3,1d4,1d6,1d8,2d6,3d6,4d6,6d6
+6	UDAM:1d2,1d3,1d4,1d6,1d8,2d6,3d6,4d6,6d6
+7	UDAM:1d2,1d3,1d4,1d6,1d8,2d6,3d6,4d6,6d6
+8	UDAM:1d3,1d4,1d6,1d8,1d10,2d8,3d8,4d8,6d8
+9	UDAM:1d3,1d4,1d6,1d8,1d10,2d8,3d8,4d8,6d8
+10	UDAM:1d3,1d4,1d6,1d8,1d10,2d8,3d8,4d8,6d8
+11	UDAM:1d3,1d4,1d6,1d8,1d10,2d8,3d8,4d8,6d8
+12	UDAM:1d4,1d6,1d8,1d10,2d6,3d6,4d6,6d6,8d6
+13	UDAM:1d4,1d6,1d8,1d10,2d6,3d6,4d6,6d6,8d6
+14	UDAM:1d4,1d6,1d8,1d10,2d6,3d6,4d6,6d6,8d6
+15	UDAM:1d4,1d6,1d8,1d10,2d6,3d6,4d6,6d6,8d6
+16	UDAM:1d6,1d8,1d10,2d6,2d8,3d8,4d8,6d8,8d8
+17	UDAM:1d6,1d8,1d10,2d6,2d8,3d8,4d8,6d8,8d8
+18	UDAM:1d6,1d8,1d10,2d6,2d8,3d8,4d8,6d8,8d8
+19	UDAM:1d6,1d8,1d10,2d6,2d8,3d8,4d8,6d8,8d8
+20	UDAM:1d8,1d10,2d6,2d8,2d10,4d8,6d8,8d8,12d8
+
+
+
+
+# Class Name	Hit Dice	Type			Class Type		Abbreviation	Max Level	Base class as subclass?	Source Page		Bonus Languages		Ability																Visible	Define																					Combat bonus										Save bonus																					Modify VAR															Monster Role
+CLASS:Wizard	HD:6		TYPE:Base.PC	CLASSTYPE:PC	ABB:Wiz		MAXLEVEL:20	ALLOWBASECLASS:NO		SOURCEPAGE:p.77	LANGBONUS:Draconic	ABILITY:Internal|AUTOMATIC|Class Skills ~ Wizard|!PREABILITY:1,CATEGORY=Archetype,WizardClassSkills	VISIBLE:YES	DEFINE:DisallowWizardArcaneSchoolArchetype|0	DEFINE:WizardLVL|0	DEFINE:WizardSchoolLVL|0	DEFINE:SpellMasteryQualify|0	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")/2|TYPE=Base.REPLACE	BONUS:SAVE|BASE.Will|classlevel("APPLIEDAS=NONEPIC")/2+2	BONUS:SAVE|BASE.Fortitude,BASE.Reflex|classlevel("APPLIEDAS=NONEPIC")/3	BONUS:VAR|WizardLVL|CL	BONUS:VAR|WizardSchoolLVL|WizardLVL	BONUS:VAR|SpellMasteryQualify|1	ROLE:Wizard
+# Class Name	Skill Pts/Lvl
+CLASS:Wizard	STARTSKILLPTS:2
+# Class Name	Spell Stat		Spell Type
+CLASS:Wizard	SPELLSTAT:INT	SPELLTYPE:Arcane
+#	KNOWNSPELLS:LEVEL=0			SPELLBOOK:YES	BONUS:CASTERLEVEL|Wizard|CL
+#	Need some way to remove cantrips known
+#
+SUBCLASS:Abjurer		COST:0	CHOICE:SCHOOL|Abjuration
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Abjuration School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Conjurer		COST:0	CHOICE:SCHOOL|Conjuration
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Conjuration School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Diviner		COST:0	CHOICE:SCHOOL|Divination
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Divination School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Enchanter	COST:0	CHOICE:SCHOOL|Enchantment
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Enchantment School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Evoker		COST:0	CHOICE:SCHOOL|Evocation
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Evocation School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Illusionist	COST:0	CHOICE:SCHOOL|Illusion
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Illusion School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Necromancer	COST:0	CHOICE:SCHOOL|Necromancy
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Necromancy School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Transmuter	COST:0	CHOICE:SCHOOL|Transmutation
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Transmutation School																		!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool
+SUBCLASS:Universalist	COST:0
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Universal School|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool|PREVAREQ:DisallowWizardArcaneSchoolArchetype,0
+###Block:Proficiencies
+1	ABILITY:Special Ability|AUTOMATIC|Weapon and Armor Proficiency ~ Wizard|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardWeaponProficiencies
+1	ABILITY:Internal|AUTOMATIC|Weapon Proficiencies ~ Wizard|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardWeaponProficiencies
+###Block:
+1	AUTO:FEAT|Scribe Scroll|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardScribeScroll
+###Block:
+#1	ABILITY:Wizard Class Feature|AUTOMATIC|Universal School|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneSchool|PREVAREQ:DisallowWizardArcaneSchoolArchetype,0
+1	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Arcane Bond|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardArcaneBond
+1	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Cantrips|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardCantrips
+5	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Bonus Feats|!PREABILITY:1,CATEGORY=Archetype,TYPE.WizardBonusFeats
+1	ABILITY:Internal|AUTOMATIC|Wizard Free Spellbook|PREMULT:1,[PREMULT:2,[PREPCLEVEL:MAX=0],[PRECLASS:1,Wizard=1]],[PREMULT:2,[!PRECLASS:1,TYPE.Base=0],[PRECLASS:1,Wizard=1]]
+###Block: Level progression
+1	CAST:3,1
+2	CAST:4,2
+3	CAST:4,2,1
+4	CAST:4,3,2
+5	CAST:4,3,2,1
+6	CAST:4,3,3,2
+7	CAST:4,4,3,2,1
+8	CAST:4,4,3,3,2
+9	CAST:4,4,4,3,2,1
+10	CAST:4,4,4,3,3,2
+11	CAST:4,4,4,4,3,2,1
+12	CAST:4,4,4,4,3,3,2
+13	CAST:4,4,4,4,4,3,2,1
+14	CAST:4,4,4,4,4,3,3,2
+15	CAST:4,4,4,4,4,4,3,2,1
+16	CAST:4,4,4,4,4,4,3,3,2
+17	CAST:4,4,4,4,4,4,4,3,2,1
+18	CAST:4,4,4,4,4,4,4,3,3,2
+19	CAST:4,4,4,4,4,4,4,4,3,3
+20	CAST:4,4,4,4,4,4,4,4,4,4
