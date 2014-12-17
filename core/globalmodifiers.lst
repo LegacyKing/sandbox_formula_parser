@@ -1,0 +1,152 @@
+
+
+#On BASEAB: - These go to individual classes
+# MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")
+#or
+# MODIFY:BaseAB|SOLVE|classlevel(this(), "APPLIEDAS=NONEPIC")
+
+#The "this()" is implied as it is an optional argument to classlevel()...
+
+#Note that "this()" never has arguments... (nor does value() for that matter)
+
+MODIFYOTHER:STAT|ALL|Mod|SOLVE|(Value/2)-5		EXPLANATION:D20 System - Sets the Mod for all "Stats" to the Value of the stat/2-5. 
+
+#STATNAME:Strength
+MODIFY:STRSCORE|SOLVE|Value
+MODIFY:STR|SOLVE|Mod
+MODIFY:LOADSCORE|SOLVE|STRSCORE	
+MODIFYOTHER:ToHit.ModTotal|GROUP=WeaponMelee|SET|STR|PRIORITY=1000000
+MODIFYOTHER:ToHit.ModTotal|GROUP=WeaponThrown|SET|STR|PRIORITY=1000000
+MODIFYOTHER:ToHit.ModTotal|GROUP=WeaponRanged|SET|DEX|PRIORITY=1000000
+MODIFYOTHER:Damage|GROUP=WeaponMelee|SET|STR|PRIORITY=1000000
+MODIFYOTHER:Damage|GROUP=WeaponThrown|SET|STR|PRIORITY=1000000
+MODIFYOTHER:Damage|GROUP=WeaponSplash|SET|-STR|PRIORITY=1000000
+MODIFY:Weapon.DamageMult.Light|SOLVE|0.5*(STR>=0)
+MODIFY:Weapon.DamageMult.OneHand|SOLVE|1
+MODIFY:Weapon.DamageMult.TwoHand|SOLVE|1.5*(STR>=0)
+
+#STATNAME:Dexterity
+MODIFY:DEXSCORE|SOLVE|Value
+MODIFY:DEX|SOLVE|Mod
+MODIFY:Initiative.Stat|SET|DEX
+MODIFY:AC.Base|SET|10|PRIORITY=1000000
+MODIFY:AC.Attribute|SOLVE|min(AC.Stat,min(MaxDex,ModEquipMaxDex))
+MODIFY:AC.Stat|SET|DEX|PRIORITY=1000000
+MODIFY:MaxDex|SOLVE|if(encumbrance==0,1000,value())
+MODIFY:MaxDex|SOLVE|if(encumbrance==1,3,value())
+MODIFY:MaxDex|SOLVE|if(encumbrance==2,1,value())
+MODIFY:AC|SOLVE|max(FightingDefensivelyAC,TotalDefenseAC)
+
+#STATNAME:Constitution	
+MODIFY:CONSCORE|SOLVE|Value
+MODIFY:CON|SOLVE|Mod
+MODIFY:HP=WoundPoints|SET|CON|PRIORITY=1000000
+MODIFY:HP=HP|SET|if(context("FLAG",FighterWeaponMastery),CON*TL,value())
+MODIFY:HP=AltHP|SET|CONSCORE*2
+MODIFY:OS=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
+MODIFY:OS=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
+
+#STATNAME:Intelligence
+MODIFY:INTSCORE|SOLVE|Value
+MODIFY:INT|SOLVE|Mod
+MODIFY:Language.Race|SOLVE|max(INT,0)+Language.Additional
+MODIFY:Skill.Bonus|SET|INT
+# NOTE: We used this to avoid TEMP changes var("STAT.3.MOD.NOEQUIP.NOTEMP")
+# Also for the retroactive Bonus to Skill Pool, we used this "BonusRetroSkillPoints"
+
+#STATNAME:Wisdom
+MODIFY:WISSCORE|SOLVE|Value
+MODIFY:WIS|SOLVE|Mod
+#STATNAME:Charisma
+MODIFY:CHASCORE|SOLVE|Value
+MODIFY:CHA|SOLVE|Mod
+
+MODIFY:Companion.NormalMount|SET|1
+MODIFY:Companion.NormalFollower|SET|1
+
+# AC.Attribute = Actual Display, and ultimate value from the Stat, whereas AC.Stat will be the MOD (Dex or CHA)
+
+
+	BONUS:COMBAT|AC|min(CHA, min(MXDXEN,MODEQUIPMAXDEX))|TYPE=Ability|PREVAREQ:ACStatIsCha,1
+	DEFINE:OversizeWeaponToHitBonus|0	
+
+
+MODIFY:Save.Fortitude.Stat|SOLVE|CON			EXPLANATION:D20 System - Sets the Fortitude Stat Bonus to the CON modifier value
+MODIFY:Save.Reflex.Stat|SOLVE|DEX				EXPLANATION:D20 System - Sets the Reflex Stat Bonus to the DEX modifier value
+MODIFY:Save.Will.Stat|SOLVE|WIS				EXPLANATION:D20 System - Sets the Will Stat Bonus to the WIS modifier value
+# getLocalVar("STAT","Constitution",Mod)	EXPLANATION:An Alternate method to get a Local Var.
+# MODIFY:STR|SOLVE|stat("Strength")
+
+MODIFY:ENCUMBRANCE|SET|encumbrance()			EXPLANATION:D20 System - Sets the Encumbrance to the "Encumbrance" - ties into the Load.lst file
+
+
+#Global file:
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.1|SOLVE|BaseAB
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.2|SOLVE|max(0,BaseAB-BaseAB.Step)
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.3|SOLVE|max(0,BaseAB-2*BaseAB.Step)
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.4|SOLVE|max(0,BaseAB-3*BaseAB.Step)
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.5|SOLVE|max(0,BaseAB-4*BaseAB.Step)
+#//AB.6 and AB.7 default to zero
+#//Some other stuff to calculate ToHit.ModTotal correctly (stats, pluses, etc), content may appear elsewhere as well
+
+
+#//Set the default values of the ToHits to the ABs, can be overridden by equipment if necessary
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|AB.1
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|AB.2
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|AB.3
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|AB.4
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|AB.5
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|AB.6
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.7
+#//ToHit.8 and ToHit.9 default to zero since they would not have been used.
+
+#//Make sure all ToHits get the mod total applied (close to last)
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.9|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+
+#For Flurry of Blows (SRD 3.5):
+MODIFY:BaseAB.Step|SET|3|PRIORITY=1000
+
+#For Flurry of Blows (PF) [on the Equipment]:
+
+#For Haste/Speed (these need to be applied as the equivalent of today's TEMPBONUS)
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|AB.1|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|AB.1|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|AB.2|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|AB.3|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|AB.4|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|AB.5|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.6|PRIORITY=1000
+MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|AB.7|PRIORITY=1000
+
+
+
+
+MODIFYOTHER:ABILITY=Archetype|GROUP=FighterWeaponMastery|FighterWeaponMastery|SET|True
+#Global set to one if the flag is turned on
+
+MODIFY:ABILITYPOOL=Weapon Mastery|SET|if(context("FLAG",FighterWeaponMastery),1,0)
+
+#TL can be done in various ways, including putting this in the global file:
+MODIFYOTHER:CLASS|ALL|TL|ADD|classlevel()
+
+
+# Which replaces this:
+#	BONUS:COMBAT|TOHIT.Melee|STR|TYPE=Ability|PREVAREQ:DisableToHitMeleeStr,0	
+#	BONUS:COMBAT|DAMAGE.Melee,DAMAGE.Thrown|STR|TYPE=Ability	
+#	BONUS:COMBAT|DAMAGEMULT:0|0.5*(STR>=0)	
+#	BONUS:COMBAT|DAMAGEMULT:1|1	
+#	BONUS:COMBAT|DAMAGEMULT:2|1.5*(STR>=0)	
+#	BONUS:COMBAT|DAMAGE.Splash|-STR|TYPE=Ability
+
+# This is for the OS to determine Bonuses in the Sheet.
+MODIFY:TWOHANDDAMAGEDIVISOR|SET|2
+MODIFY:OFFHANDLIGHTBONUS|SET|2
+

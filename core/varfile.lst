@@ -14,19 +14,57 @@ GLOBAL:VAR|Save.Fortitude.Stat	EXPLANATION:D20 System - Sets the "Saving Throw" 
 GLOBAL:VAR|Save.Reflex.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" from the designated Stat
 GLOBAL:VAR|Save.Will.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" from the designated Stat
 
-
-
-MODIFYOTHER:STAT|ALL|Mod|SOLVE|(Value/2)-5		EXPLANATION:D20 System - Sets the Mod for all "Stats" to the Value of the stat/2-5. 
+# Attributes
 LOCAL:STAT|Value						EXPLANATION:D20 System - Sets the Value of a given "Stat"
 LOCAL:STAT|Mod						EXPLANATION:D20 System - Sets the Mod'ifier' of a given "Stat"
 
-MODIFY:Save.Fortitude.Stat|SOLVE|CON			EXPLANATION:D20 System - Sets the Fortitude Stat Bonus to the CON modifier value
-MODIFY:Save.Reflex.Stat|SOLVE|DEX				EXPLANATION:D20 System - Sets the 
-MODIFY:Save.Will.Stat|SOLVE|WIS				EXPLANATION:D20 System - Sets the 
-# getLocalVar("STAT","Constitution",Mod)	EXPLANATION:An Alternate method to get a Local Var.
-# MODIFY:STR|SOLVE|stat("Strength")
+#
+GLOBAL:VAR|STRSCORE
+GLOBAL:VAR|STR
+GLOBAL:VAR|LOADSCORE
 
-MODIFY:ENCUMBRANCE|SET|encumbrance()		EXPLANATION:D20 System - Sets the Encumbrance to the "Encumbrance" - ties into the Load.lst file
+GLOBAL:VAR|DEXSCORE
+GLOBAL:VAR|DEX
+
+GLOBAL:VAR|CONSCORE
+GLOBAL:VAR|CON
+
+GLOBAL:VAR|INTSCORE
+GLOBAL:VAR|INT
+
+GLOBAL:VAR|WISSCORE
+GLOBAL:VAR|WIS
+
+GLOBAL:VAR|CHASCORE
+GLOBAL:VAR|CHA
+
+# Class Specific Local
+LOCAL:CLASS|SkillPool		EXPLANATION:
+
+
+
+
+LOCAL:CLASS|Cast.0		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.1		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.2		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.3		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.4		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.5		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.6		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.7		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.8		EXPLANATION: *(see below)
+LOCAL:CLASS|Cast.9		EXPLANATION: *(see below)
+
+
+
+#BONUS:SPELLCASTMULT|CLASS=Wizard;LEVEL=1|2
+#becomes:
+#MODIFYOTHER:CLASS|Wizard|Cast.1|MULTIPLY|2|PRIORITY=500
+
+
+#CLASS:Fighter <> MODIFY:Bravery|MAX|classlevel()
+#CLASS:SomeOtherClass <> MODIFY:Bravery|MAX|classlevel()
+
 
 
 # Class Level Trackers
@@ -37,8 +75,26 @@ GLOBAL:VAR|Class.MonkLVL		EXPLANATION:Captures the level of Class 'Monk'
 GLOBAL:VAR|Class.WizardLVL		EXPLANATION:Captures the level of Class 'Wizard'		
 
 # Class Extras
-CLASS:VAR|Class.MaxLevel		EXPLANATION:This sets the Maximum Level on the Class - this is a local var and may be used on each class to have a Maxmimum defined level. CONVERSION NOTE: This should replace 'MAXLEVEL'
-
+CLASS:VAR|Class.MaxLevel		EXPLANATION:This sets the Maximum Level on the Class - this is a local var and may be used on each class to have a Maxmimum defined level. CONVERSION NOTE: This should replace 'MAXLEVEL' see discussion below:
+# Tom Discussion:  MAXLEVEL can be a local var to each class, thats a tag we can remove
+# [20:49] Tom Parker: maybe
+# [20:49] Tom Parker: the code needs to know about it today though
+# [20:49] Andrew: it controls the maxlevel of any given class, can be replaced with a PREBOOL
+# [20:50] Tom Parker: maybe
+# [20:50] Tom Parker: The one thing we're going to have to watch out for is usability
+# [20:50] Tom Parker: right now it produces an error message about max levels being reached
+# [20:50] Tom Parker: with PREBOOL it would say not qualified, a more general error
+# [20:50] Andrew: I wouldn't know, never maxed out before. 
+# [20:50] Tom Parker: so PREBOOL may need an explanation or some such attached to it somehow
+# [20:52] Andrew: hm
+# [20:52] Tom Parker: The problem there becomes translation
+# [20:52] Andrew: newtag to display a message then, so we avoid those for now.
+# [20:52] Tom Parker: we don't want it to be on PREBOOL itself
+# [20:53] Tom Parker: more like PREBOOL:REASON1|...formula...
+# [20:53] Tom Parker: and then REASON1 is the index of some sort to get the actual string
+# [20:53] Andrew: Ah, that sounds good
+# [20:53] Tom Parker: that's more of an i18n question that we will want to solve consistently with that plan
+# [20:54] Andrew: i18n - yeah
 
 
 # Cleric Items
@@ -48,26 +104,10 @@ GLOBAL:VAR|Domain				EXPLANATION:PLACEHOLDER - Domain was BONUS:DOMAIN|NUMBER|x
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Vars File:
 GLOBAL:VAR|BaseAB				EXPLANATION:D20 System - Sets the "Base Attack Bonus" value for character.
 GLOBAL:VAR|BaseAB.Step			EXPLANATION:D20 System - Sets the "Base Attack Bonus" step - a Step is the interval between the first attack and each proceeding attack. This is called an attack iteration. Most classes are limited to 4 attacks in total, except the monk which gets 7 unarmed strikes.
+
 EQUIPMENT.PART:VAR|AB.1			EXPLANATION:Sets the AB (AttackBonus) for the 1st attack
 EQUIPMENT.PART:VAR|AB.2			EXPLANATION:Sets the AB (AttackBonus) for the 2nd attack
 EQUIPMENT.PART:VAR|AB.3			EXPLANATION:Sets the AB (AttackBonus) for the 3rd attack
@@ -75,7 +115,9 @@ EQUIPMENT.PART:VAR|AB.4			EXPLANATION:Sets the AB (AttackBonus) for the 4th atta
 EQUIPMENT.PART:VAR|AB.5			EXPLANATION:Sets the AB (AttackBonus) for the 5th attack
 EQUIPMENT.PART:VAR|AB.6			EXPLANATION:Sets the AB (AttackBonus) for the 6th attack
 EQUIPMENT.PART:VAR|AB.7			EXPLANATION:Sets the AB (AttackBonus) for the 7th attack
+
 EQUIPMENT.PART:ToHit.ModTotal		EXPLANATION:Sets the ToHit.ModTotal
+
 EQUIPMENT.PART:VAR|ToHit.1		EXPLANATION:Sets the ToHit for attack 1	
 EQUIPMENT.PART:VAR|ToHit.2		EXPLANATION:Sets the ToHit for attack 2	
 EQUIPMENT.PART:VAR|ToHit.3		EXPLANATION:Sets the ToHit for attack 3	
@@ -89,61 +131,65 @@ EQUIPMENT.PART:VAR|ToHit.10		EXPLANATION:Sets the ToHit for attack 10 //For Ecli
 EQUIPMENT.PART:VAR|ToHit.11		EXPLANATION:Sets the ToHit for attack 11 //For Eclipse (Haste/Speed/Spear Wind)
 EQUIPMENT.PART:VAR|ToHit.12		EXPLANATION:Sets the ToHit for attack 12 //For Eclipse (Haste/Speed/Spear Wind)
 
-#Global file:
-MODIFYOTHER:EQUIPMENT.PART|ALL|AB.1|SOLVE|BaseAB
-MODIFYOTHER:EQUIPMENT.PART|ALL|AB.2|SOLVE|max(0,BaseAB-BaseAB.Step)
-MODIFYOTHER:EQUIPMENT.PART|ALL|AB.3|SOLVE|max(0,BaseAB-2*BaseAB.Step)
-MODIFYOTHER:EQUIPMENT.PART|ALL|AB.4|SOLVE|max(0,BaseAB-3*BaseAB.Step)
-MODIFYOTHER:EQUIPMENT.PART|ALL|AB.5|SOLVE|max(0,BaseAB-4*BaseAB.Step)
-#//AB.6 and AB.7 default to zero
-#//Some other stuff to calculate ToHit.ModTotal correctly (stats, pluses, etc), content may appear elsewhere as well
+
+# Global Variable File:
+FLAG|FighterWeaponMastery		EXPLANATION:Sets 'Flag' called 'FighterWeaponMastery'
+FLAG|RacialVision				EXPLANATION:Sets 'Flag' (Boolean) called 'RacialVision'
+
+# Archetypes by Class
+# Barbarian
+FLAG|BarbarianRage
+FLAG|BarbarianFastMovement
+FLAG|BarbarianRagePowers
+FLAG|BarbarianTrapSense
+FLAG|BarbarianDamageReduction
+FLAG|BarbarianGreaterRage
+FLAG|BarbarianIndomitableWill
+FLAG|BarbarianTirelessRage
+FLAG|BarbarianMightyRage
 
 
-#//Set the default values of the ToHits to the ABs, can be overridden by equipment if necessary
 
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|AB.1
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|AB.2
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|AB.3
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|AB.4
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|AB.5
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|AB.6
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.7
-#//ToHit.8 and ToHit.9 default to zero since they would not have been used.
 
-#//Make sure all ToHits get the mod total applied (close to last)
+FLAG|
+FLAG|
+FLAG|
 
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.9|SOLVE|value()+ToHit.ModTotal|PRIORITY=1000000
+|!PREABILITY:1,CATEGORY=Archetype,TYPE.BarbarianRage
 
-#For Flurry of Blows (SRD 3.5):
-MODIFY:BaseAB.Step|SET|3|PRIORITY=1000
 
-#For Flurry of Blows (PF) [on the Equipment]:
-MODIFY:ToHit.ModTotal|ADD|-2|PRIORITY=1000
-MODIFY:AB.1|SOLVE|BaseAB|PRIORITY=1000
-MODIFY:AB.2|SOLVE|BaseAB|PRIORITY=1000
-MODIFY:AB.3|SOLVE|max(0,BaseAB-BaseAB.Step)|PRIORITY=1000
-MODIFY:AB.4|SOLVE|max(0,BaseAB-BaseAB.Step)|PRIORITY=1000
-MODIFY:AB.5|SOLVE|max(0,BaseAB-2*BaseAB.Step)|PRIORITY=1000
-MODIFY:AB.6|SOLVE|max(0,BaseAB-2*BaseAB.Step)|PRIORITY=1000
-MODIFY:AB.7|SOLVE|max(0,BaseAB-3*BaseAB.Step)|PRIORITY=1000
+# MODIFYOTHER:ABILITY=Archetype|GROUP=FighterWeaponMastery|FighterWeaponMastery|SET|True
+# Global set to one if the flag is turned on
+# MODIFY:ABILITYPOOL=Weapon Mastery|SET|if(context("FLAG",FighterWeaponMastery),1,0)
 
-#For Haste/Speed (these need to be applied as the equivalent of today's TEMPBONUS)
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.1|SOLVE|AB.1|PRIORITY=1000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.2|SOLVE|AB.1|PRIORITY=1000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.3|SOLVE|AB.2|PRIORITY=1000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.4|SOLVE|AB.3|PRIORITY=1000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|AB.4|PRIORITY=1000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|AB.5|PRIORITY=1000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.6|PRIORITY=1000
-MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|AB.7|PRIORITY=1000
+
+
+ABILITYPOOL|Weapon Mastery		EXPLANATION:Sets up ABILITYPOOL "Weapon Mastery"
+#In effect the following puts the flag on all Abilities of the given Group
+# Other items could set the flag individually even if they are not an Archetype
+
+
+#################
+# Note that this method of having separate SETs on each object is probably preferable to calling a count() function as you showed... it will resolve a lot faster, since it will deterministically know the SET had no effect on the results if it's already True.  A count() would have to be checked each time to see if new Abilities were added to the PC, so it will be a lot slower.
+# I'd note as well that the FLAG concept then can replace a lot of your variables that you change from 0 to 1 and use a TYPE= controlled bonus to ensure that multiple grants can't ever make it more than one (in case you need to decrement it back to zero).  You're hacking integers to do a Boolean function and the new system allows you to really, truly, use a Boolean because that is what you are really doing... and just have a higher priority if you need to force it back to FALSE.
+# Power and clarity... good things.
+#####################
+
+
+
+#On PRExxx:
+
+#PREBOOL:context("AREA",Face==5,5)
+
+
+#context drops into "AREA" and then you run a Boolean comparison for Face equaling 5,5... if the Boolean returns TRUE the PRExxx passes, if not, then not.
+#This can then capture ANYTHING in the formula environment just by writing it as a Boolean formula... and with functions like count() and others that will undoubtedly be created, you may find yourself liking to use PREBOOL rather than other PRExxx
+
+# Equipment:
+EQUIPMENT.PART:CritMult			EXPLANATION:Sets up Equipment to have "CritMult" which sets a Critical Multiplier value for each part of the equipment (FORMAT: #/xY, with Y the value). (In d20, a weapon may have Two "Heads" and have unique values for either head.
+EQUIPMENT.PART:CritRange		EXPLANATION:Sets up Equipment to have "CritRange" which sets a Critical Range value for each part of the equipment (FORMAT: Y/x#, with Y being a 20, 19-20, 18-20, etc.) (In d20, a weapon may have Two "Heads" and have unique values for either head.
+EQUIPMENT:WT				EXPLANATION:Equipment may only have one Weight, abbreviated "WT" for fast use.
+EQUIPMENT:COST				EXPLANATION:Equipment may have one Cost or "Price".
 
 
 

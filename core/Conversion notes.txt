@@ -1,0 +1,8 @@
+
+
+BONUS:COMBAT|BASEAB|xxx|TYPE=Base.REPLACE
+becomes:
+MODIFY:BaseAB|SOLVE|xxx
+
+We lose the '|TYPE=Base.REPLACE'
+
