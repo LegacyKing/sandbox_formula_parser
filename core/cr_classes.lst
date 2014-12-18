@@ -205,10 +205,10 @@ CLASS:Fighter	STARTSKILLPTS:2
 1	ABILITY:Special Ability|AUTOMATIC|Critical Mastery Qualify
 1	ABILITY:Special Ability|AUTOMATIC|Greater Penetrating Strike Qualify
 ###Block: Level progression
-2	MODIFY:BraveryLVL|MAX|classlevel()|PRIORITY=1000
-3	MODIFY:ArmorTrainingLVL|MAX|classlevel()|PRIORITY=1000
-5	MODIFY:FighterWeaponTrainingLVL|MAX|classlevel()|PRIORITY=1000
-1	MODIFY:FighterWeaponQualifyLVL|MAX|classlevel()|PRIORITY=1000
+2	MODIFY:BraveryLVL|SOLVE|max(value(),classlevel())|PRIORITY=1000
+3	MODIFY:ArmorTrainingLVL|SOLVE|max(value(),classlevel())|PRIORITY=1000
+5	MODIFY:FighterWeaponTrainingLVL|SOLVE|max(value(),classlevel())|PRIORITY=1000
+1	MODIFY:FighterWeaponQualifyLVL|SOLVE|max(value(),classlevel())|PRIORITY=1000
 ###Block:
 1	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bonus Feats|PREBOOL:if(context("FLAG",FighterBonusFeats),1,0)
 2	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bravery|PREBOOL:if(context("FLAG",FighterBravery),1,0)

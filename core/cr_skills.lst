@@ -3,7 +3,26 @@ SOURCELONG:Core Rulebook	SOURCESHORT:CR	SOURCEWEB:http://paizo.com/store/downloa
 # Original Entry by: Stefan Radermacher
 
 # Skill Name				Key Stat	Untrained?		Skill Penalty?	Type						Visible		Var. Must Be Lower			Source Page		Choose			Selections	Bonus to skill																								Temporary effect description																			Temporary Bonus															Auto Language
-Acrobatics					KEYSTAT:DEX				ACHECK:YES		TYPE:Dexterity.Base												SOURCEPAGE:p.87							BONUS:SKILL|Acrobatics|3|TYPE=ClassSkill|PRECSKILL:1,Acrobatics|PRESKILL:1,Acrobatics=1
+Acrobatics	
+	KEYSTAT:DEX	
+	ACHECK:YES	
+	TYPE:Dexterity.Base	
+	SOURCEPAGE:p.87	
+	MODIFY:Skill.Class|SOLVE|if(context("SKILL",Rank>0)&&(context("FLAG",IsClassSkill),3,value())
+# But needs two things:
+# Must be a "Class Skill" from any class
+# Must have RANK>0
+#	PRECSKILL:1,Acrobatics|PRESKILL:1,Acrobatics=1
+
+#Next, we have this work around for Skill Focus:
+Acrobatics.MOD					
+#	BONUS:SKILL|Acrobatics|3|TYPE=SkillFocus|PREFEAT:1,Skill Focus (Acrobatics)
+#	BONUS:SKILL|Acrobatics|6|TYPE=SkillFocus|PREFEAT:1,Skill Focus (Acrobatics)|PRESKILL:1,Acrobatics=10
+
+	MODIFY:Skill.Focus|SOLVE|if(context("FEAT",Skill Focus(thisSkill),3,value())&&(context("SKILL",Rank=>10),6,value())
+# Is there a method to just say "thisSkill" or do we need to specific each version?
+# I would hope we have a better method to handle this... I'll look at the feat.
+
 Appraise					KEYSTAT:INT							TYPE:Intelligence.Base						PREVARLT:AnimalCompanionSkill,1	SOURCEPAGE:p.90							BONUS:SKILL|Appraise|3|TYPE=ClassSkill|PRECSKILL:1,Appraise|PRESKILL:1,Appraise=1
 Bluff						KEYSTAT:CHA							TYPE:Charisma.Base						PREVARLT:AnimalCompanionSkill,1	SOURCEPAGE:p.90							BONUS:SKILL|Bluff|3|TYPE=ClassSkill|PRECSKILL:1,Bluff|PRESKILL:1,Bluff=1
 Climb						KEYSTAT:STR				ACHECK:YES		TYPE:Strength.Base												SOURCEPAGE:p.90							BONUS:SKILL|Climb|3|TYPE=ClassSkill|PRECSKILL:1,Climb|PRESKILL:1,Climb=1	BONUS:SKILL|Climb|8|PREMOVE:1,Climb=1|TYPE=Racial

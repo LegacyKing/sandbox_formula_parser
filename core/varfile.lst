@@ -1,5 +1,8 @@
 
-
+# New Tag Directory
+# GROUP:x|x|x
+# PREBOOL:x
+# PREBOOL:context("w",x),
 
 # Game System Vars -
 GLOBAL:VAR|Save.Fortitude		EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Fortitude"
@@ -39,16 +42,13 @@ GLOBAL:VAR|CHASCORE
 GLOBAL:VAR|CHA
 
 
-# RUles
-GLOBAL:RULE|DAMAGE_VW
-GLOBAL:RULE|USE_CMB
+
+
 
 GLOBAL:HP|WoundPoints
 GLOBAL:HP|HP
 GLOBAL:HP|AltHP
 
-
-FLAG|Tall		EXPLANATION:Set T/F whether a Race is TALL or not (not = long) - SIZE dictates BASE value for REACH and FACE, 
 
 # Class Specific Local
 LOCAL:CLASS|SkillPool		EXPLANATION:???
@@ -114,8 +114,8 @@ GLOBAL:VAR|DomainLVL			EXPLANATION:Determines the Level of domain powers
 GLOBAL:VAR|ClericDomainCount		EXPLANATION:Determines how many Domains a Cleric may have				
 GLOBAL:VAR|Domain				EXPLANATION:PLACEHOLDER - Domain was BONUS:DOMAIN|NUMBER|x		
 
-GLOBAL:OS|TwoHandDamageDivisor
-GLOBAL:OS|OffHandLightBonus
+GLOBAL:OS|TwoHandDamageDivisor	EXPLANATION:OS uses this to do TwoHandedDamage calculation, which doesn't make sense since we have DAMAGEMULT doing the same thing!
+GLOBAL:OS|OffHandLightBonus		EXPLANATION:OS uses this to do Light Bonus calculation
 
 
 #Vars File:
@@ -146,7 +146,11 @@ EQUIPMENT.PART:VAR|ToHit.11		EXPLANATION:Sets the ToHit for attack 11 //For Ecli
 EQUIPMENT.PART:VAR|ToHit.12		EXPLANATION:Sets the ToHit for attack 12 //For Eclipse (Haste/Speed/Spear Wind)
 
 
-# Global Variable File:
+# BOOLEAN - Flags & Rules
+GLOBAL:RULE|DAMAGE_VW
+GLOBAL:RULE|USE_CMB
+
+GLOBAL:FLAG|Tall				EXPLANATION:Set T/F whether a Race is TALL or not (not = long) - SIZE dictates BASE value for REACH and FACE, 
 FLAG|FighterWeaponMastery		EXPLANATION:Sets 'Flag' called 'FighterWeaponMastery'
 FLAG|RacialVision				EXPLANATION:Sets 'Flag' (Boolean) called 'RacialVision'
 
@@ -186,23 +190,23 @@ FLAG|FighterArmorMastery
 
 # Monk
 FLAG|MonkFlurryOfBlows
-FLAG|MonkBonusFeats					
-FLAG|MonkACBonus							
-FLAG|MonkStunningFist					
-FLAG|MonkEvasion							
-FLAG|MonkFastMovement					
-FLAG|MonkManeuverTraining			
-FLAG|MonkStillMind					
-FLAG|MonkKiPool							
-FLAG|MonkSlowFall						
-FLAG|MonkHighJump						
-FLAG|MonkPurityOfBody					
-FLAG|MonkWholenessOfBody			
-FLAG|MonkImprovedEvasion			
-FLAG|MonkDiamondBody					
-FLAG|MonkAbundantStep					
+FLAG|MonkBonusFeats
+FLAG|MonkACBonus
+FLAG|MonkStunningFist
+FLAG|MonkEvasion
+FLAG|MonkFastMovement
+FLAG|MonkManeuverTraining
+FLAG|MonkStillMind
+FLAG|MonkKiPool
+FLAG|MonkSlowFall
+FLAG|MonkHighJump
+FLAG|MonkPurityOfBody
+FLAG|MonkWholenessOfBody
+FLAG|MonkImprovedEvasion
+FLAG|MonkDiamondBody
+FLAG|MonkAbundantStep
 FLAG|MonkDiamondSoul
-FLAG|MonkQuiveringPalm	
+FLAG|MonkQuiveringPalm
 FLAG|MonkTongueOfTheSunAndMoon
 FLAG|MonkTimelessBody
 FLAG|MonkEmptyBody
@@ -225,7 +229,7 @@ FLAG|WizardBonusFeats
 # MODIFY:ABILITYPOOL=Weapon Mastery|SET|if(context("FLAG",FighterWeaponMastery),1,0)
 
 
-
+#GLOBAL:ABILITYPOOL|Weapon Mastery
 ABILITYPOOL|Weapon Mastery		EXPLANATION:Sets up ABILITYPOOL "Weapon Mastery"
 #In effect the following puts the flag on all Abilities of the given Group
 # Other items could set the flag individually even if they are not an Archetype
@@ -242,7 +246,17 @@ ABILITYPOOL|Weapon Mastery		EXPLANATION:Sets up ABILITYPOOL "Weapon Mastery"
 #On PRExxx:
 
 #PREBOOL:context("AREA",Face==5,5)
-
+#PREBOOL:context("x",yz)
+# x = valid defined VARTYPE
+# y = Define Value in the designated VARTYPE
+# z = any valid formula symbol and value
+# <   Less Than
+# >   Greater Than
+# =>  Greater Than or Equal to
+# <=  Less Than or Equal to
+# ==  Is equal to
+# !=  Is not equal to
+# &&  ?
 
 #context drops into "AREA" and then you run a Boolean comparison for Face equaling 5,5... if the Boolean returns TRUE the PRExxx passes, if not, then not.
 #This can then capture ANYTHING in the formula environment just by writing it as a Boolean formula... and with functions like count() and others that will undoubtedly be created, you may find yourself liking to use PREBOOL rather than other PRExxx
@@ -253,5 +267,20 @@ EQUIPMENT.PART:CritRange		EXPLANATION:Sets up Equipment to have "CritRange" whic
 EQUIPMENT:WT				EXPLANATION:Equipment may only have one Weight, abbreviated "WT" for fast use.
 EQUIPMENT:COST				EXPLANATION:Equipment may have one Cost or "Price".
 
+# Skill is a LOCAL designation, it does not have "PART". A Single Skill is composed of the following components:
+# Rank, Bonus, Stat, and Total. This matches our output display
+SKILL|Rank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
+SKILL|Bonus		EXPLANATION:Each skill has a 'Bonus' modifier displayed on the Sheet - 
+SKILL|Stat		EXPLANATION:Each skill has a 'Stat' that modifies it's final value
+SKILL|Total		EXPLANATION:Each skill has a 'Total' value
 
+# Stat is an interesting value - KEYSTAT: determines what is display, however, some classes alter which stat is used. OS should have a method to alter this display.
+
+
+# Bonus "Types" we need to track
+SKILL|Bonus.Morale
+SKILL|Bonus.Competence
+SKILL|Bonus.Enhancement
+SKILL|Bonus.Trait
+SKILL|Bonus.Class			EXPLANATION:Class is for Pathfinder - it grants a +3 to the skill IF the skill is designated as a class skill
 
