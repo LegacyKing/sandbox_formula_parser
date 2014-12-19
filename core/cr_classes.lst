@@ -15,7 +15,7 @@ CLASS:Barbarian	MAXLEVEL:20
 CLASS:Barbarian	ROLE:Combat.Skill
 CLASS:Barbarian	EXCLASS:Ex-Barbarian	
 CLASS:Barbarian	SOURCEPAGE:p.31	
-CLASS:Barbarian	ABILITY:Internal|AUTOMATIC|Class Skills ~ Barbarian|PREBOOL:if(context("FLAG",BarbarianClassSkills),1,0)	
+CLASS:Barbarian	ABILITY:Internal|AUTOMATIC|Class Skills ~ Barbarian|!PREBOOL:context("FLAG",BarbarianClassSkills)	
 
 CLASS:Barbarian	MODIFY:Class.MaxLevel|SET|20|PRIORITY=1000000
 CLASS:Barbarian	MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")				
@@ -53,39 +53,39 @@ CLASS:Barbarian	!PREALIGN:LG,LN,LE
 CLASS:Barbarian	STARTSKILLPTS:4
 # Replacement for STARTSKILLPTS?
 ###Block:Proficiencies - This was bulk cut/paste, may be more than one PREBOOL in effect.
-1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Weapon and Armor Proficiency|PREBOOL:if(context("FLAG",BarbarianArmorProficiencies),1,0)|PREBOOL:if(context("FLAG",BarbarianWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|PREBOOL:if(context("FLAG",BarbarianWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Shield Prof|TYPE=ArmorProfMedium|PREBOOL:if(context("FLAG",BarbarianArmorProficiencies),1,0)
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Weapon and Armor Proficiency|!PREBOOL:context("FLAG",BarbarianArmorProficiencies)|!PREBOOL:context("FLAG",BarbarianWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|!PREBOOL:context("FLAG",BarbarianWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Shield Prof|TYPE=ArmorProfMedium|!PREBOOL:context("FLAG",BarbarianArmorProficiencies)
 ###Block: Level Progression
-1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Rage|PREBOOL:if(context("FLAG",BarbarianRage),1,0)
-1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Fast Movement|PREBOOL:if(context("FLAG",BarbarianFastMovement),1,0)
-2	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Rage Powers|PREBOOL:if(context("FLAG",BarbarianRagePowers),1,0)
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Rage|!PREBOOL:context("FLAG",BarbarianRage)
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Fast Movement|!PREBOOL:context("FLAG",BarbarianFastMovement)
+2	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Rage Powers|!PREBOOL:context("FLAG",BarbarianRagePowers)
 2	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Uncanny Dodge Tracker
-3	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Trap Sense|PREBOOL:if(context("FLAG",BarbarianTrapSense),1,0)
-7	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Damage Reduction|PREBOOL:if(context("FLAG",BarbarianDamageReduction),1,0)
-11	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Greater Rage|PREBOOL:if(context("FLAG",BarbarianGreaterRage),1,0)
-14	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Indomitable Will|PREBOOL:if(context("FLAG",BarbarianIndomitableWill),1,0)
-17	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Tireless Rage|PREBOOL:if(context("FLAG",BarbarianTirelessRage),1,0)
-20	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Mighty Rage|PREBOOL:if(context("FLAG",BarbarianMightyRage),1,0)
+3	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Trap Sense|!PREBOOL:context("FLAG",BarbarianTrapSense)
+7	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Damage Reduction|!PREBOOL:context("FLAG",BarbarianDamageReduction)
+11	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Greater Rage|!PREBOOL:context("FLAG",BarbarianGreaterRage)
+14	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Indomitable Will|!PREBOOL:context("FLAG",BarbarianIndomitableWill)
+17	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Tireless Rage|!PREBOOL:context("FLAG",BarbarianTirelessRage)
+20	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Mighty Rage|!PREBOOL:context("FLAG",BarbarianMightyRage)
 
 # Class Name		Hit Dice	Type			Class Type		Abbreviation	Max Level	Ability																		Visible	Define			Combat bonus										Save bonus																						Modify VAR				Monster Role
 #Ex-Barbarian
 
-CLASS:Ex-Barbarian	HD:12		TYPE:Base.PC	CLASSTYPE:PC	ABB:Brb		MAXLEVEL:20	ABILITY:Internal|AUTOMATIC|Class Skills ~ Barbarian|PREBOOL:if(context("FLAG",BarbarianClassSkills),1,0)	VISIBLE:NO	DEFINE:BarbarianLVL|0	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")|TYPE=Base.REPLACE	BONUS:SAVE|BASE.Fortitude|classlevel("APPLIEDAS=NONEPIC")/2+2	BONUS:SAVE|BASE.Reflex,BASE.Will|classlevel("APPLIEDAS=NONEPIC")/3	BONUS:VAR|BarbarianLVL|CL	ROLE:Combat.Skill
+CLASS:Ex-Barbarian	HD:12		TYPE:Base.PC	CLASSTYPE:PC	ABB:Brb		MAXLEVEL:20	ABILITY:Internal|AUTOMATIC|Class Skills ~ Barbarian|!PREBOOL:context("FLAG",BarbarianClassSkills)	VISIBLE:NO	DEFINE:BarbarianLVL|0	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")|TYPE=Base.REPLACE	BONUS:SAVE|BASE.Fortitude|classlevel("APPLIEDAS=NONEPIC")/2+2	BONUS:SAVE|BASE.Reflex,BASE.Will|classlevel("APPLIEDAS=NONEPIC")/3	BONUS:VAR|BarbarianLVL|CL	ROLE:Combat.Skill
 
 # Could probably simplify the Ex-Class by using the same ABILITY to house the base items, like SAVE, Attack and the Vars that apply.
 # Class Name		Skill Pts/Lvl
 CLASS:Ex-Barbarian	STARTSKILLPTS:4
 ###Block:Proficiencies
-1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Weapon and Armor Proficiency|PREBOOL:if(context("FLAG",BarbarianArmorProficiencies),1,0)|PREBOOL:if(context("FLAG",BarbarianWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|PREBOOL:if(context("FLAG",BarbarianWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Shield Prof|TYPE=ArmorProfMedium|PREBOOL:if(context("FLAG",BarbarianArmorProficiencies),1,0)
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Weapon and Armor Proficiency|!PREBOOL:context("FLAG",BarbarianArmorProficiencies)|!PREBOOL:context("FLAG",BarbarianWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|!PREBOOL:context("FLAG",BarbarianWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Shield Prof|TYPE=ArmorProfMedium|!PREBOOL:context("FLAG",BarbarianArmorProficiencies)
 ###Block: Level Progression
-1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Fast Movement|PREBOOL:if(context("FLAG",BarbarianFastMovement),1,0)
+1	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Fast Movement|!PREBOOL:context("FLAG",BarbarianFastMovement)
 2	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Uncanny Dodge Tracker
-3	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Trap Sense|PREBOOL:if(context("FLAG",BarbarianTrapSense),1,0)
-7	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Damage Reduction|PREBOOL:if(context("FLAG",BarbarianDamageReduction),1,0)
-14	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Indomitable Will|PREBOOL:if(context("FLAG",BarbarianIndomitableWill),1,0)
+3	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Trap Sense|!PREBOOL:context("FLAG",BarbarianTrapSense)
+7	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Damage Reduction|!PREBOOL:context("FLAG",BarbarianDamageReduction)
+14	ABILITY:Barbarian Class Feature|AUTOMATIC|Barbarian ~ Indomitable Will|!PREBOOL:context("FLAG",BarbarianIndomitableWill)
 
 
 
@@ -106,7 +106,7 @@ CLASS:Cleric
 	PROHIBITSPELL:ALIGNMENT.Lawful|PREDEITYALIGN:CG,CN,CE	
 	PROHIBITSPELL:ALIGNMENT.Chaotic|PREALIGN:LG,LN,LE	
 	PROHIBITSPELL:ALIGNMENT.Chaotic|PREDEITYALIGN:LG,LN,LE	
-	ABILITY:Internal|AUTOMATIC|Class Skills ~ Cleric|PREBOOL:if(context("FLAG",ClericClassSkills),1,0)	
+	ABILITY:Internal|AUTOMATIC|Class Skills ~ Cleric|!PREBOOL:context("FLAG",ClericClassSkills)	
 	ROLE:Cleric
 	MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")*3/4				
 	MODIFY:Save.Fortitude|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2		
@@ -123,11 +123,6 @@ CLASS:Cleric
 #	
 
 
-
-
-
-
-
 # Class Name	Skill Pts/Lvl
 CLASS:Cleric	STARTSKILLPTS:2
 # Class Name	Spell Stat		Spell Type		Automatically Known Spell Levels											Caster level
@@ -135,9 +130,9 @@ CLASS:Cleric	SPELLSTAT:WIS	SPELLTYPE:Divine	KNOWNSPELLS:LEVEL=0|LEVEL=1|LEVEL=2|
 ###Block:Proficiencies
 1	ABILITY:Special Ability|AUTOMATIC|Cleric ~ Weapon and Armor Proficiency
 1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Aura
-1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Channel Energy|PREBOOL:if(context("FLAG",ClericChannelEnergy),1,0)
-1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Orisons|PREBOOL:if(context("FLAG",ClericOrisons),1,0)
-1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Spontaneous Casting|PREBOOL:if(context("FLAG",ClericSpontaneousCasting),1,0)
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Channel Energy|!PREBOOL:context("FLAG",ClericChannelEnergy)
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Orisons|!PREBOOL:context("FLAG",ClericOrisons)
+1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Spontaneous Casting|!PREBOOL:context("FLAG",ClericSpontaneousCasting)
 1	ABILITY:Cleric Class Feature|AUTOMATIC|Cleric ~ Domains
 ###Block:
 1:REPEATLEVEL:1	BONUS:SKILLPOOL|NUMBER|ClericSkillPts	DEFINE:ClericSkillPts|0
@@ -176,7 +171,7 @@ CLASS:Fighter
 	MAXLEVEL:20	
 	SOURCEPAGE:p.55	
 	ROLE:Combat.Skill
-	ABILITY:Internal|AUTOMATIC|Class Skills ~ Fighter|PREBOOL:if(context("FLAG",FighterClassSkills),1,0)	
+	ABILITY:Internal|AUTOMATIC|Class Skills ~ Fighter|!PREBOOL:context("FLAG",FighterClassSkills)	
 	MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")
 	MODIFY:Save.Fortitude.Base|classlevel()/2+2	
 	MODIFY:Save.Reflex.Base|classlevel()/3
@@ -185,14 +180,14 @@ CLASS:Fighter
 # Class Name	Skill Pts/Lvl
 CLASS:Fighter	STARTSKILLPTS:2
 ###Block:Proficiencies
-1	ABILITY:Fighter Class Feature|AUTOMATIC|Weapon and Armor Proficiency ~ Fighter|PREBOOL:if(context("FLAG",FighterProficiencies),1,0)
+1	ABILITY:Fighter Class Feature|AUTOMATIC|Weapon and Armor Proficiency ~ Fighter|!PREBOOL:context("FLAG",FighterProficiencies)
 #,TYPE.FighterArmorProficiencies,TYPE.FighterHeavyArmorProficiency,TYPE.FighterMediumArmorProficiency,TYPE.FighterLightArmorProficiency,TYPE.FighterShieldProficiency,TYPE.FighterTowerShieldProficiency
-1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|PREBOOL:if(context("FLAG",FighterWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Heavy|PREBOOL:if(context("FLAG",FighterHeavyArmorProficiency),1,0)
-1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Medium|PREBOOL:if(context("FLAG",FighterMediumArmorProficiency),1,0)
-1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Light|PREBOOL:if(context("FLAG",FighterLightArmorProficiency),1,0)
-1	ABILITY:Internal|AUTOMATIC|Shield Prof|PREBOOL:if(context("FLAG",FighterShieldProficiency),1,0)
-1	ABILITY:Internal|AUTOMATIC|Shield Prof ~ Tower|PREBOOL:if(context("FLAG",FighterTowerShieldProficiency),1,0)
+1	ABILITY:Internal|AUTOMATIC|Weapon Prof ~ Martial|Weapon Prof ~ Simple|!PREBOOL:context("FLAG",FighterWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Heavy|!PREBOOL:context("FLAG",FighterHeavyArmorProficiency)
+1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Medium|!PREBOOL:context("FLAG",FighterMediumArmorProficiency)
+1	ABILITY:Internal|AUTOMATIC|Armor Prof ~ Light|!PREBOOL:context("FLAG",FighterLightArmorProficiency)
+1	ABILITY:Internal|AUTOMATIC|Shield Prof|!PREBOOL:context("FLAG",FighterShieldProficiency)
+1	ABILITY:Internal|AUTOMATIC|Shield Prof ~ Tower|!PREBOOL:context("FLAG",FighterTowerShieldProficiency)
 ###Block: Advanced Weapon Feat qualifications - Why are these not CATEGORY:Internal???
 1	ABILITY:Special Ability|AUTOMATIC|Fighter Level Advanced Feat Tracker
 1	ABILITY:Special Ability|AUTOMATIC|Weapon Specialization Qualify
@@ -210,24 +205,39 @@ CLASS:Fighter	STARTSKILLPTS:2
 5	MODIFY:FighterWeaponTrainingLVL|SOLVE|max(value(),classlevel())|PRIORITY=1000
 1	MODIFY:FighterWeaponQualifyLVL|SOLVE|max(value(),classlevel())|PRIORITY=1000
 ###Block:
-1	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bonus Feats|PREBOOL:if(context("FLAG",FighterBonusFeats),1,0)
-2	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bravery|PREBOOL:if(context("FLAG",FighterBravery),1,0)
-3	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Armor Training|PREBOOL:if(context("FLAG",FighterArmorTraining_ALL),1,0)
-5	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Weapon Training|PREBOOL:if(context("FLAG",FighterWeaponTraining_ALL),1,0)
-19	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Armor Mastery|PREBOOL:if(context("FLAG",FighterArmorMastery),1,0)
+1	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bonus Feats|!PREBOOL:context("FLAG",FighterBonusFeats)
+2	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Bravery|!PREBOOL:context("FLAG",FighterBravery)
+3	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Armor Training|!PREBOOL:context("FLAG",FighterArmorTraining_ALL)
+5	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Weapon Training|!PREBOOL:context("FLAG",FighterWeaponTraining_ALL)
+19	ABILITY:Fighter Class Feature|AUTOMATIC|Fighter ~ Armor Mastery|!PREBOOL:context("FLAG",FighterArmorMastery)
 ###Block:
-20	MODIFY:ABILITYPOOL=Weapon Mastery|SET|PREBOOL:if(context("FLAG",FighterWeaponMastery),1,0)
+20	MODIFY:ABILITYPOOL=Weapon Mastery|SET|!PREBOOL:context("FLAG",FighterWeaponMastery)
 
 # Class Name	Hit Dice	Type			Class Type		Abbreviation	Max Level	Source Page		Define															Combat bonus											Save bonus													Modify VAR																Monster Role
-CLASS:Monk		HD:8		TYPE:Base.PC	CLASSTYPE:PC	ABB:Mnk		MAXLEVEL:20	SOURCEPAGE:p.56	DEFINE:FlurryOfBlows|0	DEFINE:MonkLVL|0	DEFINE:KiPoolWis|0	DEFINE:MonkFeatQualify|0	BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")*3/4|TYPE=Base.REPLACE	BONUS:SAVE|BASE.Fortitude,BASE.Reflex,BASE.Will|classlevel("APPLIEDAS=NONEPIC")/2+2	BONUS:VAR|FlurryOfBlows|1	BONUS:VAR|MonkLVL|CL	BONUS:VAR|KiPoolWis|1	BONUS:VAR|KiPool|1	ROLE:None
+CLASS:Monk		
+	HD:8		
+	TYPE:Base.PC	
+	CLASSTYPE:PC	
+	ABB:Mnk		
+	MAXLEVEL:20	
+	SOURCEPAGE:p.56	
+	MODIFY:BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")*3/4
+	MODIFY:Save.Fortitude.Base|classlevel()/2+2	
+	MODIFY:Save.Reflex.Base|classlevel()/2+2
+	MODIFY:Save.Will.Base|classlevel()/2+2	
+	MODIFY:Class.MonkLVL|classlevel()
+	MODIFY:FlurryOfBlows|ADD|1	
+	MODIFY:KiPoolWis|ADD|1	
+	MODIFY:KiPool|ADD|1	
+	ROLE:None
 # Class Name	Multiple Requirements
-CLASS:Monk		PREMULT:1,[PREALIGN:LG,LN,LE],[PREABILITY:1,CATEGORY=Archetype,TYPE.MonkAlignment]
+CLASS:Monk		PREMULT:1,[PREALIGN:LG,LN,LE],[PREBOOL:context("FLAG",MonkAlignment)]
 # Class Name	Skill Pts/Lvl
 CLASS:Monk		STARTSKILLPTS:4
 ###Block:Proficiencies
-1	ABILITY:Special Ability|AUTOMATIC|Weapon and Armor Proficiency ~ Monk|PREBOOL:if(context("FLAG",MonkWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Weapon Proficiencies ~ Monk|PREBOOL:if(context("FLAG",MonkWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Class Skills ~ Monk|PREBOOL:if(context("FLAG",MonkClassSkills),1,0)
+1	ABILITY:Special Ability|AUTOMATIC|Weapon and Armor Proficiency ~ Monk|!PREBOOL:context("FLAG",MonkWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Weapon Proficiencies ~ Monk|!PREBOOL:context("FLAG",MonkWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Class Skills ~ Monk|!PREBOOL:context("FLAG",MonkClassSkills)
 #PREVAREQ:MonkDefaultSkill,0
 ###Block: Vars
 1	MODIFY:FlurryLVL|MAX|Class.MonkLVL|PRIORITY=1000
@@ -239,7 +249,8 @@ CLASS:Monk		STARTSKILLPTS:4
 1	MODIFY:StunningFistMonkLVL|MAX|Class.MonkLVL|PRIORITY=1000
 3	MODIFY:ManeuverTrainingLVL|MAX|Class.MonkLVL|PRIORITY=1000
 3	MODIFY:ManeuverTrainingBAB|MAX|Class.MonkLVL*3/4|PRIORITY=1000
-4	MODIFY:KiPoolLVL,SlowFallLVL|MAX|Class.MonkLVL|PRIORITY=1000
+4	MODIFY:KiPoolLVL|MAX|Class.MonkLVL|PRIORITY=1000
+4	MODIFY:SlowFallLVL|MAX|Class.MonkLVL|PRIORITY=1000
 5	MODIFY:HighJumpLVL|MAX|Class.MonkLVL|PRIORITY=1000
 7	MODIFY:WholenessOfBodyLVL|MAX|Class.MonkLVL|PRIORITY=1000
 12	MODIFY:AbundantStepLVL|MAX|Class.MonkLVL|PRIORITY=1000
@@ -253,28 +264,28 @@ CLASS:Monk		STARTSKILLPTS:4
 ###Block: Monk Bonus Feats
 1	AUTO:FEAT|Improved Unarmed Strike
 ###Block:
-1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Flurry of Blows|PREBOOL:if(context("FLAG",MonkFlurryOfBlows),1,0)
-1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Monk Bonus Feat|PREBOOL:if(context("FLAG",MonkBonusFeats),1,0)
-1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ AC Bonus|PREBOOL:if(context("FLAG",MonkACBonus),1,0)
-1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Stunning Fist|PREBOOL:if(context("FLAG",MonkStunningFist),1,0)
-2	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Evasion|PREBOOL:if(context("FLAG",MonkEvasion),1,0)
-3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Fast Movement|PREBOOL:if(context("FLAG",MonkFastMovement),1,0)
-3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Maneuver Training|PREBOOL:if(context("FLAG",MonkManeuverTraining),1,0)
-3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Still Mind|PREBOOL:if(context("FLAG",MonkStillMind),1,0)
-4	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Ki Pool|PREBOOL:if(context("FLAG",MonkKiPool),1,0)
-4	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Slow Fall|PREBOOL:if(context("FLAG",MonkSlowFall),1,0)
-5	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ High Jump|PREBOOL:if(context("FLAG",MonkHighJump),1,0)
-5	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Purity of Body|PREBOOL:if(context("FLAG",MonkPurityOfBody),1,0)
-7	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Wholeness of Body|PREBOOL:if(context("FLAG",MonkWholenessOfBody),1,0)
-9	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Improved Evasion|PREBOOL:if(context("FLAG",MonkImprovedEvasion),1,0)
-11	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Diamond Body|PREBOOL:if(context("FLAG",MonkDiamondBody),1,0)
-12	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Abundant Step|PREBOOL:if(context("FLAG",MonkAbundantStep),1,0)
-13	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Diamond Soul|PREBOOL:if(context("FLAG",MonkDiamondSoul),1,0)
-15	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Quivering Palm|PREBOOL:if(context("FLAG",MonkQuiveringPalm),1,0)
-17	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Tongue of the Sun and Moon|PREBOOL:if(context("FLAG",MonkTongueOfTheSunAndMoon),1,0)
-17	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Timeless Body|PREBOOL:if(context("FLAG",MonkTimelessBody),1,0)
-19	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Empty Body|PREBOOL:if(context("FLAG",MonkEmptyBody),1,0)
-20	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Perfect Self|PREBOOL:if(context("FLAG",MonkPerfectSelf),1,0)
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Flurry of Blows|!PREBOOL:context("FLAG",MonkFlurryOfBlows)
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Monk Bonus Feat|!PREBOOL:context("FLAG",MonkBonusFeats)
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ AC Bonus|!PREBOOL:context("FLAG",MonkACBonus)
+1	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Stunning Fist|!PREBOOL:context("FLAG",MonkStunningFist)
+2	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Evasion|!PREBOOL:context("FLAG",MonkEvasion)
+3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Fast Movement|!PREBOOL:context("FLAG",MonkFastMovement)
+3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Maneuver Training|!PREBOOL:context("FLAG",MonkManeuverTraining)
+3	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Still Mind|!PREBOOL:context("FLAG",MonkStillMind)
+4	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Ki Pool|!PREBOOL:context("FLAG",MonkKiPool)
+4	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Slow Fall|!PREBOOL:context("FLAG",MonkSlowFall)
+5	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ High Jump|!PREBOOL:context("FLAG",MonkHighJump)
+5	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Purity of Body|!PREBOOL:context("FLAG",MonkPurityOfBody)
+7	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Wholeness of Body|!PREBOOL:context("FLAG",MonkWholenessOfBody)
+9	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Improved Evasion|!PREBOOL:context("FLAG",MonkImprovedEvasion)
+11	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Diamond Body|!PREBOOL:context("FLAG",MonkDiamondBody)
+12	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Abundant Step|!PREBOOL:context("FLAG",MonkAbundantStep)
+13	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Diamond Soul|!PREBOOL:context("FLAG",MonkDiamondSoul)
+15	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Quivering Palm|!PREBOOL:context("FLAG",MonkQuiveringPalm)
+17	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Tongue of the Sun and Moon|!PREBOOL:context("FLAG",MonkTongueOfTheSunAndMoon)
+17	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Timeless Body|!PREBOOL:context("FLAG",MonkTimelessBody)
+19	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Empty Body|!PREBOOL:context("FLAG",MonkEmptyBody)
+20	ABILITY:Monk Class Feature|AUTOMATIC|Monk ~ Perfect Self|!PREBOOL:context("FLAG",MonkPerfectSelf)
 ###Block:
 17	TEMPLATE:CHOOSE:Timeless Body ~ Adult|Timeless Body ~ Middle Age|Timeless Body ~ Old|Timeless Body ~ Venerable
 ###Block:
@@ -315,7 +326,7 @@ CLASS:Wizard
 	ALLOWBASECLASS:NO
 	SOURCEPAGE:p.77
 	LANGBONUS:Draconic
-	ABILITY:Internal|AUTOMATIC|Class Skills ~ Wizard|PREBOOL:if(context("FLAG",WizardClassSkills),1,0)
+	ABILITY:Internal|AUTOMATIC|Class Skills ~ Wizard|!PREBOOL:context("FLAG",WizardClassSkills)
 	VISIBLE:YES
 	MODIFY:Class.WizardLVL|SOLVE|classlevel()
 	MODIFY:WizardSchoolLVL|SET|Class.WizardLVL
@@ -324,8 +335,7 @@ CLASS:Wizard
 	MODIFY:SAVE.Will.BASE|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2
 	MODIFY:SAVE.Fortitude.BASE|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3
 	MODIFY:Save.Reflex.BASE|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3
-
-	BONUS:VAR|WizardSchoolLVL|WizardLVL	BONUS:VAR|SpellMasteryQualify|1	ROLE:Wizard
+	ROLE:Wizard
 # Class Name	Skill Pts/Lvl
 CLASS:Wizard	STARTSKILLPTS:2
 # Class Name	Spell Stat		Spell Type
@@ -334,32 +344,32 @@ CLASS:Wizard	SPELLSTAT:INT	SPELLTYPE:Arcane
 #	Need some way to remove cantrips known
 #
 SUBCLASS:Abjurer		COST:0	CHOICE:SCHOOL|Abjuration
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Abjuration School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Abjuration School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Conjurer		COST:0	CHOICE:SCHOOL|Conjuration
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Conjuration School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Conjuration School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Diviner		COST:0	CHOICE:SCHOOL|Divination
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Divination School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Divination School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Enchanter	COST:0	CHOICE:SCHOOL|Enchantment
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Enchantment School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Enchantment School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Evoker		COST:0	CHOICE:SCHOOL|Evocation
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Evocation School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Evocation School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Illusionist	COST:0	CHOICE:SCHOOL|Illusion
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Illusion School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Illusion School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Necromancer	COST:0	CHOICE:SCHOOL|Necromancy
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Necromancy School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Necromancy School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Transmuter	COST:0	CHOICE:SCHOOL|Transmutation
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Transmutation School																		PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Transmutation School	!PREBOOL:context("FLAG",WizardArcaneSchool)
 SUBCLASS:Universalist	COST:0
-SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Universal School|PREBOOL:if(context("FLAG",WizardArcaneSchool),1,0)|PREVAREQ:DisallowWizardArcaneSchoolArchetype,0
+SUBCLASSLEVEL:1	ABILITY:Wizard Class Feature|AUTOMATIC|Universal School|!PREBOOL:context("FLAG",WizardArcaneSchool)|PREVAREQ:DisallowWizardArcaneSchoolArchetype,0
 ###Block:Proficiencies
-1	ABILITY:Special Ability|AUTOMATIC|Weapon and Armor Proficiency ~ Wizard|PREBOOL:if(context("FLAG",WizardWeaponProficiencies),1,0)
-1	ABILITY:Internal|AUTOMATIC|Weapon Proficiencies ~ Wizard|PREBOOL:if(context("FLAG",WizardWeaponProficiencies),1,0)
+1	ABILITY:Special Ability|AUTOMATIC|Weapon and Armor Proficiency ~ Wizard|!PREBOOL:context("FLAG",WizardWeaponProficiencies)
+1	ABILITY:Internal|AUTOMATIC|Weapon Proficiencies ~ Wizard|!PREBOOL:context("FLAG",WizardWeaponProficiencies)
 ###Block:
-1	AUTO:FEAT|Scribe Scroll|PREBOOL:if(context("FLAG",WizardScribeScroll),1,0)
+1	AUTO:FEAT|Scribe Scroll|!PREBOOL:context("FLAG",WizardScribeScroll)
 ###Block:
-1	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Arcane Bond|PREBOOL:if(context("FLAG",WizardArcaneBond),1,0)
-1	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Cantrips|PREBOOL:if(context("FLAG",WizardCantrips),1,0)
-5	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Bonus Feats|PREBOOL:if(context("FLAG",WizardBonusFeats),1,0)
+1	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Arcane Bond|!PREBOOL:context("FLAG",WizardArcaneBond)
+1	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Cantrips|!PREBOOL:context("FLAG",WizardCantrips)
+5	ABILITY:Wizard Class Feature|AUTOMATIC|Wizard ~ Bonus Feats|!PREBOOL:context("FLAG",WizardBonusFeats)
 1	ABILITY:Internal|AUTOMATIC|Wizard Free Spellbook|PREMULT:1,[PREMULT:2,[PREPCLEVEL:MAX=0],[PRECLASS:1,Wizard=1]],[PREMULT:2,[!PRECLASS:1,TYPE.Base=0],[PRECLASS:1,Wizard=1]]
 ###Block: Level progression
 1	CAST:3,1

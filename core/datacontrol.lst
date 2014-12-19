@@ -1,6 +1,4 @@
 
-
-
 #VARTYPEDEF:x|y
 
 #x is a legal data format (currently NUMBER, GRIDPOINT)
@@ -19,12 +17,13 @@ VARTYPEDEF:BOOLEAN|RULE				EXPLANATION:Boolean "Rule" for the house rules
 
 VARTYPEDEF:NUMBER|OS				EXPLANATION:This is for controlling the OS
 VARTYPEDEF:NUMBER|VAR				EXPLANATION:This is our normal VARS
+
 VARTYPEDEF:NUMBER|ABILITYPOOL			EXPLANATION:This is for ability pools
 
 # Based upon new design talks with Tom
-VARTYPEDEF:NUMBER|CLASS				EXPLANATION:For Class specific items
-VARTYPEDEF:NUMBER|SKILL				EXPLANATION:For Skills, like Acrobatics
-VARTYPEDEF:NUMBER|STAT				EXPLANATION:For Attributes, like Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma.
+#VARTYPEDEF:NUMBER|CLASS				EXPLANATION:For Class specific items
+#VARTYPEDEF:NUMBER|SKILL				EXPLANATION:For Skills, like Acrobatics
+#VARTYPEDEF:NUMBER|STAT				EXPLANATION:For Attributes, like Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma.
 
 
 #LOCAL:STAT|Value						EXPLANATION:D20 System - Sets the Value of a given "Stat"

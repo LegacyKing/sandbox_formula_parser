@@ -1,4 +1,17 @@
 
+# Per Tom - SCOPE List:
+# GLOBAL
+# EQUIPMENT
+# EQUIPMENT.PART
+# Considerations for:
+# STAT
+# CLASS
+# SKILL
+# SPELL
+
+
+
+
 # New Tag Directory
 # GROUP:x|x|x
 # PREBOOL:x
@@ -74,7 +87,7 @@ LOCAL:CLASS|Cast.9		EXPLANATION: *(see below)
 #MODIFYOTHER:CLASS|Wizard|Cast.1|MULTIPLY|2|PRIORITY=500
 
 
-#CLASS:Fighter <> MODIFY:Bravery|MAX|classlevel()
+#CLASS:Fighter <> MODIFY:Bravery|SOLVE|max(classlevel())
 #CLASS:SomeOtherClass <> MODIFY:Bravery|MAX|classlevel()
 
 
@@ -151,7 +164,6 @@ GLOBAL:RULE|DAMAGE_VW
 GLOBAL:RULE|USE_CMB
 
 GLOBAL:FLAG|Tall				EXPLANATION:Set T/F whether a Race is TALL or not (not = long) - SIZE dictates BASE value for REACH and FACE, 
-FLAG|FighterWeaponMastery		EXPLANATION:Sets 'Flag' called 'FighterWeaponMastery'
 FLAG|RacialVision				EXPLANATION:Sets 'Flag' (Boolean) called 'RacialVision'
 
 # Class Archetype Flags
@@ -186,9 +198,11 @@ FLAG|FighterBravery
 FLAG|FighterArmorTraining_ALL
 FLAG|FighterWeaponTraining_ALL
 FLAG|FighterArmorMastery
+FLAG|FighterWeaponMastery		EXPLANATION:Sets 'Flag' called 'FighterWeaponMastery'
 
 
 # Monk
+FLAG|MonkAlignment			EXPLANATION:This opposite value allows a MONK to have any ALIGNMENT and not become an Ex-Class
 FLAG|MonkFlurryOfBlows
 FLAG|MonkBonusFeats
 FLAG|MonkACBonus
@@ -252,35 +266,72 @@ ABILITYPOOL|Weapon Mastery		EXPLANATION:Sets up ABILITYPOOL "Weapon Mastery"
 # z = any valid formula symbol and value
 # <   Less Than
 # >   Greater Than
-# =>  Greater Than or Equal to
+# >=  Greater Than or Equal to
 # <=  Less Than or Equal to
 # ==  Is equal to
 # !=  Is not equal to
-# &&  ?
+# &&  Logical AND
+# II  Logical OR
 
 #context drops into "AREA" and then you run a Boolean comparison for Face equaling 5,5... if the Boolean returns TRUE the PRExxx passes, if not, then not.
 #This can then capture ANYTHING in the formula environment just by writing it as a Boolean formula... and with functions like count() and others that will undoubtedly be created, you may find yourself liking to use PREBOOL rather than other PRExxx
 
 # Equipment:
-EQUIPMENT.PART:CritMult			EXPLANATION:Sets up Equipment to have "CritMult" which sets a Critical Multiplier value for each part of the equipment (FORMAT: #/xY, with Y the value). (In d20, a weapon may have Two "Heads" and have unique values for either head.
-EQUIPMENT.PART:CritRange		EXPLANATION:Sets up Equipment to have "CritRange" which sets a Critical Range value for each part of the equipment (FORMAT: Y/x#, with Y being a 20, 19-20, 18-20, etc.) (In d20, a weapon may have Two "Heads" and have unique values for either head.
-EQUIPMENT:WT				EXPLANATION:Equipment may only have one Weight, abbreviated "WT" for fast use.
-EQUIPMENT:COST				EXPLANATION:Equipment may have one Cost or "Price".
+LOCAL:EQUIPMENT.PART|CritMult			EXPLANATION:Sets up Equipment to have "CritMult" which sets a Critical Multiplier value for each part of the equipment (FORMAT: #/xY, with Y the value). (In d20, a weapon may have Two "Heads" and have unique values for either head.
+LOCAL:EQUIPMENT.PART|CritRange		EXPLANATION:Sets up Equipment to have "CritRange" which sets a Critical Range value for each part of the equipment (FORMAT: Y/x#, with Y being a 20, 19-20, 18-20, etc.) (In d20, a weapon may have Two "Heads" and have unique values for either head.
+LOCAL:EQUIPMENT|WT				EXPLANATION:Equipment may only have one Weight, abbreviated "WT" for fast use.
+LOCAL:EQUIPMENT|COST				EXPLANATION:Equipment may have one Cost or "Price".
+
+
+
 
 # Skill is a LOCAL designation, it does not have "PART". A Single Skill is composed of the following components:
 # Rank, Bonus, Stat, and Total. This matches our output display
-SKILL|Rank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
-SKILL|Bonus		EXPLANATION:Each skill has a 'Bonus' modifier displayed on the Sheet - 
-SKILL|Stat		EXPLANATION:Each skill has a 'Stat' that modifies it's final value
-SKILL|Total		EXPLANATION:Each skill has a 'Total' value
+LOCAL:VAR|MaxRank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
+LOCAL:VAR|Rank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
+LOCAL:VAR|Bonus		EXPLANATION:Each skill has a 'Bonus' modifier displayed on the Sheet - 
+LOCAL:VAR|Stat		EXPLANATION:Each skill has a 'Stat' that modifies it's final value
+LOCAL:VAR|Total		EXPLANATION:Each skill has a 'Total' value
 
 # Stat is an interesting value - KEYSTAT: determines what is display, however, some classes alter which stat is used. OS should have a method to alter this display.
 
 
-# Bonus "Types" we need to track
-SKILL|Bonus.Morale
-SKILL|Bonus.Competence
-SKILL|Bonus.Enhancement
-SKILL|Bonus.Trait
-SKILL|Bonus.Class			EXPLANATION:Class is for Pathfinder - it grants a +3 to the skill IF the skill is designated as a class skill
+# Bonus "Types" we need to track -- Pending Tom's input to handle stacking rules.
+LOCAL:VAR|Bonus.Morale
+LOCAL:VAR|Bonus.Competence
+LOCAL:VAR|Bonus.Enhancement
+LOCAL:VAR|Bonus.Trait
+LOCAL:VAR|Bonus.Class			EXPLANATION:Class is for Pathfinder - it grants a +3 to the skill IF the skill is designated as a class skill
+
+
+# Global VARS:
+CMB.Stat
+
+# Monk
+FlurryOfBlows
+Class.MonkLVL
+KiPoolWis
+MonkFeatQualify
+
+
+# Skill Focus Feat should use this:
+# MODIFYOTHER:SKILL|%LIST|SkillTotal|SOLVE|value()+if(Rank>10,6,3)|PRIORITY=10000
+
+# Var file
+LOCAL:VAR|Grantors
+
+
+#SomeFeat
+#	MODIFYOTHER:SKILL|%LIST|Grantors|ADD|1
+#	MODIFYOTHER:SKILL|%LIST|SkillTotal|SOLVE|value()+if(Grantors>=1,1,0)|PRIORITY=10000
+
+
+#	MODIFYOTHER:SKILL|%LIST|SkillTotal|SOLVE|value()+if(Grantors>1,1,0)|PRIORITY=10000
+
+
+
+
+#TOM QUESTION: I want this applied to ALL skills only, is local the right method or do I need to define it differently? Brings another question, if I define something as local, is it shared in all scopes?
+# Reasoning: Rules allow some companions to bypass certain skills, and using the same name to keep this clean would be appreciated
+LOCAL:FLAG|AnimalCompanionSkill	EXPLANATION:Method to restrict skills from animal companions. 
 
