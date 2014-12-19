@@ -9,8 +9,9 @@
 # SKILL
 # SPELL
 
-
-
+# CONFUSION POINT:
+#	LOCAL:SKILL|VAR=
+#	VAR= is assumed if nothing else is placed there
 
 # New Tag Directory
 # GROUP:x|x|x
@@ -18,49 +19,56 @@
 # PREBOOL:context("w",x),
 
 # Game System Vars -
-GLOBAL:VAR|Save.Fortitude		EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Fortitude"
-GLOBAL:VAR|Save.Reflex			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Reflex"
-GLOBAL:VAR|Save.Will			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Will"
+GLOBAL:VAR=Save.Fortitude		EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Fortitude"
+GLOBAL:VAR=Save.Reflex			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Reflex"
+GLOBAL:VAR=Save.Will			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Will"
 
-GLOBAL:VAR|Save.Fortitude.Base	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" as a Base value - this is from Classes
-GLOBAL:VAR|Save.Reflex.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" as a Base value - this is from Classes
-GLOBAL:VAR|Save.Will.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" as a Base value - this is from Classes
+GLOBAL:VAR=Save.Fortitude.Base	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" as a Base value - this is from Classes
+GLOBAL:VAR=Save.Reflex.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" as a Base value - this is from Classes
+GLOBAL:VAR=Save.Will.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" as a Base value - this is from Classes
 
-GLOBAL:VAR|Save.Fortitude.Stat	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" from the designated Stat
-GLOBAL:VAR|Save.Reflex.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" from the designated Stat
-GLOBAL:VAR|Save.Will.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" from the designated Stat
+GLOBAL:VAR=Save.Fortitude.Stat	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" from the designated Stat
+GLOBAL:VAR=Save.Reflex.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" from the designated Stat
+GLOBAL:VAR=Save.Will.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" from the designated Stat
 
 # Attributes
+#'LOCAL:STAT|Value' is the SAME AS 'LOCAL:STAT|VAR=Value' VAR= is assumed.
 LOCAL:STAT|Value						EXPLANATION:D20 System - Sets the Value of a given "Stat"
 LOCAL:STAT|Mod						EXPLANATION:D20 System - Sets the Mod'ifier' of a given "Stat"
 
 #
-GLOBAL:VAR|STRSCORE
-GLOBAL:VAR|STR
-GLOBAL:VAR|LOADSCORE
+GLOBAL:VAR=STRSCORE
+GLOBAL:VAR=STR
+GLOBAL:VAR=LOADSCORE
 
-GLOBAL:VAR|DEXSCORE
-GLOBAL:VAR|DEX
+GLOBAL:VAR=DEXSCORE
+GLOBAL:VAR=DEX
 
-GLOBAL:VAR|CONSCORE
-GLOBAL:VAR|CON
+GLOBAL:VAR=CONSCORE
+GLOBAL:VAR=CON
 
-GLOBAL:VAR|INTSCORE
-GLOBAL:VAR|INT
+GLOBAL:VAR=INTSCORE
+GLOBAL:VAR=INT
 
-GLOBAL:VAR|WISSCORE
-GLOBAL:VAR|WIS
+GLOBAL:VAR=WISSCORE
+GLOBAL:VAR=WIS
 
-GLOBAL:VAR|CHASCORE
-GLOBAL:VAR|CHA
-
-
+GLOBAL:VAR=CHASCORE
+GLOBAL:VAR=CHA
 
 
 
-GLOBAL:HP|WoundPoints
-GLOBAL:HP|HP
-GLOBAL:HP|AltHP
+
+
+GLOBAL:HP|HP			EXPLANATION:Total HP PC possess
+#
+GLOBAL:HP|WoundPoints		EXPLANATION:Alternative HP System - Sets Woundpoints
+GLOBAL:HP|AltHP			EXPLANATION:Alternative HP System - Sets 'Alt'ernative 'HP' value
+
+
+Reach	EXPLANATION:Race Reach
+Hands	EXPLANATION:# of hands you have
+Legs	EXPLANATION:# of Legs you have
 
 
 # Class Specific Local
@@ -68,7 +76,11 @@ LOCAL:CLASS|SkillPool		EXPLANATION:???
 
 
 
+#BONUS:SPELLCASTMULT|CLASS=Wizard;LEVEL=1|2
+#becomes:
+#MODIFYOTHER:CLASS|Wizard|Cast.1|MULTIPLY|2|PRIORITY=500
 
+# Each Class gets a Cast.# assigned
 LOCAL:CLASS|Cast.0		EXPLANATION: *(see below)
 LOCAL:CLASS|Cast.1		EXPLANATION: *(see below)
 LOCAL:CLASS|Cast.2		EXPLANATION: *(see below)
@@ -80,11 +92,19 @@ LOCAL:CLASS|Cast.7		EXPLANATION: *(see below)
 LOCAL:CLASS|Cast.8		EXPLANATION: *(see below)
 LOCAL:CLASS|Cast.9		EXPLANATION: *(see below)
 
+# Each Class gets a Known.# assigned
+LOCAL:CLASS|Known.0		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.1		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.2		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.3		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.4		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.5		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.6		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.7		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.8		EXPLANATION: *(see below)
+LOCAL:CLASS|Known.9		EXPLANATION: *(see below)
 
 
-#BONUS:SPELLCASTMULT|CLASS=Wizard;LEVEL=1|2
-#becomes:
-#MODIFYOTHER:CLASS|Wizard|Cast.1|MULTIPLY|2|PRIORITY=500
 
 
 #CLASS:Fighter <> MODIFY:Bravery|SOLVE|max(classlevel())
@@ -93,11 +113,11 @@ LOCAL:CLASS|Cast.9		EXPLANATION: *(see below)
 
 
 # Class Level Trackers
-GLOBAL:VAR|Class.BarbarianLVL		EXPLANATION:Captures the level of Class 'Barbarian'		
-GLOBAL:VAR|Class.ClericLVL		EXPLANATION:Captures the level of Class 'Cleric'		
-GLOBAL:VAR|Class.FighterLVL		EXPLANATION:Captures the level of Class 'Fighter'		
-GLOBAL:VAR|Class.MonkLVL		EXPLANATION:Captures the level of Class 'Monk'		
-GLOBAL:VAR|Class.WizardLVL		EXPLANATION:Captures the level of Class 'Wizard'		
+GLOBAL:VAR=Class.BarbarianLVL		EXPLANATION:Captures the level of Class 'Barbarian'		
+GLOBAL:VAR=Class.ClericLVL		EXPLANATION:Captures the level of Class 'Cleric'		
+GLOBAL:VAR=Class.FighterLVL		EXPLANATION:Captures the level of Class 'Fighter'		
+GLOBAL:VAR=Class.MonkLVL		EXPLANATION:Captures the level of Class 'Monk'		
+GLOBAL:VAR=Class.WizardLVL		EXPLANATION:Captures the level of Class 'Wizard'		
 
 # Class Extras
 CLASS:VAR|Class.MaxLevel		EXPLANATION:This sets the Maximum Level on the Class - this is a local var and may be used on each class to have a Maxmimum defined level. CONVERSION NOTE: This should replace 'MAXLEVEL' see discussion below:
@@ -123,17 +143,17 @@ CLASS:VAR|Class.MaxLevel		EXPLANATION:This sets the Maximum Level on the Class -
 
 
 # Cleric Items
-GLOBAL:VAR|DomainLVL			EXPLANATION:Determines the Level of domain powers		
-GLOBAL:VAR|ClericDomainCount		EXPLANATION:Determines how many Domains a Cleric may have				
-GLOBAL:VAR|Domain				EXPLANATION:PLACEHOLDER - Domain was BONUS:DOMAIN|NUMBER|x		
+GLOBAL:VAR=DomainLVL			EXPLANATION:Determines the Level of domain powers		
+GLOBAL:VAR=ClericDomainCount		EXPLANATION:Determines how many Domains a Cleric may have				
+GLOBAL:VAR=Domain				EXPLANATION:PLACEHOLDER - Domain was BONUS:DOMAIN|NUMBER|x		
 
-GLOBAL:OS|TwoHandDamageDivisor	EXPLANATION:OS uses this to do TwoHandedDamage calculation, which doesn't make sense since we have DAMAGEMULT doing the same thing!
-GLOBAL:OS|OffHandLightBonus		EXPLANATION:OS uses this to do Light Bonus calculation
+GLOBAL:VAR=TwoHandDamageDivisor	EXPLANATION:OS uses this to do TwoHandedDamage calculation, which doesn't make sense since we have DAMAGEMULT doing the same thing!
+GLOBAL:VAR=OffHandLightBonus		EXPLANATION:OS uses this to do Light Bonus calculation
 
 
 #Vars File:
-GLOBAL:VAR|BaseAB				EXPLANATION:D20 System - Sets the "Base Attack Bonus" value for character.
-GLOBAL:VAR|BaseAB.Step			EXPLANATION:D20 System - Sets the "Base Attack Bonus" step - a Step is the interval between the first attack and each proceeding attack. This is called an attack iteration. Most classes are limited to 4 attacks in total, except the monk which gets 7 unarmed strikes.
+GLOBAL:VAR=BaseAB				EXPLANATION:D20 System - Sets the "Base Attack Bonus" value for character.
+GLOBAL:VAR=BaseAB.Step			EXPLANATION:D20 System - Sets the "Base Attack Bonus" step - a Step is the interval between the first attack and each proceeding attack. This is called an attack iteration. Most classes are limited to 4 attacks in total, except the monk which gets 7 unarmed strikes.
 
 EQUIPMENT.PART:VAR|AB.1			EXPLANATION:Sets the AB (AttackBonus) for the 1st attack
 EQUIPMENT.PART:VAR|AB.2			EXPLANATION:Sets the AB (AttackBonus) for the 2nd attack
@@ -158,13 +178,20 @@ EQUIPMENT.PART:VAR|ToHit.10		EXPLANATION:Sets the ToHit for attack 10 //For Ecli
 EQUIPMENT.PART:VAR|ToHit.11		EXPLANATION:Sets the ToHit for attack 11 //For Eclipse (Haste/Speed/Spear Wind)
 EQUIPMENT.PART:VAR|ToHit.12		EXPLANATION:Sets the ToHit for attack 12 //For Eclipse (Haste/Speed/Spear Wind)
 
+# Equipment: If Equipment is supposed to be local in it's scope, is "LOCAL:x" necessary?
+LOCAL:EQUIPMENT.PART|VAR=CritMult			EXPLANATION:Sets up Equipment to have "CritMult" which sets a Critical Multiplier value for each part of the equipment (FORMAT: #/xY, with Y the value). (In d20, a weapon may have Two "Heads" and have unique values for either head.
+LOCAL:EQUIPMENT.PART|VAR=CritRange		EXPLANATION:Sets up Equipment to have "CritRange" which sets a Critical Range value for each part of the equipment (FORMAT: Y/x#, with Y being a 20, 19-20, 18-20, etc.) (In d20, a weapon may have Two "Heads" and have unique values for either head.
+LOCAL:EQUIPMENT.PART|VAR=Reach			EXPLANATION:Equipment Reach
+LOCAL:EQUIPMENT|VAR=WT				EXPLANATION:Equipment may only have one Weight, abbreviated "WT" for fast use.
+LOCAL:EQUIPMENT|VAR=COST				EXPLANATION:Equipment may have one Cost or "Price".
+
 
 # BOOLEAN - Flags & Rules
-GLOBAL:RULE|DAMAGE_VW
-GLOBAL:RULE|USE_CMB
+GLOBAL:RULE=DAMAGE_VW
+GLOBAL:RULE=USE_CMB
 
-GLOBAL:FLAG|Tall				EXPLANATION:Set T/F whether a Race is TALL or not (not = long) - SIZE dictates BASE value for REACH and FACE, 
-FLAG|RacialVision				EXPLANATION:Sets 'Flag' (Boolean) called 'RacialVision'
+GLOBAL:FLAG=Tall				EXPLANATION:Set T/F whether a Race is TALL or not (not = long) - SIZE dictates BASE value for REACH and FACE, 
+FLAG=RacialVision				EXPLANATION:Sets 'Flag' (Boolean) called 'RacialVision'
 
 # Class Archetype Flags
 # Barbarian
@@ -276,32 +303,27 @@ ABILITYPOOL|Weapon Mastery		EXPLANATION:Sets up ABILITYPOOL "Weapon Mastery"
 #context drops into "AREA" and then you run a Boolean comparison for Face equaling 5,5... if the Boolean returns TRUE the PRExxx passes, if not, then not.
 #This can then capture ANYTHING in the formula environment just by writing it as a Boolean formula... and with functions like count() and others that will undoubtedly be created, you may find yourself liking to use PREBOOL rather than other PRExxx
 
-# Equipment:
-LOCAL:EQUIPMENT.PART|CritMult			EXPLANATION:Sets up Equipment to have "CritMult" which sets a Critical Multiplier value for each part of the equipment (FORMAT: #/xY, with Y the value). (In d20, a weapon may have Two "Heads" and have unique values for either head.
-LOCAL:EQUIPMENT.PART|CritRange		EXPLANATION:Sets up Equipment to have "CritRange" which sets a Critical Range value for each part of the equipment (FORMAT: Y/x#, with Y being a 20, 19-20, 18-20, etc.) (In d20, a weapon may have Two "Heads" and have unique values for either head.
-LOCAL:EQUIPMENT|WT				EXPLANATION:Equipment may only have one Weight, abbreviated "WT" for fast use.
-LOCAL:EQUIPMENT|COST				EXPLANATION:Equipment may have one Cost or "Price".
 
 
 
 
 # Skill is a LOCAL designation, it does not have "PART". A Single Skill is composed of the following components:
 # Rank, Bonus, Stat, and Total. This matches our output display
-LOCAL:VAR|MaxRank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
-LOCAL:VAR|Rank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
-LOCAL:VAR|Bonus		EXPLANATION:Each skill has a 'Bonus' modifier displayed on the Sheet - 
-LOCAL:VAR|Stat		EXPLANATION:Each skill has a 'Stat' that modifies it's final value
-LOCAL:VAR|Total		EXPLANATION:Each skill has a 'Total' value
+LOCAL:SKILL|VAR=MaxRank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
+LOCAL:SKILL|VAR=Rank		EXPLANATION:Each skill has a 'Rank' that is increased for a skill point pool
+LOCAL:SKILL|VAR=Bonus		EXPLANATION:Each skill has a 'Bonus' modifier displayed on the Sheet - 
+LOCAL:SKILL|VAR=Stat		EXPLANATION:Each skill has a 'Stat' that modifies it's final value
+LOCAL:SKILL|VAR=Total		EXPLANATION:Each skill has a 'Total' value
 
 # Stat is an interesting value - KEYSTAT: determines what is display, however, some classes alter which stat is used. OS should have a method to alter this display.
 
 
 # Bonus "Types" we need to track -- Pending Tom's input to handle stacking rules.
-LOCAL:VAR|Bonus.Morale
-LOCAL:VAR|Bonus.Competence
-LOCAL:VAR|Bonus.Enhancement
-LOCAL:VAR|Bonus.Trait
-LOCAL:VAR|Bonus.Class			EXPLANATION:Class is for Pathfinder - it grants a +3 to the skill IF the skill is designated as a class skill
+LOCAL:SKILL|VAR=Bonus.Morale
+LOCAL:SKILL|VAR=Bonus.Competence
+LOCAL:SKILL|VAR=Bonus.Enhancement
+LOCAL:SKILL|VAR=Bonus.Trait
+LOCAL:SKILL|VAR=Bonus.Class			EXPLANATION:Class is for Pathfinder - it grants a +3 to the skill IF the skill is designated as a class skill
 
 
 # Global VARS:
@@ -318,7 +340,7 @@ MonkFeatQualify
 # MODIFYOTHER:SKILL|%LIST|SkillTotal|SOLVE|value()+if(Rank>10,6,3)|PRIORITY=10000
 
 # Var file
-LOCAL:VAR|Grantors
+LOCAL:SKILL|VAR=Grantors
 
 
 #SomeFeat
@@ -333,5 +355,67 @@ LOCAL:VAR|Grantors
 
 #TOM QUESTION: I want this applied to ALL skills only, is local the right method or do I need to define it differently? Brings another question, if I define something as local, is it shared in all scopes?
 # Reasoning: Rules allow some companions to bypass certain skills, and using the same name to keep this clean would be appreciated
+LOCAL:SKILL|FLAG=AnimalCompanionSkill
 LOCAL:FLAG|AnimalCompanionSkill	EXPLANATION:Method to restrict skills from animal companions. 
 
+###Block: AC Stuff
+# AC is an abstract value made up of many different bonuses. PCGen has a Character sheet that allows the player to see where each modifier is coming from
+# For fast reference.
+# Total is the highest value achievable by the PC
+# Flatfoored is a circumstance based value that applies only when the PC is caught flatfooted.
+# Touch is a value used for a special attack called "Touch Attack" this is used by Creatures with a power (touch) or a spell (ranged touch)
+# The system has multiple bonuses that do not stack, only a highest granted wins.
+
+
+
+# These all display on the OS
+AC.Total				EXPLANATION:All 'AC.x' are included 
+# Circumstance Displays
+AC.Flatfooted			EXPLANATION:The value of the AC (When Flatfooted) - LOST STAT & Dodge unless Special Ability
+AC.Touch				EXPLANATION:The value of the AC (Versus Touch) - Only includes Stat, Deflection. Shield if Special Ability
+#
+AC.TouchMisc			EXPLANATION:Special AC value that only affects the Touch value... Probably not required any longer	
+AC.Base					EXPLANATION:Displays Base AC value (d20 is 10)
+AC.Armor					EXPLANATION:Armor Value + Enhancement Value
+#AC.ArmorEnhancement		
+AC.Shield			EXPLANATION:Shield Value + Enhancement Value
+#AC.ShieldEnhancement		
+AC.Ability			EXPLANATION:Value for Stat
+AC.Size				EXPLANATION:Value from Size deviation from Medium
+AC.NaturalArmor		
+AC.NaturalArmorEnhancement	
+AC.Dodge				EXPLANATION:OS Display - Dodge Value
+AC.Deflection			EXPLANATION:OS Display - Deflection Value
+AC.Misc				EXPLANATION:OS Display - Anything else
+AC.Circumstance		EXPLANATION:OS Display - Circumstance Value
+AC.Insight			EXPLANATION:OS Display - Insight Value
+AC.Morale			EXPLANATION:OS Display - Morale Value
+AC.Profane			EXPLANATION:OS Display - Proface Value
+AC.Sacred			EXPLANATION:OS Display - Sacred Value
+AC.CMD				EXPLANATION:Special defense
+AC.ClassDefense		EXPLANATION:Class Defense value - not applicable in pathfinder
+
+# Since TouchMisc should only add to the Touch, and not the total AC I'm deviating from the standard and using Remove in the Total.
+#Flatfooted				ADD:TOTAL		REMOVE:TouchMisc	REMOVE:Ability|PRESTAT:1,DEX=10|!PREABILITY:1,CATEGORY=Special Ability,Retain Dex To AC ~ Flat-footed		REMOVE:Dodge|!PREABILITY:1,CATEGORY=Special Ability,Retain Dex To AC ~ Flat-footed
+#Touch				ADD:TOTAL		REMOVE:Armor|ArmorEnhancement|Shield|ShieldEnhancement|NaturalArmor|NaturalArmorEnhancement	ADD:Shield|ShieldEnhancement|PREVARGTEQ:ShieldAddsToTouchAC,1
+
+#TouchMisc				ADD:TouchMisc
+#Base					ADD:Base
+#Armor				ADD:Armor|ArmorEnhancement
+#ArmorEnhancement			ADD:ArmorEnhancement
+#Shield				ADD:Shield|ShieldEnhancement
+#ShieldEnhancement		ADD:ShieldEnhancement
+#Ability				ADD:Ability
+#Size					ADD:Size
+#NaturalArmor			ADD:NaturalArmor|NaturalArmorEnhancement
+#NaturalArmorEnhancement	ADD:NaturalArmorEnhancement
+#Dodge				ADD:Dodge
+#Deflection				ADD:Deflection
+#Misc					ADD:TOTAL		REMOVE:Base|Armor|ArmorEnhancement|Shield|ShieldEnhancement|Ability|Size|NaturalArmor|NaturalArmorEnhancement|Dodge|Deflection|TouchMisc
+#Circumstance			ADD:Circumstance
+#Insight				ADD:Insight
+#Morale				ADD:Morale
+#Profane				ADD:Profane
+#Sacred				ADD:Sacred
+#CMD					ADD:Circumstance|Deflection|Dodge|Insight|Luck|Morale|Profane|Sacred
+#ClassDefense			ADD:ClassDefense

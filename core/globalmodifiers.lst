@@ -44,7 +44,9 @@ MODIFY:Initiative.Stat|SET|DEX							EXPLANATION:Initiative.Stat is the Modifier
 #STATNAME:Strength
 MODIFY:STRSCORE|SOLVE|Value
 MODIFY:STR|SOLVE|Mod
+#MODIFY:STR|SOLVE|stat("Strength")	EXPLANATION:Alternative Tom displayed, instead of universal method above.
 MODIFY:LOADSCORE|SOLVE|STRSCORE	
+
 
 #STATNAME:Dexterity
 MODIFY:DEXSCORE|SOLVE|Value								EXPLANATION:DEXSCORE = Stat "Dexterity" value.
@@ -63,6 +65,7 @@ MODIFY:HP=AltHP|SOLVE|CONSCORE*2
 #STATNAME:Intelligence
 MODIFY:INTSCORE|SOLVE|Value
 MODIFY:INT|SOLVE|Mod
+
 MODIFY:Language.Race|SOLVE|max(INT,0)+Language.Additional			EXPLANATION:PC's have two pools for Languages - those gained from Race and high intelligence, the second is from the Linguistics Skill
 
 
@@ -77,6 +80,9 @@ MODIFY:WIS|SOLVE|Mod
 #STATNAME:Charisma
 MODIFY:CHASCORE|SOLVE|Value
 MODIFY:CHA|SOLVE|Mod
+
+# Generic
+MODIFY:RacialVision|SET|value()+if(context("FLAG",RacialVision),1,0)
 
 
 #GENERAL RULES
@@ -119,7 +125,7 @@ MODIFY:ENCUMBRANCE|SET|encumbrance()			EXPLANATION:D20 System - Sets the Encumbr
 
 
 
-# OS Flags
+# OS Flags - Need to deal with RULE.lst file:
 MODIFY:OS=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
 MODIFY:OS=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
 
@@ -333,4 +339,11 @@ MODIFYOTHER:CLASS|ALL|TL|ADD|classlevel()
 # This is for the OS to determine Bonuses in the Sheet.
 MODIFY:OS=TWOHANDDAMAGEDIVISOR|SET|2
 MODIFY:OS=OFFHANDLIGHTBONUS|SET|2
+
+###Block: AC Universal Rules!
+MODIFY:AC.Total|SOLVE|value()+AC.Base+AC.Armor+AC.Shield+AC.Ability+AC.Size+AC.NaturalArmor+AC.Enhancements
+MODIFY:AC.Flatfooted|SOLVE|value()+AC.Total-AC.Stat-AC.Dodge
+MODIFY:AC.Touch|SOLVE|value()+AC.Base+AC.Stat+AC.Enhancements
+
+MODIFY:AC.Enhancements|SOLVE|value()+AC.Dodge+AC.Deflection+AC.Misc+AC.Circumstance+AC.Insight+AC.Morale+AC.Profane+AC.Sacred+AC.ClassDefense
 

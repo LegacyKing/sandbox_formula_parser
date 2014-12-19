@@ -6,6 +6,7 @@ SIZEMULT:Large|2
 SIZEMULT:Huge|4
 SIZEMULT:Gargantuan|8
 SIZEMULT:Colossal|16
+# Load gets value from LOADSCORE - Vectors...
 LOAD:0|0
 LOAD:1|10
 LOAD:2|20
