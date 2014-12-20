@@ -14,19 +14,29 @@ MODIFYOTHER:STAT|ALL|Mod|SOLVE|(Value/2)-5		EXPLANATION:D20 System - Sets the Mo
 # GLOBAL RULES:
 
 #Straight conversion would be:
-MODIFYOTHER:VAR|ToHit.ModTotal|GROUP=WeaponMelee|SET|STR|PRIORITY=1000000	EXPLANATION:ModTotal for Melee weapons set to the Strength Modifier	
-MODIFYOTHER:VAR|ToHit.ModTotal|GROUP=WeaponThrown|SET|STR|PRIORITY=1000000	EXPLANATION:
-MODIFYOTHER:VAR|ToHit.ModTotal|GROUP=WeaponRanged|SET|DEX|PRIORITY=1000000	EXPLANATION:
-MODIFYOTHER:DAMAGE|Bonus|GROUP=WeaponMelee|SET|STR|PRIORITY=1000000		EXPLANATION:Bonus to Damage for Melee weapons set to the Strength modifier
-MODIFYOTHER:DAMAGE|Bonus|GROUP=WeaponThrown|SET|STR|PRIORITY=1000000		EXPLANATION:Bonus to Damage for Thrown weapons set to the Strength modifier
-MODIFYOTHER:DAMAGE|Bonus|GROUP=WeaponSplash|SET|-STR|PRIORITY=1000000		EXPLANATION:Bonus to Damage for Splash weapons set to remove the Strength modifier
+MODIFYOTHER:EQUIPMENT.PART|VAR=ToHit.ModTotal|GROUP=WeaponMelee|SET|STR|PRIORITY=1000000	EXPLANATION:ModTotal for Melee weapons set to the Strength Modifier	
+MODIFYOTHER:EQUIPMENT.PART|VAR=ToHit.ModTotal|GROUP=WeaponThrown|SET|STR|PRIORITY=1000000	EXPLANATION:
+MODIFYOTHER:EQUIPMENT.PART|VAR=ToHit.ModTotal|GROUP=WeaponRanged|SET|DEX|PRIORITY=1000000	EXPLANATION:
+
+# Tom hasn't decided how to handle DAMAGE:xdy+z / damage bonus yet.
+MODIFYOTHER:EQUIPMENT.PART|VAR=Damage.Bonus|GROUP=WeaponMelee|SET|STR|PRIORITY=1000000		EXPLANATION:Bonus to Damage for Melee weapons set to the Strength modifier
+MODIFYOTHER:EQUIPMENT.PART|VAR=Damage.Bonus|GROUP=WeaponThrown|SET|STR|PRIORITY=1000000		EXPLANATION:Bonus to Damage for Thrown weapons set to the Strength modifier
+MODIFYOTHER:EQUIPMENT.PART|VAR=Damage.Bonus|GROUP=WeaponSplash|SET|-STR|PRIORITY=1000000		EXPLANATION:Bonus to Damage for Splash weapons set to remove the Strength modifier
 
 # This is used by the Output system - consider redoing to OS=x
 MODIFY:Weapon.DamageMult.Light|SOLVE|0.5*(STR>=0)
 MODIFY:Weapon.DamageMult.OneHand|SOLVE|1
 MODIFY:Weapon.DamageMult.TwoHand|SOLVE|1.5*(STR>=0)
 
-# AC:
+###Block: AC Universal Rules!
+MODIFY:VAR=AC.Total|SOLVE|value()+AC.Base+AC.Armor+AC.Shield+AC.Attribute+AC.Size+AC.NaturalArmor+AC.Enhancements		EXPLANATION:AC displayed for Total
+MODIFY:VAR=AC.Flatfooted|SOLVE|value()+AC.Total-AC.Stat-AC.Dodge										EXPLANATION:AC displayed for Flatfooted	
+MODIFY:VAR=AC.Touch|SOLVE|value()+AC.Base+AC.Stat+AC.Enhancements										EXPLANATION:AC displayed for Touch
+#
+MODIFY:VAR=AC.Enhancements|SOLVE|value()+AC.Dodge+AC.Deflection+AC.Misc+AC.Circumstance+AC.Insight+AC.Morale+AC.Profane+AC.Sacred+AC.ClassDefense	EXPLANATION:Resolves all the "Enhancements" to AC
+
+
+# AC values:
 MODIFY:AC.Base|SET|10|PRIORITY=1000000						EXPLANATION:D20 System - Default value is 10
 MODIFY:AC.Attribute|SOLVE|min(AC.Stat,min(MaxDex,ModEquipMaxDex))		EXPLANATION:D20 System - Sets the actual attribute modifier to the lowest value of Dex Mod, or penalties for Armor "MaxDex" or "Encumbrance".
 MODIFY:AC.Stat|SET|DEX|PRIORITY=1000000						EXPLANATION:D20 System - Sets the default AC.Stat to DEX mod, though this can be overriden using a PRIORITY >1000000
@@ -36,6 +46,7 @@ MODIFY:MaxDex|SOLVE|if(encumbrance==0,1000,value())				EXPLANATION:D20 System - 
 MODIFY:MaxDex|SOLVE|if(encumbrance==1,3,value())				EXPLANATION:D20 System - Sets MaxDex to be 3, if encumbrance value is 1
 MODIFY:MaxDex|SOLVE|if(encumbrance==2,1,value())				EXPLANATION:D20 System - Sets MaxDex to be 1, if encumbrance value is 2
 
+# Interesting, looks like 'ModEquipMaxDex' was the value coming from equipment.
 
 
 MODIFY:Initiative.Stat|SET|DEX							EXPLANATION:Initiative.Stat is the Modifier for Initiative based upon Dex Bonus
@@ -109,7 +120,7 @@ MODIFYOTHER:SKILL|Climb|SOLVE|value()+if(namespace("MOVE",Climb>=1,8,0)
 # This globally applies the Swin Bonus to the SkillTotal of the Situational Swim skill (Pathfinder Core Rulebook, page 91, forth printing)
 # RULE QUOTE: "A creature with a swim speed can move through water at its indicated speed without making Swim checks. It gains a +8 racial bonus on any Swim check to perform a special action or avoid a hazard."
 # TOM QUESTION: How do we bonus the SITUATION?
-#?MODIFYOTHER:SKILL|Swim|SOLVE|value()+if(namespace("MOVE",Swim>=1,8,0)
+#?MODIFYOTHER:SKILL|Swim=perform special action or avoid hazard|SOLVE|value()+if(namespace("MOVE",Swim>=1,8,0)
 
 #	BONUS:COMBAT|AC|min(CHA, min(MXDXEN,MODEQUIPMAXDEX))|TYPE=Ability|PREVAREQ:ACStatIsCha,1
 #	DEFINE:OversizeWeaponToHitBonus|0	
@@ -126,8 +137,8 @@ MODIFY:ENCUMBRANCE|SET|encumbrance()			EXPLANATION:D20 System - Sets the Encumbr
 
 
 # OS Flags - Need to deal with RULE.lst file:
-MODIFY:OS=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
-MODIFY:OS=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
+MODIFY:VAR=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
+MODIFY:VAR=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
 
 
 
@@ -269,7 +280,7 @@ MODIFYOTHER:ABILITY=Archetype|GROUP=WizardBonusFeats|FLAG=WizardBonusFeats|SET|T
 #CLASS:Fighter	MODIFYOTHER:SKILL|Ride|Grantors|ADD|1
 
 
-#<blah blah>if(getLocalVar("SKILL","Ride",Grantors)>=1,...stuff when a class skill...,...stuff when not a class skill...)
+#<blah blah>if(getLocalVar("SKILL","Ride",Grantors>)=1,...stuff when a class skill...,...stuff when not a class skill...)
 #[20:39] Tom Parker: missed a ) after the s in Grantors
 #[20:39] Tom Parker: then in Skill Specialization, we need to do 2 things:
 
@@ -287,7 +298,7 @@ MODIFYOTHER:ABILITY=Archetype|GROUP=WizardBonusFeats|FLAG=WizardBonusFeats|SET|T
 
 
 # Pathfinder Skill Specialization
-MODIFYOTHER:SKILL|%LIST|SkillTotal|SOLVE|value()+if(Grantors>1,1,0)|PRIORITY=10000
+# Goes on the ability		MODIFYOTHER:SKILL|%LIST|SkillTotal|SOLVE|value()+if(Grantors>1,1,0)|PRIORITY=10000
 
 
 
@@ -337,13 +348,14 @@ MODIFYOTHER:CLASS|ALL|TL|ADD|classlevel()
 #	BONUS:COMBAT|DAMAGE.Splash|-STR|TYPE=Ability
 
 # This is for the OS to determine Bonuses in the Sheet.
-MODIFY:OS=TWOHANDDAMAGEDIVISOR|SET|2
-MODIFY:OS=OFFHANDLIGHTBONUS|SET|2
+MODIFY:VAR=TWOHANDDAMAGEDIVISOR|SET|2
+MODIFY:VAR=OFFHANDLIGHTBONUS|SET|2
 
-###Block: AC Universal Rules!
-MODIFY:AC.Total|SOLVE|value()+AC.Base+AC.Armor+AC.Shield+AC.Ability+AC.Size+AC.NaturalArmor+AC.Enhancements
-MODIFY:AC.Flatfooted|SOLVE|value()+AC.Total-AC.Stat-AC.Dodge
-MODIFY:AC.Touch|SOLVE|value()+AC.Base+AC.Stat+AC.Enhancements
 
-MODIFY:AC.Enhancements|SOLVE|value()+AC.Dodge+AC.Deflection+AC.Misc+AC.Circumstance+AC.Insight+AC.Morale+AC.Profane+AC.Sacred+AC.ClassDefense
 
+MODIFYOTHER:EQUIPMENT|GROUP=somegroup|VAR=BaseCost|SOLVE|value()*0.5
+
+# From the SizeAdjustment.lst Email discussion
+MODIFYOTHER:EQUIPMENT.PART|GROUP=Weapon|MagicCost|SOLVE|value()+2000*(PlusCost.Weapon^2)
+MODIFYOTHER:EQUIPMENT.PART|GROUP=Armor|MagicCost|SOLVE|value()+1000*(PlusCost.Armor^2)
+MODIFYOTHER:EQUIPMENT.PART|GROUP=Shield|MagicCost|SOLVE|value()+1000*(PlusCost.Shield^2)

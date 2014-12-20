@@ -419,3 +419,9 @@ AC.ClassDefense		EXPLANATION:Class Defense value - not applicable in pathfinder
 #Sacred				ADD:Sacred
 #CMD					ADD:Circumstance|Deflection|Dodge|Insight|Luck|Morale|Profane|Sacred
 #ClassDefense			ADD:ClassDefense
+
+
+LOCAL:EQUIPMENT|PlusCost.Weapon
+LOCAL:EQUIPMENT|PlusCost.Armor
+LOCAL:EQUIPMENT|PlusCost.Shield
+
