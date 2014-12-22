@@ -143,24 +143,12 @@
 		<image>file:${pcstring('DIR.PCG')}/${pcstring('NAME')}.jpg</image>
 		<interests>${pcstring('INTERESTS')}</interests>
 		<languages>
-<@loop from=0 to=pcvar('COUNT[LANGUAGES]-1') ; lang , lang_has_next>
+		<@loop from=0 to=pcvar('COUNT[LANGUAGES]-1') ; lang , lang_has_next>
 			<language>${pcstring('LANGUAGES.${lang}')}</language>
-</@loop>
+		</@loop>
+			<language>${pcstring('ABILITYALL.ANY.0.ASPECT=Language.ASPECT.Language')}</language>
 			<all>${pcstring('LANGUAGES')}</all>
 		</languages>
-
-<#--	Need to DO:
-<language>|LANGUAGES.%lang||ABILITYALL.Special Ability.0.TYPE=LanguageDisplay.BENEFIT|</language>
-|ENDFOR|
-			<language>|ABILITYALL.Special Ability.0.TYPE=LanguageDisplay||ABILITYALL.Special Ability.0.TYPE=LanguageDisplay.ASPECT.Language||ABILITYALL.Special Ability.0.TYPE=LanguageDisplay.BENEFIT|</language>
-
-			<all>|LANGUAGES||ABILITYALL.Special Ability.0.TYPE=LanguageDisplay.BENEFIT| |ABILITYALL.Special Ability.0.TYPE=LanguageDisplay.DESC|</all>
-		</languages>
-|FOR,%lang,0,count("ABILITIES","CATEGORY=Special Ability","TYPE=SkillBonus")-1,1,0|
-|ENDFOR|
--->
-
-
 		<location>${pcstring('LOCATION')}</location>
 		<move>
 <@loop from=0 to=pcvar('COUNT[MOVE]-1') ; move , move_has_next>
@@ -185,6 +173,7 @@
 		</portrait>
 		<phobias>${pcstring('PHOBIAS')}</phobias>
 		<race>${pcstring('RACE')}</race>
+		<race>${pcstring('ABILITYALL.ANY.0.ASPECT=RaceName.ASPECT.RaceName')}</race>
 		<race>
 <@loop from=0 to=pcvar('countdistinct("ABILITIES","CATEGORY=Internal","ASPECT=RaceExtra")-1') ; ability , ability_has_next>
 			<raceextra>${pcstring('ABILITYALL.Internal.HIDDEN.${ability}.ASPECT.RaceExtra')}</raceextra>
