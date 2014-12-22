@@ -27,50 +27,67 @@ SIZENAME:Fine		ABB:F
 
 # KEY:x should be used so ABB is not the KEY. Currently KEY is not a legal tag in SizeAdjustment.lst
 SIZENAME:Fine		ABB:F	KEY:F
-	MODIFYOTHER:EQUIPMENT|GROUP=Ammunition|VAR=Cost|SOLVE|value()*0.5
-	MODIFYOTHER:EQUIPMENT|GROUP=Armor|Cost|SOLVE|value()*0.5
-	MODIFYOTHER:EQUIPMENT|GROUP=Shield|Cost|SOLVE|value()*0.5
-	MODIFYOTHER:EQUIPMENT|GROUP=Weapon|Cost|SOLVE|value()*0.5
-	MODIFYOTHER:EQUIPMENT|GROUP=Ammunition|VAR=WT|SOLVE|value()*0.1
-	MODIFYOTHER:EQUIPMENT|GROUP=Armor|WT|SOLVE|value()*0.1
-	MODIFYOTHER:EQUIPMENT|GROUP=Shield|WT|SOLVE|value()*0.1
-	MODIFYOTHER:EQUIPMENT|GROUP=Weapon|WT|SOLVE|value()*0.1
-	MODIFYOTHER:EQUIPMENT|GROUP=Goods|WT|SOLVE|value()*0.25
-	MODIFYOTHER:EQUIPMENT|GROUP=Armor|VAR=AC.Armor|SOLVE|value()*0.5
-	MODIFYOTHER:EQUIPMENT|GROUP=Shield|AC.Shield|SOLVE|value()*0.5
-	MODIFY:VAR=AC.Size|ADD|8
-	MODIFY:VAR=TOHIT.MOD|ADD|8
-	MODIFYOTHER:SKILL|Fly|VAR=Skill.Bonus|ADD|8
-	MODIFYOTHER:SKILL|Stealth|VAR=Skill.Bonus|ADD|8
-	MODIFYOTHER:SKILL|Climb|VAR=Skill.Stat|SOLVE|value()+DEX-STR
-	MODIFY:VAR=Loadmult|SOLVE|value()*0.125
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Ammunition|VAR=Cost|SOLVE|value()*0.5
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Armor|Cost|SOLVE|value()*0.5
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Shield|Cost|SOLVE|value()*0.5
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Weapon|Cost|SOLVE|value()*0.5
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Ammunition|VAR=WT|SOLVE|value()*0.1
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Armor|WT|SOLVE|value()*0.1
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Shield|WT|SOLVE|value()*0.1
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Weapon|WT|SOLVE|value()*0.1
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Goods|WT|SOLVE|value()*0.25
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Armor|VAR=AC.Armor|SOLVE|value()*0.5
+SIZENAME:Fine	MODIFYOTHER:EQUIPMENT|GROUP=Shield|AC.Shield|SOLVE|value()*0.5
+SIZENAME:Fine	MODIFY:VAR=AC.Size|ADD|8
+SIZENAME:Fine	MODIFY:VAR=TOHIT.MOD|ADD|8
+SIZENAME:Fine	MODIFYOTHER:SKILL|Fly|VAR=Skill.Bonus|ADD|8
+SIZENAME:Fine	MODIFYOTHER:SKILL|Stealth|VAR=Skill.Bonus|ADD|8
+SIZENAME:Fine	MODIFYOTHER:SKILL|Climb|VAR=Skill.Stat|SOLVE|value()+DEX-STR
+SIZENAME:Fine	MODIFY:VAR=Loadmult|SOLVE|value()*0.125
 
 
 
 
 # These are progressive changes based upon number of size steps up or down from the base size - We need to make this a WHOLE lot easier to manage.
+
+# This is the scale going from Colossal to Fine
+# If I Was Colossal originally
 BONUS:STAT|STR|-8|PREBASESIZEGT:Gargantuan|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|CON|-4|PREBASESIZEGT:Gargantuan|PREVAREQ:BypassSizeMods,0
 BONUS:COMBAT|AC|-5|TYPE=NaturalArmor|PREBASESIZEGT:Gargantuan|PREVAREQ:BypassSizeMods,0	
+# If I Was Gargantuan originally
 BONUS:STAT|STR|-8|PREBASESIZEGT:Huge|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|CON|-4|PREBASESIZEGT:Huge|PREVAREQ:BypassSizeMods,0
 BONUS:COMBAT|AC|-4|TYPE=NaturalArmor|PREBASESIZEGT:Huge|PREVAREQ:BypassSizeMods,0
+# If I Was Huge originally
 BONUS:STAT|STR|-8|PREBASESIZEGT:Large|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|DEX|2|PREBASESIZEGT:Large|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|CON|-4|PREBASESIZEGT:Large|PREVAREQ:BypassSizeMods,0
 BONUS:COMBAT|AC|-3|TYPE=NaturalArmor|PREBASESIZEGT:Large|PREVAREQ:BypassSizeMods,0
+# If I Was Large originally
 BONUS:STAT|STR|-8|PREBASESIZEGT:Medium|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|DEX|2|PREBASESIZEGT:Medium|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|CON|-4|PREBASESIZEGT:Medium|PREVAREQ:BypassSizeMods,0
 BONUS:COMBAT|AC|-2|TYPE=NaturalArmor|PREBASESIZEGT:Medium|PREVAREQ:BypassSizeMods,0
+# If I Was Medium originally
 BONUS:STAT|STR|-4|PREBASESIZEGT:Small|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|DEX|2|PREBASESIZEGT:Small|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|CON|-2|PREBASESIZEGT:Small|PREVAREQ:BypassSizeMods,0
+# If I Was Small originally
 BONUS:STAT|STR|-4|PREBASESIZEGT:Tiny|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|DEX|2|PREBASESIZEGT:Tiny|PREVAREQ:BypassSizeMods,0	
+# If I Was Tiny originally
 BONUS:STAT|STR|-2|PREBASESIZEGT:Diminutive|PREVAREQ:BypassSizeMods,0
 BONUS:STAT|DEX|2|PREBASESIZEGT:Diminutive|PREVAREQ:BypassSizeMods,0	
+# If I Was Diminutive originally
 BONUS:STAT|DEX|2|PREBASESIZEGT:Fine|PREVAREQ:BypassSizeMods,0	
+
+# This is the scale going from Fine to Colossal
+
+
+
+
+
 # This is set up to make a base damage support based upon creature size. A damage dice vartype would be useful for this. "xdy" format
 SIZENAME:Fine		BONUS:VAR|PrimaryAttackDamageDice|1|TYPE=Base	BONUS:VAR|PrimaryAttackDamageSize|1|TYPE=Base
 #	ABILITY:Internal|AUTOMATIC|SIZE_MASTER
@@ -215,3 +232,42 @@ SIZENAME:Colossal
 SIZENAME:Colossal		BONUS:VAR|PrimaryAttackDamageDice|2|TYPE=Base	BONUS:VAR|PrimaryAttackDamageSize|8|TYPE=Base
 #	ABILITY:Internal|AUTOMATIC|SIZE_MASTER
 
+
+# Each step is cumalative 
+# If I Was Fine originally
+BONUS:STAT|DEX|-2|PREBASESIZELT:Diminutive|PREVAREQ:BypassSizeMods,0	
+
+# If I Was Diminutive or smaller originally
+BONUS:STAT|DEX|-2|PREBASESIZELT:Tiny|PREVAREQ:BypassSizeMods,0	
+BONUS:STAT|STR|2|PREBASESIZELT:Tiny|PREVAREQ:BypassSizeMods,0
+
+# If I Was Tiny or smaller originally
+BONUS:STAT|DEX|-2|PREBASESIZELT:Small|PREVAREQ:BypassSizeMods,0	
+BONUS:STAT|STR|4|PREBASESIZELT:Small|PREVAREQ:BypassSizeMods,0
+
+# If I Was Small or smaller originally
+BONUS:STAT|DEX|-2|PREBASESIZELT:Medium|PREVAREQ:BypassSizeMods,0	
+BONUS:STAT|STR|4|PREBASESIZELT:Medium|PREVAREQ:BypassSizeMods,0	
+BONUS:STAT|CON|2|PREBASESIZELT:Medium|PREVAREQ:BypassSizeMods,0
+
+# If I Was Medium or smaller originally
+BONUS:STAT|DEX|-2|PREBASESIZELT:Large|PREVAREQ:BypassSizeMods,0
+BONUS:STAT|STR|8|PREBASESIZELT:Large|PREVAREQ:BypassSizeMods,0
+BONUS:STAT|CON|4|PREBASESIZELT:Large|PREVAREQ:BypassSizeMods,0
+BONUS:COMBAT|AC|2|TYPE=NaturalArmor.STACK|PREBASESIZELT:Large|PREVAREQ:BypassSizeMods,0		
+
+# If I Was Large or smaller originally
+BONUS:STAT|DEX|-2|PREBASESIZELT:Huge|PREVAREQ:BypassSizeMods,0
+BONUS:STAT|STR|8|PREBASESIZELT:Huge|PREVAREQ:BypassSizeMods,0
+BONUS:STAT|CON|4|PREBASESIZELT:Huge|PREVAREQ:BypassSizeMods,0
+BONUS:COMBAT|AC|3|TYPE=NaturalArmor.STACK|PREBASESIZELT:Huge|PREVAREQ:BypassSizeMods,0		
+
+# If I Was Huge or smaller originally
+BONUS:STAT|STR|8|PREBASESIZELT:Gargantuan|PREVAREQ:BypassSizeMods,0	
+BONUS:STAT|CON|4|PREBASESIZELT:Gargantuan|PREVAREQ:BypassSizeMods,0
+BONUS:COMBAT|AC|4|TYPE=NaturalArmor.STACK|PREBASESIZELT:Gargantuan|PREVAREQ:BypassSizeMods,0		
+
+# If I Was Gargantuan or smaller originally
+BONUS:STAT|STR|8|PREBASESIZELT:Colossal|PREVAREQ:BypassSizeMods,0	
+BONUS:STAT|CON|4|PREBASESIZELT:Colossal|PREVAREQ:BypassSizeMods,0
+BONUS:COMBAT|AC|5|TYPE=NaturalArmor.STACK|PREBASESIZELT:Colossal|PREVAREQ:BypassSizeMods,0

@@ -53,29 +53,25 @@ MODIFY:Initiative.Stat|SET|DEX							EXPLANATION:Initiative.Stat is the Modifier
 
 
 #STATNAME:Strength
-MODIFY:STRSCORE|SOLVE|Value
-MODIFY:STR|SOLVE|Mod
-#MODIFY:STR|SOLVE|stat("Strength")	EXPLANATION:Alternative Tom displayed, instead of universal method above.
+#	MODIFY:STR|SOLVE|stat("Strength")	EXPLANATION:Alternative Tom displayed, instead of universal method above.
+#	MODIFY:STRSCORE|SOLVE|getLocalVariable("STAT","STR",Value)
 MODIFY:LOADSCORE|SOLVE|STRSCORE	
 
 
 #STATNAME:Dexterity
-MODIFY:DEXSCORE|SOLVE|Value								EXPLANATION:DEXSCORE = Stat "Dexterity" value.
-MODIFY:DEX|SOLVE|Mod									EXPLANATION:Sets 'DEX' to the Mod value for Dexterity.
+							EXPLANATION:DEXSCORE = Stat "Dexterity" value.
+									EXPLANATION:Sets 'DEX' to the Mod value for Dexterity.
 MODIFY:AC|SOLVE|max(FightingDefensivelyAC,TotalDefenseAC)			EXPLANATION:D20 System - Adds to AC the values of either Fighting Defensively or Total Defense AC. This is turned on by activating a TEMPBONUS/TEMPMOD.
 
 # SET vs SOLVE
 
 #STATNAME:Constitution	
-MODIFY:CONSCORE|SOLVE|Value
-MODIFY:CON|SOLVE|Mod
+
 MODIFY:HP=WoundPoints|SET|CON|PRIORITY=1000000						
 MODIFY:HP=HP|SOLVE|CON*TL
 MODIFY:HP=AltHP|SOLVE|CONSCORE*2
 
 #STATNAME:Intelligence
-MODIFY:INTSCORE|SOLVE|Value
-MODIFY:INT|SOLVE|Mod
 
 MODIFY:Language.Race|SOLVE|max(INT,0)+Language.Additional			EXPLANATION:PC's have two pools for Languages - those gained from Race and high intelligence, the second is from the Linguistics Skill
 
@@ -85,12 +81,10 @@ MODIFY:Skill.Bonus|SET|INT
 # Also for the retroactive Bonus to Skill Pool, we used this "BonusRetroSkillPoints"
 
 #STATNAME:Wisdom
-MODIFY:WISSCORE|SOLVE|Value
-MODIFY:WIS|SOLVE|Mod
+
 
 #STATNAME:Charisma
-MODIFY:CHASCORE|SOLVE|Value
-MODIFY:CHA|SOLVE|Mod
+
 
 # Generic
 MODIFY:RacialVision|SET|value()+if(context("FLAG",RacialVision),1,0)
@@ -126,9 +120,6 @@ MODIFYOTHER:SKILL|Climb|SOLVE|value()+if(namespace("MOVE",Climb>=1,8,0)
 #	DEFINE:OversizeWeaponToHitBonus|0	
 
 # Redo to OS display
-MODIFY:Save.Fortitude.Stat|SOLVE|CON			EXPLANATION:D20 System - Sets the Fortitude Stat Bonus to the CON modifier value
-MODIFY:Save.Reflex.Stat|SOLVE|DEX				EXPLANATION:D20 System - Sets the Reflex Stat Bonus to the DEX modifier value
-MODIFY:Save.Will.Stat|SOLVE|WIS				EXPLANATION:D20 System - Sets the Will Stat Bonus to the WIS modifier value
 # getLocalVar("STAT","Constitution",Mod)	EXPLANATION:An Alternate method to get a Local Var.
 # MODIFY:STR|SOLVE|stat("Strength")
 
@@ -189,7 +180,6 @@ MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.6|PRIORITY=1000
 MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|AB.7|PRIORITY=1000
 
 
- MODIFYOTHER:ABILITY=Archetype|GROUP=FighterWeaponMastery|FLAG=FighterWeaponMastery|SET|True
 # Clarify with Tom that this (see below) sets all Flags true IF an Archetype with GROUP:FighterWeaponMastery will activate the TRUE flag
 # Archetype Support
 MODIFYOTHER:ABILITY=Archetype|GROUP=BarbarianRage|FLAG=BarbarianRage|SET|True

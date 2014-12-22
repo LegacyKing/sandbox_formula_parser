@@ -1,13 +1,15 @@
 
 # Per Tom - SCOPE List:
-# GLOBAL
-# EQUIPMENT
-# EQUIPMENT.PART
+# GLOBAL		//Used everywhere
+# EQUIPMENT		//Equip File
+# EQUIPMENT.PART	//Equipment Parts - for heads of weapons
 # Considerations for:
-# STAT
-# CLASS
-# SKILL
-# SPELL
+# CHECK	// Saving Throws
+# STAT	// Attributes (Strength, Dexterity, Constitution, etc.)
+# CLASS	// Class File
+# SKILL	// Skill File
+# SPELL	// Spell File
+
 
 # CONFUSION POINT:
 #	LOCAL:SKILL|VAR=
@@ -16,54 +18,46 @@
 # New Tag Directory
 # GROUP:x|x|x
 # PREBOOL:x
-# PREBOOL:context("w",x),
+# PREBOOL:context("w",x) = True
 
 # Game System Vars -
-GLOBAL:VAR=Save.Fortitude		EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Fortitude"
-GLOBAL:VAR=Save.Reflex			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Reflex"
-GLOBAL:VAR=Save.Will			EXPLANATION:D20 System - Sets the "Saving Throw" total value for "Will"
-
-GLOBAL:VAR=Save.Fortitude.Base	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" as a Base value - this is from Classes
-GLOBAL:VAR=Save.Reflex.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" as a Base value - this is from Classes
-GLOBAL:VAR=Save.Will.Base		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" as a Base value - this is from Classes
-
-GLOBAL:VAR=Save.Fortitude.Stat	EXPLANATION:D20 System - Sets the "Saving Throw" value for "Fortitude" from the designated Stat
-GLOBAL:VAR=Save.Reflex.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Reflex" from the designated Stat
-GLOBAL:VAR=Save.Will.Stat		EXPLANATION:D20 System - Sets the "Saving Throw" value for "Will" from the designated Stat
-
 # Attributes
 #'LOCAL:STAT|Value' is the SAME AS 'LOCAL:STAT|VAR=Value' VAR= is assumed.
 LOCAL:STAT|Value						EXPLANATION:D20 System - Sets the Value of a given "Stat"
 LOCAL:STAT|Mod						EXPLANATION:D20 System - Sets the Mod'ifier' of a given "Stat"
 
-#
+# New Scope: CHECK
+LOCAL:CHECK|VAR=Save			EXPLANATION:D20 System - Sets a local Save for each check in the system (Check is PCGen term for a Saving Throw)
+LOCAL:CHECK|VAR=Save.Base		EXPLANATION:D20 System - Sets a local Save base for each check in the system (Base is modified by Classes)
+LOCAL:CHECK|VAR=Save.Stat		EXPLANATION:D20 System - Sets a local Save stat for each check in the system (Stat is the MOD value)
+LOCAL:CHECK|VAR=Save.Bonus		EXPLANATION:D20 System - Sets a local Save bonus for each check in the system (Anything else affecting the save)
+LOCAL:CHECK|VAR=Save.Racial		EXPLANATION:D20 System - Sets a local Save racial for each check in the system (Anything else affecting the save)
+LOCAL:CHECK|VAR=Save.Epic		EXPLANATION:D20 System - Sets a local Save for each check in the system (Epic using systems only NOT FOR PF!)
+
+# Globally accessed
 GLOBAL:VAR=STRSCORE
 GLOBAL:VAR=STR
 GLOBAL:VAR=LOADSCORE
-
+#
 GLOBAL:VAR=DEXSCORE
 GLOBAL:VAR=DEX
-
+#
 GLOBAL:VAR=CONSCORE
 GLOBAL:VAR=CON
-
+#
 GLOBAL:VAR=INTSCORE
 GLOBAL:VAR=INT
-
+#
 GLOBAL:VAR=WISSCORE
 GLOBAL:VAR=WIS
-
+#
 GLOBAL:VAR=CHASCORE
 GLOBAL:VAR=CHA
-
-
-
-
-
-GLOBAL:HP|HP			EXPLANATION:Total HP PC possess
 #
-GLOBAL:HP|WoundPoints		EXPLANATION:Alternative HP System - Sets Woundpoints
-GLOBAL:HP|AltHP			EXPLANATION:Alternative HP System - Sets 'Alt'ernative 'HP' value
+GLOBAL:VAR=HP			EXPLANATION:Total HP PC possess
+#
+GLOBAL:VAR=WoundPoints		EXPLANATION:Alternative HP System - Sets Woundpoints
+GLOBAL:VAR=AltHP			EXPLANATION:Alternative HP System - Sets 'Alt'ernative 'HP' value
 
 
 Reach	EXPLANATION:Race Reach
@@ -72,8 +66,8 @@ Legs	EXPLANATION:# of Legs you have
 
 
 # Class Specific Local
-LOCAL:CLASS|SkillPool		EXPLANATION:???
-
+LOCAL:CLASS|SkillPool		EXPLANATION:Grants each class a "SkillPool"
+LOCAL:CLASS|ECL			EXPLANATION:Sets the "Effective Class Level" for each Class defined automatically as the existing class level. Then you can use this  --  getLocalVar("CLASS","Barbarian",ECL)
 
 
 #BONUS:SPELLCASTMULT|CLASS=Wizard;LEVEL=1|2
@@ -113,14 +107,9 @@ LOCAL:CLASS|Known.9		EXPLANATION: *(see below)
 
 
 # Class Level Trackers
-GLOBAL:VAR=Class.BarbarianLVL		EXPLANATION:Captures the level of Class 'Barbarian'		
-GLOBAL:VAR=Class.ClericLVL		EXPLANATION:Captures the level of Class 'Cleric'		
-GLOBAL:VAR=Class.FighterLVL		EXPLANATION:Captures the level of Class 'Fighter'		
-GLOBAL:VAR=Class.MonkLVL		EXPLANATION:Captures the level of Class 'Monk'		
-GLOBAL:VAR=Class.WizardLVL		EXPLANATION:Captures the level of Class 'Wizard'		
 
 # Class Extras
-CLASS:VAR|Class.MaxLevel		EXPLANATION:This sets the Maximum Level on the Class - this is a local var and may be used on each class to have a Maxmimum defined level. CONVERSION NOTE: This should replace 'MAXLEVEL' see discussion below:
+LOCAL:CLASS|VAR=MaxLevel		EXPLANATION:This sets the Maximum Level on the Class - this is a local var and may be used on each class to have a Maxmimum defined level. CONVERSION NOTE: This should replace 'MAXLEVEL' see discussion below:
 # Tom Discussion:  MAXLEVEL can be a local var to each class, thats a tag we can remove
 # [20:49] Tom Parker: maybe
 # [20:49] Tom Parker: the code needs to know about it today though
@@ -314,6 +303,7 @@ LOCAL:SKILL|VAR=Rank		EXPLANATION:Each skill has a 'Rank' that is increased for 
 LOCAL:SKILL|VAR=Bonus		EXPLANATION:Each skill has a 'Bonus' modifier displayed on the Sheet - 
 LOCAL:SKILL|VAR=Stat		EXPLANATION:Each skill has a 'Stat' that modifies it's final value
 LOCAL:SKILL|VAR=Total		EXPLANATION:Each skill has a 'Total' value
+LOCAL:SKILL|VAR=Grantors	EXPLANATION:Each skill has a 'Grantors' value that tracks how many classes have the given skill as a "Class" skill.
 
 # Stat is an interesting value - KEYSTAT: determines what is display, however, some classes alter which stat is used. OS should have a method to alter this display.
 
@@ -329,18 +319,13 @@ LOCAL:SKILL|VAR=Bonus.Class			EXPLANATION:Class is for Pathfinder - it grants a 
 # Global VARS:
 CMB.Stat
 
-# Monk
-FlurryOfBlows
-Class.MonkLVL
-KiPoolWis
-MonkFeatQualify
+
 
 
 # Skill Focus Feat should use this:
 # MODIFYOTHER:SKILL|%LIST|SkillTotal|SOLVE|value()+if(Rank>10,6,3)|PRIORITY=10000
 
 # Var file
-LOCAL:SKILL|VAR=Grantors
 
 
 #SomeFeat
@@ -355,8 +340,7 @@ LOCAL:SKILL|VAR=Grantors
 
 #TOM QUESTION: I want this applied to ALL skills only, is local the right method or do I need to define it differently? Brings another question, if I define something as local, is it shared in all scopes?
 # Reasoning: Rules allow some companions to bypass certain skills, and using the same name to keep this clean would be appreciated
-LOCAL:SKILL|FLAG=AnimalCompanionSkill
-LOCAL:FLAG|AnimalCompanionSkill	EXPLANATION:Method to restrict skills from animal companions. 
+LOCAL:SKILL|FLAG=AnimalCompanionSkill	EXPLANATION:Method to restrict skills from animal companions. 
 
 ###Block: AC Stuff
 # AC is an abstract value made up of many different bonuses. PCGen has a Character sheet that allows the player to see where each modifier is coming from
@@ -369,31 +353,31 @@ LOCAL:FLAG|AnimalCompanionSkill	EXPLANATION:Method to restrict skills from anima
 
 
 # These all display on the OS
-AC.Total				EXPLANATION:All 'AC.x' are included 
+AC.Total				EXPLANATION:OS Display - Total AC values 'AC.x' are included
 # Circumstance Displays
 AC.Flatfooted			EXPLANATION:The value of the AC (When Flatfooted) - LOST STAT & Dodge unless Special Ability
 AC.Touch				EXPLANATION:The value of the AC (Versus Touch) - Only includes Stat, Deflection. Shield if Special Ability
 #
 AC.TouchMisc			EXPLANATION:Special AC value that only affects the Touch value... Probably not required any longer	
-AC.Base					EXPLANATION:Displays Base AC value (d20 is 10)
-AC.Armor					EXPLANATION:Armor Value + Enhancement Value
-#AC.ArmorEnhancement		
-AC.Shield			EXPLANATION:Shield Value + Enhancement Value
-#AC.ShieldEnhancement		
-AC.Ability			EXPLANATION:Value for Stat
-AC.Size				EXPLANATION:Value from Size deviation from Medium
-AC.NaturalArmor		
-AC.NaturalArmorEnhancement	
+AC.Base				EXPLANATION:OS Display - Base AC value (d20 is 10)
+AC.Armor				EXPLANATION:OS Display - Armor Value + Enhancement Value
+AC.ArmorEnhancement		EXPLANATION:Armor Enhancement value - this adds to Armor Value for total.
+AC.Shield				EXPLANATION:OS Display - Shield Value + Shield Enhancement Value
+AC.ShieldEnhancement		EXPLANATION:Shield Enhancement Value - this is added to the Shield Display
+AC.Ability				EXPLANATION:OS Display - Value for Stat
+AC.Size				EXPLANATION:OS Display - Value from Size deviation from Medium
+AC.NaturalArmor			EXPLANATION:OS Display - Natural Armor + NaturalArmorEnhancement
+AC.NaturalArmorEnhancement	EXPLANATION:Natural Armor Enhancement Value - this is added to the Natural Armor Display
 AC.Dodge				EXPLANATION:OS Display - Dodge Value
 AC.Deflection			EXPLANATION:OS Display - Deflection Value
 AC.Misc				EXPLANATION:OS Display - Anything else
-AC.Circumstance		EXPLANATION:OS Display - Circumstance Value
-AC.Insight			EXPLANATION:OS Display - Insight Value
-AC.Morale			EXPLANATION:OS Display - Morale Value
-AC.Profane			EXPLANATION:OS Display - Proface Value
-AC.Sacred			EXPLANATION:OS Display - Sacred Value
+AC.Circumstance			EXPLANATION:OS Display - Circumstance Value
+AC.Insight				EXPLANATION:OS Display - Insight Value
+AC.Morale				EXPLANATION:OS Display - Morale Value
+AC.Profane				EXPLANATION:OS Display - Proface Value
+AC.Sacred				EXPLANATION:OS Display - Sacred Value
 AC.CMD				EXPLANATION:Special defense
-AC.ClassDefense		EXPLANATION:Class Defense value - not applicable in pathfinder
+AC.ClassDefense			EXPLANATION:Class Defense value - not applicable in pathfinder
 
 # Since TouchMisc should only add to the Touch, and not the total AC I'm deviating from the standard and using Remove in the Total.
 #Flatfooted				ADD:TOTAL		REMOVE:TouchMisc	REMOVE:Ability|PRESTAT:1,DEX=10|!PREABILITY:1,CATEGORY=Special Ability,Retain Dex To AC ~ Flat-footed		REMOVE:Dodge|!PREABILITY:1,CATEGORY=Special Ability,Retain Dex To AC ~ Flat-footed
@@ -421,7 +405,405 @@ AC.ClassDefense		EXPLANATION:Class Defense value - not applicable in pathfinder
 #ClassDefense			ADD:ClassDefense
 
 
-LOCAL:EQUIPMENT|PlusCost.Weapon
-LOCAL:EQUIPMENT|PlusCost.Armor
-LOCAL:EQUIPMENT|PlusCost.Shield
+LOCAL:EQUIPMENT.PART|PlusCost.Weapon
+LOCAL:EQUIPMENT.PART|PlusCost.Armor
+LOCAL:EQUIPMENT.PART|PlusCost.Shield
 
+###BLOCK: Class Feature Variables
+# Barbarian
+RagePowersLVL			
+RagePowersPrereqLVL		
+BarbarianTrapSenseLVL		
+BarbarianDR				
+BarbarianDRLVL			
+# Rage Powers
+IncreasedDRCount						
+GuardedStanceACBonus	
+GuardedStanceDuration
+PowerfulBlowDamageBonus					
+RagingClimberBonus						
+RagingLeaperBonus						
+RagingSwimmerBonus						
+RenewedVigorDice	
+RenewedVigorBonus	
+RollingDodgeACBonus	
+RollingDodgeDuration	
+StrengthSurgeBonus						
+SuperstitionSaveBonus					
+SurpriseAccuracyAttackBonus				
+SwiftFootCount							
+TerrifyingHowlDC						
+# Bard
+BardicKnowledgeSkillBonus	
+BardicKnowledgeLVL	
+BardicPerformanceDuration	
+BardicPerformanceLVL	
+VersatilePerformanceLVL						
+LoreMasterTimes	
+LoreMasterLVL			
+JackOfAllTradesLVL							
+# Bardic Music
+FascinateCreatures	
+FascinateDC	
+InspireCourageBonus					
+InspireCompetenceBonus				
+SuggestionDC						
+InspireGreatnessAllies				
+SoothingPerformanceLVL				
+FrighteningTuneDC					
+InspireHeroicsAllies					
+MassSuggestionDC					
+DeadlyPerformanceDC					
+
+# Cleric
+DomainLVL
+DomainPowerTimes
+DomainAbilityTriggerLVL
+ClericChannelEnergyLVL
+ClericChannelEnergyTimes
+ClericChannelPositiveEnergyDC	
+ClericChannelPositiveEnergyDice	
+ClericChannelPositiveEnergyDieSize	
+ClericChannelPositiveEnergyLVL	
+ClericChannelNegativeEnergyDC	
+ClericChannelNegativeEnergyDice	
+ClericChannelNegativeEnergyDieSize	
+ClericChannelNegativeEnergyLVL	
+
+DomainAirLVL	
+DomainAirAbilityTriggerLVL	
+DomainAirDC	
+DomainAirTimes													
+
+DomainAnimalLVL	
+DomainAnimalDC	
+DomainAnimalTimes	
+DomainAnimalAbilityTriggerLVL										
+
+DomainArtificeLVL	
+DomainArtificeDC	
+DomainArtificeTimes	
+DomainArtificeAbilityTriggerLVL									
+
+DomainChaosLVL	
+DomainChaosDC	
+DomainChaosTimes	
+DomainChaosAbilityTriggerLVL											
+
+DomainCharmLVL	
+DomainCharmDC	
+DomainCharmTimes	
+DomainCharmAbilityTriggerLVL											
+
+DomainCommunityLVL	
+DomainCommunityDC	
+DomainCommunityTimes	
+DomainCommunityAbilityTriggerLVL									
+
+DomainDarknessLVL	
+DomainDarknessDC	
+DomainDarknessTimes	
+DomainDarknessAbilityTriggerLVL									
+
+DomainDeathLVL	
+DomainDeathDC	
+DomainDeathTimes	
+DomainDeathAbilityTriggerLVL											
+
+DomainDestructionLVL	
+DomainDestructionDC	
+DomainDestructionTimes	
+DomainDestructionAbilityTriggerLVL							
+
+DomainEarthLVL	
+DomainEarthDC	
+DomainEarthTimes	
+DomainEarthAbilityTriggerLVL											
+
+DomainEvilLVL	
+DomainEvilDC	
+DomainEvilTimes	
+DomainEvilAbilityTriggerLVL											
+
+DomainFireLVL	
+DomainFireDC	
+DomainFireTimes	
+DomainFireAbilityTriggerLVL											
+
+DomainGloryLVL	
+DomainGloryDC	
+DomainGloryTimes	
+DomainGloryAbilityTriggerLVL											
+
+DomainGoodLVL	
+DomainGoodDC	
+DomainGoodTimes	
+DomainGoodAbilityTriggerLVL											
+
+DomainHealingLVL	
+DomainHealingDC	
+DomainHealingTimes	
+DomainHealingAbilityTriggerLVL									
+
+DomainKnowledgeLVL	
+DomainKnowledgeDC	
+DomainKnowledgeTimes	
+DomainKnowledgeAbilityTriggerLVL									
+
+DomainLawLVL	
+DomainLawDC	
+DomainLawTimes	
+DomainLawAbilityTriggerLVL													
+
+DomainLiberationLVL	
+DomainLiberationDC	
+DomainLiberationTimes	
+DomainLiberationAbilityTriggerLVL							
+
+DomainLuckLVL	
+DomainLuckDC	
+DomainLuckTimes	
+DomainLuckAbilityTriggerLVL											
+
+DomainMadnessLVL	
+DomainMadnessDC	
+DomainMadnessTimes	
+DomainMadnessAbilityTriggerLVL									
+
+DomainMagicLVL	
+DomainMagicDC	
+DomainMagicTimes	
+DomainMagicAbilityTriggerLVL											
+
+DomainNobilityLVL	
+DomainNobilityDC	
+DomainNobilityTimes	
+DomainNobilityAbilityTriggerLVL									
+
+DomainPlantLVL	
+DomainPlantDC	
+DomainPlantTimes	
+DomainPlantAbilityTriggerLVL											
+
+DomainProtectionSaveBonus	
+DomainProtectionLVL	
+DomainProtectionDC	
+DomainProtectionTimes	
+DomainProtectionAbilityTriggerLVL	
+
+DomainReposeLVL	
+DomainReposeDC	
+DomainReposeTimes	
+DomainReposeAbilityTriggerLVL										
+
+DomainRuneLVL	
+DomainRuneDC	
+DomainRuneTimes	
+DomainRuneAbilityTriggerLVL											
+
+DomainStrengthLVL	
+DomainStrengthDC	
+DomainStrengthTimes	
+DomainStrengthAbilityTriggerLVL									
+
+DomainSunLVL	
+DomainSunDC	
+DomainSunTimes	
+DomainSunAbilityTriggerLVL													
+
+DomainTravelLVL	
+DomainTravelDC	
+DomainTravelTimes	
+DomainTravelAbilityTriggerLVL										
+
+DomainTrickeryLVL	
+DomainTrickeryDC	
+DomainTrickeryTimes	
+DomainTrickeryAbilityTriggerLVL									
+
+DomainWarLVL	
+DomainWarDC	
+DomainWarTimes	
+DomainWarAbilityTriggerLVL													
+
+DomainWaterLVL	
+DomainWaterDC	
+DomainWaterTimes	
+DomainWaterAbilityTriggerLVL											
+
+DomainWeatherLVL	
+DomainWeatherDC	
+DomainWeatherTimes	
+DomainWeatherAbilityTriggerLVL									
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Monk
+FlurryOfBlows
+KiPoolWis
+MonkFeatQualify
+
+DEFINE:LightningArcTimes|0									
+DEFINE:DomainAirResistanceBonus|0								
+DEFINE:SpeakWithAnimalsRounds|0								
+DEFINE:AnimalCompanionMasterLVL|0								
+DEFINE:ArtificersTouchTimes|0									
+DEFINE:DancingWeaponTimes|0									
+DEFINE:TouchofChaosTimes|0									
+DEFINE:ChaosBladeTimes|0									
+DEFINE:DazingTouchTimes|0									
+DEFINE:CharmCharmingSmileRounds|0								
+DEFINE:CalmingTouchTimes|0									
+DEFINE:UnityTimes|0										
+DEFINE:TouchofDarknessTimes|0									
+DEFINE:EyesOfDarknessRounds|0									
+DEFINE:BleedingTouchTimes|0									
+DEFINE:DestructiveSmiteTimes|0								
+DEFINE:DestructiveAuraRounds|0								
+DEFINE:AcidDartTimes|0										
+DEFINE:DomainEarthResistanceBonus|0								
+DEFINE:TouchofEvilTimes|0									
+DEFINE:ScytheOfEvilTimes|0									
+DEFINE:FireBoltTimes|0										
+DEFINE:DomainFireResistanceBonus|0								
+DEFINE:TouchofGloryTimes|0									
+DEFINE:GloryDivinePresenceRounds|0								
+DEFINE:TouchofGoodTimes|0									
+DEFINE:HolyLanceTimes|0										
+DEFINE:RebukeDeathTimes|0									
+DEFINE:LoreKeeperDomainSkillBonus|0								
+DEFINE:RemoteViewingRounds|0									
+DEFINE:TouchofLawTimes|0									
+DEFINE:StaffOfOrderTimes|0									
+DEFINE:LiberationRounds|0									
+DEFINE:FreedomsCallRounds|0									
+DEFINE:BitofLuckTimes|0										
+DEFINE:GoodFortuneTimes|0									
+DEFINE:VisionofMadnessTimes|0									
+DEFINE:AuraOfMadnessRounds|0									
+DEFINE:HandoftheAcolyteTimes|0								
+DEFINE:DispellingTouchTimes|0									
+DEFINE:WoodenFistRounds|0									
+DEFINE:BrambleArmorRounds|0									
+DEFINE:ResistantTouchTimes|0									
+DEFINE:AuraOfProtectionRounds|0								
+DEFINE:GentleRestTimes|0									
+DEFINE:WardAgainstDeathRounds|0								
+DEFINE:BlastRuneTimes|0										
+DEFINE:StrengthSurgeTimes|0									
+DEFINE:MightOfTheGodsRounds|0									
+DEFINE:SunNimbusOfLightRounds|0								
+DEFINE:AgileFeetTimes|0										
+DEFINE:TravelDimensionalHop|0									
+DEFINE:CopycatTimes|0										
+DEFINE:TrickeryMastersIllusionDC|0	
+DEFINE:TrickeryMastersIllusionRounds|0	
+DEFINE:BattleRageTimes|0									
+DEFINE:WeaponMasterRounds|0									
+DEFINE:IcicleTimes|0										
+DEFINE:DomainWaterResistanceBonus|0								
+DEFINE:StormBurstTimes|0									
+DEFINE:WeatherLightningLordTimes|0								
+
+# Druid
+DEFINE:AnimalCompanionLVL|0	DEFINE:AnimalCompanionMasterLVL|0	
+DEFINE:AnimalCompanionGranted|0						
+DEFINE:DruidAirAllowed|0	DEFINE:DruidAnimalAllowed|0	DEFINE:DruidEarthAllowed|0	DEFINE:DruidFireAllowed|0	DEFINE:DruidPlantAllowed|0	DEFINE:DruidWaterAllowed|0	DEFINE:DruidWeatherAllowed|0  
+DEFINE:DomainAirLVL|0	DEFINE:DomainAirAbilityTriggerLVL|0	DEFINE:DomainAirDC|0	DEFINE:DomainAirTimes|0																		
+DEFINE:DomainAnimalLVL|0	DEFINE:DomainAnimalDC|0	DEFINE:DomainAnimalTimes|0	DEFINE:DomainAnimalAbilityTriggerLVL|0															
+DEFINE:DomainEarthLVL|0	DEFINE:DomainEarthDC|0	DEFINE:DomainEarthTimes|0	DEFINE:DomainEarthAbilityTriggerLVL|0																
+DEFINE:DomainFireLVL|0	DEFINE:DomainFireDC|0	DEFINE:DomainFireTimes|0	DEFINE:DomainFireAbilityTriggerLVL|0																
+DEFINE:DomainPlantLVL|0	DEFINE:DomainPlantDC|0	DEFINE:DomainPlantTimes|0	DEFINE:DomainPlantAbilityTriggerLVL|0																
+DEFINE:DomainWaterLVL|0	DEFINE:DomainWaterDC|0	DEFINE:DomainWaterTimes|0	DEFINE:DomainWaterAbilityTriggerLVL|0																
+DEFINE:DomainWeatherLVL|0	DEFINE:DomainWeatherDC|0	DEFINE:DomainWeatherTimes|0	DEFINE:DomainWeatherAbilityTriggerLVL|0														
+DEFINE:WildShapeTimes|0	DEFINE:WildShapeDuration|0	DEFINE:WildShapeProgression|0	
+DEFINE:DruidWildShape|0	
+
+DEFINE:PoisonSaveDC|0
+
+# Fighter
+DEFINE:FighterWeaponQualifyLVL|0									
+DEFINE:WeapSpecQualify|0	DEFINE:WeaponSpecQualifyLVL|0					
+DEFINE:DisruptiveQualify|0	DEFINE:DisruptiveQualifyLVL|0					
+DEFINE:GreatShieldFocusQualify|0	DEFINE:GreatShieldFocusQualifyLVL|0			
+DEFINE:GreatWeapFocusQualify|0	DEFINE:GreatWeapFocusQualifyLVL|0			
+DEFINE:SpellbreakerQualify|0	DEFINE:SpellbreakerQualifyLVL|0				
+DEFINE:GreatWeapSpecQualify|0	DEFINE:GreatWeapSpecQualifyLVL|0				
+DEFINE:PenetratingStrikeQualify|0	DEFINE:PenetratingStrikeQualifyLVL|0		
+DEFINE:CriticalMasteryQualify|0	DEFINE:CriticalMasteryQualifyLVL|0			
+DEFINE:GreatPenetratingStrikeQualify|0	DEFINE:GreatPenetratingStrikeQualifyLVL|0	
+DEFINE:Bravery|0	DEFINE:BraveryLVL|0	DEFINE:ArmorTraining|0	DEFINE:ArmorTrainingLVL|0	DEFINE:ArmorTrainingTier|0
+DEFINE:WeaponTrainingBase|0	DEFINE:FighterWeaponTrainingLVL|0	
+DEFINE:WeaponTrainingTierOne|0	
+DEFINE:WeaponTrainingTierTwo|0	
+DEFINE:WeaponTrainingTierThree|0	
+DEFINE:WeaponTrainingFour|0		
+DEFINE:WeaponTrainingAxes|0        
+DEFINE:WeaponTrainingBladesHeavy|0 
+DEFINE:WeaponTrainingBladesLight|0 
+DEFINE:WeaponTrainingBows|0        
+DEFINE:WeaponTrainingClose|0       
+DEFINE:WeaponTrainingCrossbows|0   
+DEFINE:WeaponTrainingDouble|0      
+DEFINE:WeaponTrainingFlails|0      
+DEFINE:WeaponTrainingHammers|0     
+DEFINE:WeaponTrainingMonk|0        
+DEFINE:WeaponTrainingNatural|0     
+DEFINE:WeaponTrainingPoleArms|0    
+DEFINE:WeaponTrainingSpears|0      
+DEFINE:WeaponTrainingThrown|0      
+
+DEFINE:MonkBonusFeatLVL|0												
+DEFINE:MonkACBonus|0	DEFINE:MonkACLVL|0	DEFINE:MonkACWisBonus|0					
+DEFINE:FlurryLVL|0	DEFINE:FlurryExtraAttacks|0	DEFINE:FlurryBABBonus|0	DEFINE:MonkBAB|0	
+DEFINE:StunningFistMonkLVL|0												
+DEFINE:MonkFastMovementLVL|0	DEFINE:MonkFastMovementBonus|0						
+DEFINE:ManeuverTrainingLVL|0	DEFINE:ManeuverTrainingBAB|0							
+																
+																
+DEFINE:SlowFall|0	DEFINE:SlowFallLVL|0										
+DEFINE:HighJumpLVL|0	DEFINE:HighJumpBonus|0									
+																
+DEFINE:WholenessOfBody|0	DEFINE:WholenessOfBodyLVL|0							
+																
+DEFINE:AbundantStepCasterLVL|0	DEFINE:AbundantStepLVL|0						
+DEFINE:DiamondSoul|0	DEFINE:DiamondSoulLVL|0									
+DEFINE:QuiveringPalmDuration|0	DEFINE:QuiveringPalmDC|0	DEFINE:QuiveringPalmLVL|0	
+DEFINE:KiPoints|0	DEFINE:KiPoolLVL|0
+DEFINE:KiPool|0
+DEFINE:MonkBonusFeatCount|0
+# Paladin
+DEFINE:DetectEvilLVL|0																				
+DEFINE:SmiteEvilTimes|0	DEFINE:SmiteEvilAttackBonus|0	DEFINE:SmiteEvilDamageBonus|0	DEFINE:SmiteEvilACBonus|0	DEFINE:SmiteEvilLVL|0	
+DEFINE:DivineGrace|0																				
+DEFINE:LayOnHandsTimes|0	DEFINE:LayOnHandsDice|0	DEFINE:LayOnHandsLVL|0											
+																							
+DEFINE:Mercies|0	DEFINE:MercyLVL|0																		
+DEFINE:PaladinChannelDC|0	DEFINE:PaladinChannelDice|0	DEFINE:PaladinChannelDieSize|0	DEFINE:PaladinChannelLVL|0			
+DEFINE:HolyChampionCasterLevel|0	DEFINE:HolyChampionLVL|0													
+DEFINE:DivineBondLVL|0	DEFINE:DivineBondTimes|0							
+DEFINE:CelestialSpiritDuration|0	DEFINE:CelestialSpiritBonus|0					
+DEFINE:SpecialMountLVL|0	DEFINE:SpecialMountSpellLevel|0	DEFINE:SpecialMountSR|0	
+DEFINE:MasterHunterLVL|0	DEFINE:MasterHunterDC|0
+DEFINE:TrackLVL|0	DEFINE:TrackBonus|0
+DEFINE:CombatStyleLVL|0	DEFINE:RangerDefaultCombatStyle|0	DEFINE:RangerBonusFeatCount|0				
+DEFINE:RangerFavoredEnemyLVL|0	DEFINE:RangerFavoredEnemyCount|0	DEFINE:FavoredEnemyBonusCount|0	
+DEFINE:RangerFavoredTerrainLVL|0													
