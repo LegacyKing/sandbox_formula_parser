@@ -1,0 +1,34 @@
+# CVS $Revision: 25136 $ $Author: amaitland $ -- Mon Sep 15 21:55:54 2014 -- reformated by prettylst.pl v1.51 (build 25129)
+SOURCELONG:Fantasy Craft	SOURCESHORT:FC	SOURCEDATE:2009-07
+# Original Entry By: Dragon Dark Lord
+# Original Entry Date: 2011-03-01
+
+
+# Partial
+# Equipment Name				SORTKEY		Required Armor Proficiency		Type				Cost					Weight			AC Penalty Check				Modifier						Source Page				Damage Reduction	Add to base move			Quality and value
+Partial Padded Armor			SORTKEY:Armor_1a	PROFICIENCY:ARMOR|Padded		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|10		MODIFY:WT|SET|4								EQMOD:RES_COLD|3					SOURCEPAGE:p.174											QUALITY:Const|Soft 2	QUALITY:Comp|4D	QUALITY:Era|Primitive
+Partial Leather Armor			SORTKEY:Armor_1b	PROFICIENCY:ARMOR|Leather		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|20		MODIFY:WT|SET|6								EQMOD:DP|-1.RES_FIRE|3				SOURCEPAGE:p.174			DR:1/-							QUALITY:Const|Soft 2	QUALITY:Comp|7D	QUALITY:Era|Primitive
+Partial Studded Leather Armor		SORTKEY:Armor_1c	PROFICIENCY:ARMOR|Studded Leather	TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|40		MODIFY:WT|SET|12								EQMOD:DP|-1						SOURCEPAGE:p.174			DR:2/-							QUALITY:Const|Soft 2	QUALITY:Comp|12D	QUALITY:Era|Ancient
+Partial Chainmail Armor			SORTKEY:Armor_1d	PROFICIENCY:ARMOR|Chainmail		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|100	MODIFY:WT|SET|24								EQMOD:DISGUISE|-4.DP|-1.RES_EDGED|2		SOURCEPAGE:p.174			DR:2/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Hard 2	QUALITY:Comp|15W	QUALITY:Era|Feudal
+Partial Hardened Leather Armor	SORTKEY:Armor_1e	PROFICIENCY:ARMOR|Hardened Leather	TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|100	MODIFY:WT|SET|18		MODIFY:ACCHECK.Armor|SET|-1		EQMOD:DISGUISE|-2.DP|-1.RES_FIRE|3		SOURCEPAGE:p.174			DR:3/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Soft 3	QUALITY:Comp|10W	QUALITY:Era|Primitive
+Partial Scalemail Armor			SORTKEY:Armor_1f	PROFICIENCY:ARMOR|Scalemail		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|200	MODIFY:WT|SET|22		MODIFY:ACCHECK.Armor|SET|-1		EQMOD:DISGUISE|-8.DP|-2.RES_EDGED|2		SOURCEPAGE:p.174			DR:3/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Hard 3	QUALITY:Comp|12W	QUALITY:Era|Ancient
+Partial Platemail Armor			SORTKEY:Armor_1g	PROFICIENCY:ARMOR|Platemail		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|400	MODIFY:WT|SET|27		MODIFY:ACCHECK.Armor|SET|-3		EQMOD:DISGUISE|Obvious.DP|-3.RES_BLUNT|1	SOURCEPAGE:p.174			DR:4/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Hard 3	QUALITY:Comp|15W	QUALITY:Era|Feudal
+
+# Moderate
+Moderate Padded Armor			SORTKEY:Armor_2a	PROFICIENCY:ARMOR|Padded		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|25		MODIFY:WT|SET|6								EQMOD:RES_COLD|5					SOURCEPAGE:p.174			DR:1/-							QUALITY:Const|Soft 3	QUALITY:Comp|5W	QUALITY:Era|Primitive
+Moderate Leather Armor			SORTKEY:Armor_2b	PROFICIENCY:ARMOR|Leather		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|50		MODIFY:WT|SET|10								EQMOD:DP|-1.RES_FIRE|5				SOURCEPAGE:p.174			DR:2/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Soft 3	QUALITY:Comp|7W	QUALITY:Era|Primitive
+Moderate Studded Leather Armor	SORTKEY:Armor_2c	PROFICIENCY:ARMOR|Studded Leather	TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|100	MODIFY:WT|SET|20								EQMOD:DISGUISE|-2.DP|-1				SOURCEPAGE:p.174			DR:3/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Soft 3	QUALITY:Comp|15W	QUALITY:Era|Ancient
+Moderate Chainmail Armor		SORTKEY:Armor_2d	PROFICIENCY:ARMOR|Chainmail		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|250	MODIFY:WT|SET|40								EQMOD:DISGUISE|-6.DP|-1.RES_EDGED|3		SOURCEPAGE:p.174			DR:3/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Hard 3	QUALITY:Comp|15W	QUALITY:Era|Feudal
+Moderate Hardened Leather Armor	SORTKEY:Armor_2e	PROFICIENCY:ARMOR|Hardened Leather	TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|250	MODIFY:WT|SET|32		MODIFY:ACCHECK.Armor|SET|-1		EQMOD:DISGUISE|-4.DP|-1.RES_FIRE|5		SOURCEPAGE:p.174			DR:4/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Soft 4	QUALITY:Comp|10M	QUALITY:Era|Primitive
+Moderate Scalemail Armor		SORTKEY:Armor_2f	PROFICIENCY:ARMOR|Scalemail		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|500	MODIFY:WT|SET|45		MODIFY:ACCHECK.Armor|SET|-1		EQMOD:DISGUISE|Obvious.DP|-2.RES_EDGED|3	SOURCEPAGE:p.174			DR:4/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Hard 4	QUALITY:Comp|15M	QUALITY:Era|Ancient
+Moderate Platemail Armor		SORTKEY:Armor_2g	PROFICIENCY:ARMOR|Platemail		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|1000	MODIFY:WT|SET|50		MODIFY:ACCHECK.Armor|SET|-3		EQMOD:DISGUISE|Obvious.DP|-3.RES_BLUNT|2	SOURCEPAGE:p.174			DR:5/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Hard 4	QUALITY:Comp|17M	QUALITY:Era|Feudal
+Moderate Articulated Plate Armor	SORTKEY:Armor_2h	PROFICIENCY:ARMOR|Articulated Plate	TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|1600	MODIFY:WT|SET|55		MODIFY:ACCHECK.Armor|SET|-2		EQMOD:DISGUISE|Obvious.DP|-2.RES_BLUNT|2	SOURCEPAGE:p.174			DR:5/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Hard 4	QUALITY:Comp|25M	QUALITY:Era|Reason
+
+
+#Block: Barding
+Moderate Leather Armor Barding	SORTKEY:Armor_2b	PROFICIENCY:ARMOR|Leather		TYPE:Armor.Light.Suit	MODIFY:Cost.Base|SET|50		MODIFY:WT|SET|10								EQMOD:DP|-1.RES_FIRE|5				SOURCEPAGE:p.174			DR:2/-		MODIFY:MOVE=Walk|ADD|-5		QUALITY:Const|Soft 3	QUALITY:Comp|7W	QUALITY:Era|Primitive
+#KIT Gear: Moderate leather armor barding (DR 2; Resist Fire 5; DP -1; ACP -0; MOVE:-5 ft.; Disguise +0)
+
+#
+#EOF
+#
