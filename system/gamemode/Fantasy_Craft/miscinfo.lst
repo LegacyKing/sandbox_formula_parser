@@ -6,7 +6,9 @@ MENUTOOLTIP:Use Fantasy Craft character creation settings
 DISPLAYORDER:1
 ALLOWEDMODES:FantasyCraft
 #
-##DEFAULTVARIABLEVALUE:NUMBER|0
+DEFAULTVARIABLEVALUE:NUMBER|0
+DEFAULTVARIABLEVALUE:POINT|0,0
+DEFAULTVARIABLEVALUE:BOOLEAN|False
 
 # message displayed when experience added allows character to advance a level
 LEVELMSG:Congratulations, you can advance with that much experience!

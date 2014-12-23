@@ -23,16 +23,14 @@ MODIFYOTHER:EQUIPMENT.PART|VAR=Damage.Bonus|GROUP=WeaponThrown|SET|STR|PRIORITY=
 MODIFYOTHER:EQUIPMENT.PART|VAR=Damage.Bonus|GROUP=WeaponSplash|SET|-STR|PRIORITY=1000000		EXPLANATION:Bonus to Damage for Splash weapons set to remove the Strength modifier
 
 # This is used by the Output system - consider redoing to OS=x
-MODIFY:Weapon.DamageMult.Light|SOLVE|0.5*(STR>=0)
+MODIFY:Weapon.DamageMult.Light|SOLVE|1
 MODIFY:Weapon.DamageMult.OneHand|SOLVE|1
-MODIFY:Weapon.DamageMult.TwoHand|SOLVE|1.5*(STR>=0)
+MODIFY:Weapon.DamageMult.TwoHand|SOLVE|1
 
 ###Block: AC Universal Rules!
-MODIFY:VAR=AC.Total|SOLVE|value()+AC.Base+AC.Armor+AC.Shield+AC.Attribute+AC.Size+AC.NaturalArmor+AC.Enhancements		EXPLANATION:AC displayed for Total
-MODIFY:VAR=AC.Flatfooted|SOLVE|value()+AC.Total-AC.Stat-AC.Dodge										EXPLANATION:AC displayed for Flatfooted	
-MODIFY:VAR=AC.Touch|SOLVE|value()+AC.Base+AC.Stat+AC.Enhancements										EXPLANATION:AC displayed for Touch
-#
-MODIFY:VAR=AC.Enhancements|SOLVE|value()+AC.Dodge+AC.Deflection+AC.Misc+AC.Circumstance+AC.Insight+AC.Morale+AC.Profane+AC.Sacred+AC.ClassDefense	EXPLANATION:Resolves all the "Enhancements" to AC
+MODIFY:AC.Total|SOLVE|value()+AC.Base+AC.Ability+AC.Size+AC.ClassDefense+AC.Misc							EXPLANATION:Fantasy Craft - Total AC value
+MODIFY:VAR=AC.Flatfooted|SOLVE|value()+AC.Total													EXPLANATION:Fantasy Craft - Not Used	
+MODIFY:VAR=AC.Touch|SOLVE|value()+AC.Total													EXPLANATION:Fantasy Craft - Not Used
 
 
 # AC values:
@@ -127,14 +125,16 @@ MODIFY:ENCUMBRANCE|SET|encumbrance()			EXPLANATION:D20 System - Sets the Encumbr
 
 
 # OS Flags - Need to deal with RULE.lst file:
-MODIFY:VAR=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
-MODIFY:VAR=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
+MODIFY:VAR=UseAlternateDamage|SET|1							EXPLANATION:Fantasy Craft only uses Vitality and Wound Point rules.
+#MODIFY:VAR=UseCombatManueverBonus|SET|if(context("RULE",USE_CMB),1,0)
 
 
 
 #Global file:
 MODIFYOTHER:EQUIPMENT.PART|ALL|AB.1|SOLVE|BaseAB
-MODIFYOTHER:EQUIPMENT.PART|ALL|AB.2|SOLVE|max(0,BaseAB-BaseAB.Step)
+MODIFYOTHER:EQUIPMENT.PART|ALL|AB.2|SOLVE|BaseAB
+
+# No use for additional attack steps.
 MODIFYOTHER:EQUIPMENT.PART|ALL|AB.3|SOLVE|max(0,BaseAB-2*BaseAB.Step)
 MODIFYOTHER:EQUIPMENT.PART|ALL|AB.4|SOLVE|max(0,BaseAB-3*BaseAB.Step)
 MODIFYOTHER:EQUIPMENT.PART|ALL|AB.5|SOLVE|max(0,BaseAB-4*BaseAB.Step)
@@ -341,9 +341,8 @@ MODIFYOTHER:CLASS|ALL|TL|ADD|classlevel()
 #	BONUS:COMBAT|DAMAGE.Splash|-STR|TYPE=Ability
 
 # This is for the OS to determine Bonuses in the Sheet.
-MODIFY:VAR=TWOHANDDAMAGEDIVISOR|SET|2
-MODIFY:VAR=OFFHANDLIGHTBONUS|SET|2
-
+#MODIFY:VAR=TWOHANDDAMAGEDIVISOR|SET|2
+#MODIFY:VAR=OFFHANDLIGHTBONUS|SET|2
 
 
 
@@ -367,6 +366,7 @@ MODIFY:VAR=NormalMount|ADD|1
 	MODIFY:VAR=IX|9
 	MODIFY:VAR=X|10
 
+FLAG=SubraceChosen
 
 BONUS:VAR|Subrace|1|PREABILITY:1,CATEGORY=Internal,TYPE.SubraceChosen	
 
@@ -374,25 +374,45 @@ BONUS:VAR|BaseReach|REACH.VAL
 
 
 # Old Vars
-	BONUS:VAR|Allowed_Rank|TL+12|TYPE=BASE
-	BONUS:VAR|Allowed_RankSpellcasting|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankAcrobatics|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankAthletics|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankBlend|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankBluff|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankCrafting|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankDisguise|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankHaggle|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankImpress|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankIntimidate|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankInvestigate|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankMedicine|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankNotice|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankPrestidigitation|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankResolve|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankRide|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankSearch|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankSenseMotive|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankSneak|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankSurvival|Allowed_Rank-10
-	BONUS:VAR|Allowed_RankTactics|Allowed_Rank-10
+#	BONUS:VAR|Allowed_Rank|TL+12|TYPE=BASE
+#	BONUS:VAR|Allowed_RankSpellcasting|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankAcrobatics|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankAthletics|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankBlend|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankBluff|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankCrafting|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankDisguise|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankHaggle|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankImpress|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankIntimidate|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankInvestigate|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankMedicine|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankNotice|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankPrestidigitation|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankResolve|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankRide|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankSearch|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankSenseMotive|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankSneak|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankSurvival|Allowed_Rank-10
+#	BONUS:VAR|Allowed_RankTactics|Allowed_Rank-10
+
+# TOM ALERT! We hardcode Two-Handed Fighting Variables in the SYSTEM?!?!
+# Fantasy Craft doesn't use TWF rules - this is meant to counter-act that:
+BONUS:COMBAT|TOHIT-SECONDARY|10	BONUS:COMBAT|TOHIT-PRIMARY|6
+# I'm assuming this is an OS display item
+
+# TOM ALERT! If you use a oneHanded weapon in TWO hands you add 1 to the damage.
+BONUS:COMBAT|DAMAGE.Melee,DAMAGE.Thrown|1|TYPE=TwoHanded|PREEQUIPBOTH:1,WIELDCATEGORY=OneHanded	
+
+# TOM NOTIFY:	Grapple ignores BAB, and uses strictly Athletics Skill
+# We need to convert this, but Grapple is "Special", just like "Unarmed"
+BONUS:COMBAT|TOHIT.Grapple|STR|TYPE=Ability	
+BONUS:COMBAT|TOHIT.Grapple|-BAB	
+BONUS:COMBAT|TOHIT.Grapple|skillinfo("TOTAL","Athletics")-STR	
+# Should be something like: Unless combat vars for Grapple is local ---
+MODIFY:VAR=TOHIT.Grapple|SOLVE|namespace("SKILL","Athletics",Total)
+#
+MODIFYOTHER:EQUIPMENT|Grapple|SOLVE|namespace("SKILL","Athletics",Total)
+
+MODIFY:VAR=Loadscore|SOLVE|STRSCORE+LoadScoreSizeMod	

@@ -126,6 +126,26 @@ MODIFYOTHER:SKILL|Climb|SOLVE|value()+if(namespace("MOVE",Climb>=1,8,0)
 MODIFY:ENCUMBRANCE|SET|encumbrance()			EXPLANATION:D20 System - Sets the Encumbrance to the "Encumbrance" - ties into the Load.lst file
 
 
+MODIFYOTHER:CLASS|ALL|BaseAB|SOLVE|classlevel("APPLIEDAS=NONEPIC")*BAB.ProgressionSpeed	EXPLANATION: This automatically calculates standard Class BAB progression!
+
+MODIFYOTHER:CLASS|ALL|Save.Fortitude|SOLVE|
+
+# Support for BaseAB
+MODIFYOTHER:CLASS|GROUP=BABProgressionFull|BAB.Progression|SET|1					EXPLANATION: Any class with GROUP:BABProgressionFull will have a 1:1 progression for BAB
+MODIFYOTHER:CLASS|GROUP=BABProgressionModerate|BAB.Progression|SET|0.75				EXPLANATION: Any class with GROUP:BABProgressionModerate will have a *3/4 progression for BAB
+MODIFYOTHER:CLASS|GROUP=BABProgressionPoor|BAB.Progression|SET|0.5				EXPLANATION: Any class with GROUP:BABProgressionPoor will have a *1/2 progression for BAB	
+
+# Support for CHECKS aka Saves
+MODIFYOTHER:CLASS|GROUP=GoodSaveFortitude|Save.Fortitude|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2
+MODIFYOTHER:CLASS|GROUP=GoodSaveReflex|Save.Reflex|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2
+MODIFYOTHER:CLASS|GROUP=GoodSaveWill|Save.Will|SOLVE|classlevel("APPLIEDAS=NONEPIC")/2+2
+
+MODIFYOTHER:CLASS|GROUP=PoorSaveFortitude|Save.Fortitude|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3
+MODIFYOTHER:CLASS|GROUP=PoorSaveReflex|Save.Reflex|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3
+MODIFYOTHER:CLASS|GROUP=PoorSaveWill|Save.Will|SOLVE|classlevel("APPLIEDAS=NONEPIC")/3
+
+
+
 
 # OS Flags - Need to deal with RULE.lst file:
 MODIFY:VAR=UseAlternateDamage|SET|if(context("RULE",DAMAGE_VW),1,0)
@@ -178,6 +198,7 @@ MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.5|SOLVE|AB.4|PRIORITY=1000
 MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.6|SOLVE|AB.5|PRIORITY=1000
 MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.7|SOLVE|AB.6|PRIORITY=1000
 MODIFYOTHER:EQUIPMENT.PART|ALL|ToHit.8|SOLVE|AB.7|PRIORITY=1000
+
 
 
 # Clarify with Tom that this (see below) sets all Flags true IF an Archetype with GROUP:FighterWeaponMastery will activate the TRUE flag

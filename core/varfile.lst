@@ -4,11 +4,12 @@
 # EQUIPMENT		//Equip File
 # EQUIPMENT.PART	//Equipment Parts - for heads of weapons
 # Considerations for:
-# CHECK	// Saving Throws
-# STAT	// Attributes (Strength, Dexterity, Constitution, etc.)
-# CLASS	// Class File
-# SKILL	// Skill File
-# SPELL	// Spell File
+# CHECK		// Saving Throws
+# STAT		// Attributes (Strength, Dexterity, Constitution, etc.)
+# CLASS		// Class File
+# SKILL		// Skill File
+# SPELL		// Spell File
+# ABILITYPOOL	// ABILITYCATEGORY File?
 
 
 # CONFUSION POINT:
@@ -68,6 +69,8 @@ Legs	EXPLANATION:# of Legs you have
 # Class Specific Local
 LOCAL:CLASS|SkillPool		EXPLANATION:Grants each class a "SkillPool"
 LOCAL:CLASS|ECL			EXPLANATION:Sets the "Effective Class Level" for each Class defined automatically as the existing class level. Then you can use this  --  getLocalVar("CLASS","Barbarian",ECL)
+
+LOCAL:CLASS|BAB.ProgressionSpeed
 
 
 #BONUS:SPELLCASTMULT|CLASS=Wizard;LEVEL=1|2
@@ -807,3 +810,17 @@ DEFINE:TrackLVL|0	DEFINE:TrackBonus|0
 DEFINE:CombatStyleLVL|0	DEFINE:RangerDefaultCombatStyle|0	DEFINE:RangerBonusFeatCount|0				
 DEFINE:RangerFavoredEnemyLVL|0	DEFINE:RangerFavoredEnemyCount|0	DEFINE:FavoredEnemyBonusCount|0	
 DEFINE:RangerFavoredTerrainLVL|0													
+
+
+
+
+
+
+
+
+
+
+
+
+
+

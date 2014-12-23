@@ -1,96 +1,148 @@
 
+
+
+# New Scope: CHECK
+LOCAL:CHECK|VAR=Save			EXPLANATION:D20 System - Sets a local Save for each check in the system (Check is PCGen term for a Saving Throw)
+LOCAL:CHECK|VAR=Save.Base		EXPLANATION:D20 System - Sets a local Save base for each check in the system (Base is modified by Classes)
+LOCAL:CHECK|VAR=Save.Stat		EXPLANATION:D20 System - Sets a local Save stat for each check in the system (Stat is the MOD value)
+LOCAL:CHECK|VAR=Save.Bonus		EXPLANATION:D20 System - Sets a local Save bonus for each check in the system (Anything else affecting the save)
+LOCAL:CHECK|VAR=Save.Racial		EXPLANATION:D20 System - Sets a local Save racial for each check in the system (Anything else affecting the save)
+
+
 LOCAL:SKILL|VAR=MaxRank
 LOCAL:SKILL|Rank
 LOCAL:SKILL|Bonus
 LOCAL:SKILL|Stat
 
 
+# Global Vars
+AC.Total		
+AC.Base		
+AC.Ability		
+AC.Size		
+AC.ClassDefense	
+AC.Misc		
+AC.Flatfooted	
+AC.Touch		
 
 
-
-
-
+StrDamage		
+LOADSCORE	
+LoadScoreSizeMod	
 
 
 
 # These are the Old Defines:
-	DEFINE:DisplayVersion|0
-	DEFINE:SpellCastingFeatCount|0
-	DEFINE:BasicCombatFeatCount|0
-	DEFINE:MeleeCombatFeatCount|0
-	DEFINE:RangedCombatFeatCount|0
-	DEFINE:UnarmedCombatFeatCount|0
-	DEFINE:ChanceFeatCount|0
-	DEFINE:CovertFeatCount|0
-	DEFINE:GearFeatCount|0
-	DEFINE:SkillFeatCount|0
-	DEFINE:SpeciesFeatCount|0
-	DEFINE:StyleFeatCount|0
-	DEFINE:TerrainFeatCount|0
+DisplayVersion
+SpellCastingFeatCount
+BasicCombatFeatCount
+MeleeCombatFeatCount
+RangedCombatFeatCount
+UnarmedCombatFeatCount
+ChanceFeatCount
+CovertFeatCount
+GearFeatCount
+SkillFeatCount
+SpeciesFeatCount
+StyleFeatCount
+TerrainFeatCount
+
+Allowed_Rank
+MinRank
+Allowed_RankSpellcasting
+Allowed_RankAcrobatics
+Allowed_RankAthletics
+Allowed_RankBlend
+Allowed_RankBluff
+Allowed_RankCrafting
+Allowed_RankDisguise
+Allowed_RankHaggle
+Allowed_RankImpress
+Allowed_RankIntimidate
+Allowed_RankInvestigate
+Allowed_RankMedicine
+Allowed_RankNotice
+Allowed_RankPrestidigitation
+Allowed_RankResolve
+Allowed_RankRide
+Allowed_RankSearch
+Allowed_RankSenseMotive
+Allowed_RankSneak
+Allowed_RankSurvival
+Allowed_RankTactics
+ProficiencyBowLvl
+ProficiencyBluntLvl
+ProficiencyEdgedLvl
+ProficiencyHurledLvl
+ProficiencyUnarmedLvl
+ProficiencySiegeLvl
+ProficiencyBlackPowderLvl
+BiteGrade
+ClawGrade
+KickGrade
+SlamGrade
+TalonGrade
+GoreGrade
+SqueezeGrade
+SwallowGrade
+TailSlapGrade
+TrampleGrade
+I
+II
+III
+IV
+V
+VI
+VII
+VIII
+IX
+X
+LifestyleScore
+Panache
+Prudence
+LifestyleTotal
 
 
-	DEFINE:Allowed_Rank|0
-	DEFINE:MinRank|0
-	DEFINE:Allowed_RankSpellcasting|0
-	DEFINE:Allowed_RankAcrobatics|0
-	DEFINE:Allowed_RankAthletics|0
-	DEFINE:Allowed_RankBlend|0
-	DEFINE:Allowed_RankBluff|0
-	DEFINE:Allowed_RankCrafting|0
-	DEFINE:Allowed_RankDisguise|0
-	DEFINE:Allowed_RankHaggle|0
-	DEFINE:Allowed_RankImpress|0
-	DEFINE:Allowed_RankIntimidate|0
-	DEFINE:Allowed_RankInvestigate|0
-	DEFINE:Allowed_RankMedicine|0
-	DEFINE:Allowed_RankNotice|0
-	DEFINE:Allowed_RankPrestidigitation|0
-	DEFINE:Allowed_RankResolve|0
-	DEFINE:Allowed_RankRide|0
-	DEFINE:Allowed_RankSearch|0
-	DEFINE:Allowed_RankSenseMotive|0
-	DEFINE:Allowed_RankSneak|0
-	DEFINE:Allowed_RankSurvival|0
-	DEFINE:Allowed_RankTactics|0
-	DEFINE:ProficiencyBowLvl|0
-	DEFINE:ProficiencyBluntLvl|0
-	DEFINE:ProficiencyEdgedLvl|0
-	DEFINE:ProficiencyHurledLvl|0
-	DEFINE:ProficiencyUnarmedLvl|0
-	DEFINE:ProficiencySiegeLvl|0
-	DEFINE:ProficiencyBlackPowderLvl|0
-	DEFINE:BiteGrade|0
-	DEFINE:ClawGrade|0
-	DEFINE:KickGrade|0
-	DEFINE:SlamGrade|0
-	DEFINE:TalonGrade|0
-	DEFINE:GoreGrade|0
-	DEFINE:SqueezeGrade|0
-	DEFINE:SwallowGrade|0
-	DEFINE:TailSlapGrade|0
-	DEFINE:TrampleGrade|0
-	DEFINE:I|0
-	DEFINE:II|0
-	DEFINE:III|0
-	DEFINE:IV|0
-	DEFINE:V|0
-	DEFINE:VI|0
-	DEFINE:VII|0
-	DEFINE:VIII|0
-	DEFINE:IX|0
-	DEFINE:X|0
-	DEFINE:LifestyleScore|0
-	DEFINE:Panache|0
-	DEFINE:Prudence|0
-	DEFINE:LifestyleTotal|0
 
+DarkvisionLvl
+NPCThreatLvl
 
+ArcaneKnown	
+SpellPoints	
+Panache	
+TotalCasterLvl
 
-	DEFINE:DarkvisionLvl|0
-	DEFINE:NPCThreatLvl|0
+NormalMount	
+ProficiencyCount
+InterestCount
+Min_Rank	
+Allowed_Rank	
+Mx_Rank	
+Subrace	
+Prudence	
+HeroicRenown
+BaseReach	
+BonusSkillPts		
+WoundPointSizeMod	
+UseAlternateDamage
 
-	DEFINE:ArcaneKnown|0	
-	DEFINE:SpellPoints|0	
-	DEFINE:Panache|0	
-	DEFINE:TotalCasterLvl|0
+#BONUS:VAR|NormalMount|1
+#BONUS:VAR|Mx_Rank|TL+12|TYPE=BASE	
+#BONUS:VAR|Subrace|1|PREABILITY:1,CATEGORY=Internal,TYPE.SubraceChosen	
+#BONUS:VAR|BaseReach|REACH.VAL
+#BONUS:VAR|ArcaneKnown|WISSCORE+skillinfo("RANK","Spellcasting")	
+#BONUS:MODSKILLPOINTS|NUMBER|INT+BonusSkillPts	
+#BONUS:HP|BONUS|CON	
+#BONUS:HP|ALTHP|WoundPointSizeMod	
+#BONUS:VAR|UseAlternateDamage|1	
 
+MasterAndCommanderLvl
+MasterAndCommanderTacticsBonus
+MasterAndCommanderFeatCount
+BattlePlanningCount
+BattlePlanningLvl
+TakeCommandBonus
+GiftsAndFavorsCityLvl
+EloquenceCount
+BookwormLvl
+ExplorerFeatCount

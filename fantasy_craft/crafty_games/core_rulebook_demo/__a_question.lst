@@ -1,0 +1,25 @@
+
+QUESTIONS:
+
+Tag replacement for 
+
+DEFINE:MAXLEVELSTAT=x|y	SETS highest spell casting level based upon stat.
+
+# TOM ALERT! We hardcode Two-Handed Fighting Variables in the SYSTEM or OS???!!!???!!!
+# Fantasy Craft doesn't use TWF rules - this is meant to counter-act that:
+BONUS:COMBAT|TOHIT-SECONDARY|10	BONUS:COMBAT|TOHIT-PRIMARY|6
+# I'm assuming this is an OS display item
+
+# TOM ALERT! If you use a oneHanded weapon in TWO hands you add 1 to the damage.
+BONUS:COMBAT|DAMAGE.Melee,DAMAGE.Thrown|1|TYPE=TwoHanded|PREEQUIPBOTH:1,WIELDCATEGORY=OneHanded	
+
+# TOM NOTIFY:	Grapple ignores BAB, and uses strictly Athletics Skill
+# We need to convert this, but Grapple is "Special", just like "Unarmed"
+BONUS:COMBAT|TOHIT.Grapple|STR|TYPE=Ability	
+BONUS:COMBAT|TOHIT.Grapple|-BAB	
+BONUS:COMBAT|TOHIT.Grapple|skillinfo("TOTAL","Athletics")-STR	
+# Should be something like:
+MODIFY:VAR=TOHIT.Grapple|SOLVE|namespace("SKILL","Athletics",Total)
+# Unless combat vars for Grapple is local ---
+MODIFYOTHER:EQUIPMENT|ToHit.Grapple|SOLVE|namespace("SKILL","Athletics",Total)
+

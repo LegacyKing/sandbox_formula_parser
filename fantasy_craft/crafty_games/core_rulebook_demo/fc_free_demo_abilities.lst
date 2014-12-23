@@ -64,8 +64,8 @@ Lifestyle
 	TYPE:SpecialQuality
 	DESC:Lifestyle %1 == Panache %2 (%4, %5s)/ Prudence %3 (%6 pct)|LifestyleTotal|Panache|Prudence|(Panache+1)/3|Panache*10|15+(Prudence*5)
 	BONUS:ABILITYPOOL|Lifestyle|LifestyleScore
-	MODIFY:VAR=LifestyleScore|CHA
-	MODIFY:VAR=LifestyleTotal|Panache+Prudence
+	MODIFY:VAR=LifestyleScore|SOLVE|CHA
+	MODIFY:VAR=LifestyleTotal|SOLVE|Panache+Prudence
 
 #
 Panache
@@ -75,7 +75,7 @@ Panache
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFY:VAR=Panache|1
+	MODIFY:VAR=Panache|ADD|1
 Prudence
 	KEY:Prudence+1
 	CATEGORY:Special Ability
@@ -83,7 +83,7 @@ Prudence
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFY:VAR=Prudence|1
+	MODIFY:VAR=Prudence|ADD|1
 #COMMENT: This changes the Description displays to the full content
 
 Reputation
@@ -91,7 +91,7 @@ Reputation
 	CATEGORY:Special Ability
 	DEFINE:ReputationScore|0
 	DESC:%1|ReputationScore
-	MODIFY:VAR=ReputationScore|TL*10
+	MODIFY:VAR=ReputationScore|SOLVE|TL*10
 
 Renown
 	CATEGORY:Internal
@@ -99,83 +99,53 @@ Renown
 	DEFINE:MilitaryRenown|0
 	DEFINE:NobleRenown|0
 	DEFINE:RenownTotal|0
-	ABILITY:Special Ability|AUTOMATIC|Heroic Title|PREVARGTEQ:HeroicRenown,1
-	ABILITY:Special Ability|AUTOMATIC|Military Title|PREVARGTEQ:MilitaryRenown,1
-	ABILITY:Special Ability|AUTOMATIC|Noble Title|PREVARGTEQ:NobleRenown,1
+	ABILITY:Special Ability|AUTOMATIC|Heroic Title|PREBOOL:context("VAR",HeroicRenown>=1)
+	ABILITY:Special Ability|AUTOMATIC|Military Title|PREBOOL:context("VAR",MilitaryRenown>=1)
+	ABILITY:Special Ability|AUTOMATIC|Noble Title|PREBOOL:context("VAR",NobleRenown>=1)
 	BONUS:ABILITYPOOL|Renown Choice|RenownTotal
 #
 Heroic Title
 	SORTKEY:ARenown
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Renown.RenownTrackChoices
-	DESC:Swordsman|PREVAREQ:HeroicRenown,1
-	DESC:Adventurer|PREVAREQ:HeroicRenown,2
-	DESC:Gallant|PREVAREQ:HeroicRenown,3
-	DESC:Champion|PREVAREQ:HeroicRenown,4
-	DESC:Knight Errant|PREVAREQ:HeroicRenown,5
-	DESC:Knight|PREVAREQ:HeroicRenown,6
-	DESC:Exemplar|PREVAREQ:HeroicRenown,7
-	DESC:Knight Champion|PREVAREQ:HeroicRenown,8
-	DESC:Dragon Slayer|PREVAREQ:HeroicRenown,9
-	DESC:Savior of the Realm|PREVARGTEQ:HeroicRenown,10
-	BENEFIT:Swordsman|PREVAREQ:HeroicRenown,1
-	BENEFIT:Adventurer|PREVAREQ:HeroicRenown,2
-	BENEFIT:Gallant|PREVAREQ:HeroicRenown,3
-	BENEFIT:Champion|PREVAREQ:HeroicRenown,4
-	BENEFIT:Knight Errant|PREVAREQ:HeroicRenown,5
-	BENEFIT:Knight|PREVAREQ:HeroicRenown,6
-	BENEFIT:Exemplar|PREVAREQ:HeroicRenown,7
-	BENEFIT:Knight Champion|PREVAREQ:HeroicRenown,8
-	BENEFIT:Dragon Slayer|PREVAREQ:HeroicRenown,9
-	BENEFIT:Savior of the Realm|PREVARGTEQ:HeroicRenown,10
+	DESC:Swordsman|PREBOOL:context("VAR",HeroicRenown==1)
+	DESC:Adventurer|PREBOOL:context("VAR",HeroicRenown==2)
+	DESC:Gallant|PREBOOL:context("VAR",HeroicRenown==3)
+	DESC:Champion|PREBOOL:context("VAR",HeroicRenown==4)
+	DESC:Knight Errant|PREBOOL:context("VAR",HeroicRenown==5)
+	DESC:Knight|PREBOOL:context("VAR",HeroicRenown==6)
+	DESC:Exemplar|PREBOOL:context("VAR",HeroicRenown==7)
+	DESC:Knight Champion|PREBOOL:context("VAR",HeroicRenown==8)
+	DESC:Dragon Slayer|PREBOOL:context("VAR",HeroicRenown==9)
+	DESC:Savior of the Realm|PREBOOL:context("VAR",HeroicRenown>=10)
 Military Title
 	SORTKEY:ARenown
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Renown.RenownTrackChoices
-	DESC:Squire|PREVAREQ:MilitaryRenown,1
-	DESC:Man-at-Arms|PREVAREQ:MilitaryRenown,2
-	DESC:Corporal|PREVAREQ:MilitaryRenown,3
-	DESC:Sergeant|PREVAREQ:MilitaryRenown,4
-	DESC:Lieutenant|PREVAREQ:MilitaryRenown,5
-	DESC:Captain|PREVAREQ:MilitaryRenown,6
-	DESC:Major|PREVAREQ:MilitaryRenown,7
-	DESC:Lieutenant General|PREVAREQ:MilitaryRenown,8
-	DESC:General|PREVAREQ:MilitaryRenown,9
-	DESC:Warlord|PREVARGTEQ:MilitaryRenown,10
-	BENEFIT:Squire|PREVAREQ:MilitaryRenown,1
-	BENEFIT:Man-at-Arms|PREVAREQ:MilitaryRenown,2
-	BENEFIT:Corporal|PREVAREQ:MilitaryRenown,3
-	BENEFIT:Sergeant|PREVAREQ:MilitaryRenown,4
-	BENEFIT:Lieutenant|PREVAREQ:MilitaryRenown,5
-	BENEFIT:Captain|PREVAREQ:MilitaryRenown,6
-	BENEFIT:Major|PREVAREQ:MilitaryRenown,7
-	BENEFIT:Lieutenant General|PREVAREQ:MilitaryRenown,8
-	BENEFIT:General|PREVAREQ:MilitaryRenown,9
-	BENEFIT:Warlord|PREVARGTEQ:MilitaryRenown,10
+	DESC:Squire|PREBOOL:context("VAR",MilitaryRenown==1)
+	DESC:Man-at-Arms|PREBOOL:context("VAR",MilitaryRenown==2)
+	DESC:Corporal|PREBOOL:context("VAR",MilitaryRenown==3)
+	DESC:Sergeant|PREBOOL:context("VAR",MilitaryRenown==4)
+	DESC:Lieutenant|PREBOOL:context("VAR",MilitaryRenown==5)
+	DESC:Captain|PREBOOL:context("VAR",MilitaryRenown==6)
+	DESC:Major|PREBOOL:context("VAR",MilitaryRenown==7)
+	DESC:Lieutenant General|PREBOOL:context("VAR",MilitaryRenown==8)
+	DESC:General|PREBOOL:context("VAR",MilitaryRenown==9)
+	DESC:Warlord|PREBOOL:context("VAR",MilitaryRenown>=10)
 Noble Title
 	SORTKEY:ARenown
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Renown.RenownTrackChoices
-	DESC:Lord|PREVAREQ:NobleRenown,1
-	DESC:Baron|PREVAREQ:NobleRenown,2
-	DESC:Viscount|PREVAREQ:NobleRenown,3
-	DESC:Earl|PREVAREQ:NobleRenown,4
-	DESC:Margrave|PREVAREQ:NobleRenown,5
-	DESC:Marquis|PREVAREQ:NobleRenown,6
-	DESC:Duke|PREVAREQ:NobleRenown,7
-	DESC:Archduke|PREVAREQ:NobleRenown,8
-	DESC:Monarch|PREVAREQ:NobleRenown,9
-	DESC:Lord Sovereign|PREVARGTEQ:NobleRenown,10
-	BENEFIT:Lord|PREVAREQ:NobleRenown,1
-	BENEFIT:Baron|PREVAREQ:NobleRenown,2
-	BENEFIT:Viscount|PREVAREQ:NobleRenown,3
-	BENEFIT:Earl|PREVAREQ:NobleRenown,4
-	BENEFIT:Margrave|PREVAREQ:NobleRenown,5
-	BENEFIT:Marquis|PREVAREQ:NobleRenown,6
-	BENEFIT:Duke|PREVAREQ:NobleRenown,7
-	BENEFIT:Archduke|PREVAREQ:NobleRenown,8
-	BENEFIT:Monarch|PREVAREQ:NobleRenown,9
-	BENEFIT:Lord Sovereign|PREVARGTEQ:NobleRenown,10
+	DESC:Lord|PREBOOL:context("VAR",NobleRenown==1)
+	DESC:Baron|PREBOOL:context("VAR",NobleRenown==2)
+	DESC:Viscount|PREBOOL:context("VAR",NobleRenown==3)
+	DESC:Earl|PREBOOL:context("VAR",NobleRenown==4)
+	DESC:Margrave|PREBOOL:context("VAR",NobleRenown==5)
+	DESC:Marquis|PREBOOL:context("VAR",NobleRenown==6)
+	DESC:Duke|PREBOOL:context("VAR",NobleRenown==7)
+	DESC:Archduke|PREBOOL:context("VAR",NobleRenown==8)
+	DESC:Monarch|PREBOOL:context("VAR",NobleRenown==9)
+	DESC:Lord Sovereign|PREBOOL:context("VAR",NobleRenown>=10)
 #
 Heroic Renown Bonus +1
 	CATEGORY:Special Ability
@@ -183,21 +153,21 @@ Heroic Renown Bonus +1
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFY:VAR=HeroicRenown|1
+	MODIFY:VAR=HeroicRenown|ADD|1
 Military Renown Bonus +1
 	CATEGORY:Special Ability
 	TYPE:RenownTrackChoices
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFY:VAR=MilitaryRenown|1
+	MODIFY:VAR=MilitaryRenown|ADD|1
 Noble Renown Bonus +1
 	CATEGORY:Special Ability
 	TYPE:RenownTrackChoices
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFY:VAR=NobleRenown|1
+	MODIFY:VAR=NobleRenown|ADD|1
 #
 
 #-----------------------#
@@ -219,10 +189,7 @@ Blunt
 	SORTKEY:Proficiency_a3
 	CATEGORY:Special Ability
 	TYPE:ProfOutput
-	DEFINE:BluntForte|0
-	MODIFY:VAR=BluntForte|1|PREVARGTEQ:ProficiencyBluntLvl,2
 	ASPECT:Proficiency|%1|ProficiencyBluntLvl
-	ASPECT:Forte|%1|BluntForte
 Edged
 	KEY:Edged Proficiency Display
 	SORTKEY:Proficiency_a5
@@ -261,32 +228,32 @@ Bow
 	SORTKEY:Proficiency_a1
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	MODIFY:VAR=ProficiencyBowLvl|1
+	MODIFY:VAR=ProficiencyBowLvl|ADD|1
 	ASPECT:Proficiency|1
 Blunt
 	KEY:Blunt Proficiency
 	SORTKEY:Proficiency_a3
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	MODIFY:VAR=ProficiencyBluntLvl|1
+	MODIFY:VAR=ProficiencyBluntLvl|ADD|1
 Edged
 	KEY:Edged Proficiency
 	SORTKEY:Proficiency_a5
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	MODIFY:VAR=ProficiencyEdgedLvl|1
+	MODIFY:VAR=ProficiencyEdgedLvl|ADD|1
 Hurled
 	KEY:Hurled Proficiency
 	SORTKEY:Proficiency_a7
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	MODIFY:VAR=ProficiencyHurledLvl|1
+	MODIFY:VAR=ProficiencyHurledLvl|ADD|1
 Unarmed
 	KEY:Unarmed Proficiency
 	SORTKEY:Proficiency_b3
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	MODIFY:VAR=ProficiencyUnarmedLvl|1
+	MODIFY:VAR=ProficiencyUnarmedLvl|ADD|1
 
 # Weapon Forte's
 Bow Forte
@@ -296,9 +263,7 @@ Bow Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Bow Proficiency
 	AUTO:WEAPONPROF|TYPE=BowForte
-	MODIFY:VAR=ProficiencyBowLvl|1
-	BONUS:WEAPONPROF=TYPE.Bow|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.BowForte|TOHIT|1|TYPE=Proficiency
+	MODIFY:VAR=ProficiencyBowLvl|ADD|1
 Blunt Forte
 	KEY:Blunt Forte
 	SORTKEY:Proficiency_a4
@@ -306,9 +271,7 @@ Blunt Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Blunt Proficiency
 	AUTO:WEAPONPROF|TYPE=BluntForte
-	MODIFY:VAR=ProficiencyBluntLvl|1
-	BONUS:WEAPONPROF=TYPE.Blunt|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.BluntForte|TOHIT|1|TYPE=Proficiency
+	MODIFY:VAR=ProficiencyBluntLvl|ADD|1
 Edged Forte
 	KEY:Edged Forte
 	SORTKEY:Proficiency_a6
@@ -316,9 +279,7 @@ Edged Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Edged Proficiency
 	AUTO:WEAPONPROF|TYPE=EdgedForte
-	MODIFY:VAR=ProficiencyEdgedLvl|1
-	BONUS:WEAPONPROF=TYPE.Edged|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.EdgedForte|TOHIT|1|TYPE=Proficiency
+	MODIFY:VAR=ProficiencyEdgedLvl|ADD|1
 Hurled Forte
 	KEY:Hurled Forte
 	SORTKEY:Proficiency_a8
@@ -326,9 +287,7 @@ Hurled Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Hurled Proficiency
 	AUTO:WEAPONPROF|TYPE=HurledForte
-	MODIFY:VAR=ProficiencyHurledLvl|1
-	BONUS:WEAPONPROF=TYPE.Hurled|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.HurledForte|TOHIT|1|TYPE=Proficiency
+	MODIFY:VAR=ProficiencyHurledLvl|ADD|1
 Unarmed Forte
 	KEY:Unarmed Forte
 	SORTKEY:Proficiency_b4
@@ -336,9 +295,7 @@ Unarmed Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Unarmed Proficiency
 	AUTO:WEAPONPROF|TYPE=UnarmedForte
-	MODIFY:VAR=ProficiencyUnarmedLvl|1
-	BONUS:WEAPONPROF=TYPE.Unarmed|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.UnarmedForte|TOHIT|1|TYPE=Proficiency
+	MODIFY:VAR=ProficiencyUnarmedLvl|ADD|1
 
 
 # Included for PREREQ Purposes, but not enabled due to errors generated if missing the actual items.
@@ -346,25 +303,25 @@ Siege
 	KEY:Siege Proficiency
 	SORTKEY:Proficiency_b1
 	CATEGORY:Special Ability
-	MODIFY:VAR=ProficiencySiegeLvl|1
+	MODIFY:VAR=ProficiencySiegeLvl|ADD|1
 Black Powder
 	KEY:Black Powder Proficiency
 	SORTKEY:Proficiency_b5
 	CATEGORY:Special Ability
-	MODIFY:VAR=ProficiencyBlackPowderLvl|1
+	MODIFY:VAR=ProficiencyBlackPowderLvl|ADD|1
 #
 Siege Forte
 	KEY:Siege Forte
 	SORTKEY:Proficiency_b2
 	CATEGORY:Special Ability
 	PREABILITY:1,CATEGORY=Special Ability,Siege Proficiency
-	MODIFY:VAR=ProficiencySiegeLvl|1
+	MODIFY:VAR=ProficiencySiegeLvl|ADD|1
 Black Powder Forte
 	KEY:Black Powder Forte
 	SORTKEY:Proficiency_b6
 	CATEGORY:Special Ability
 	PREABILITY:1,CATEGORY=Special Ability,Black Powder Proficiency
-	MODIFY:VAR=ProficiencyBlackPowderLvl|1
+	MODIFY:VAR=ProficiencyBlackPowderLvl|ADD|1
 
 
 # Weapon Proficiencies ~ Actual Ability
@@ -385,7 +342,6 @@ Bow
 	CATEGORY:Special Ability
 	TYPE:Proficiency
 	AUTO:WEAPONPROF|Bow|TYPE=Bow
-	ASPECT:Proficiency|1
 Blunt
 	KEY:Granted Blunt Proficiency
 	SORTKEY:Proficiency_a3
@@ -418,8 +374,8 @@ Bow Forte
 	TYPE:Proficiency.Forte.BowForte
 	PREABILITY:1,CATEGORY=Special Ability,Bow Proficiency
 	AUTO:WEAPONPROF|TYPE=BowForte
-	BONUS:WEAPONPROF=TYPE.Bow|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.BowForte|TOHIT|1|TYPE=Proficiency
+	MODIFYOTHER:EQUIPMENT|GROUP=Bow|ToHit|ADD|1
+	MODIFYOTHER:EQUIPMENT|GROUP=BowForte|ToHit|ADD|1
 Blunt Forte
 	KEY:Granted Blunt Forte
 	SORTKEY:Proficiency_a4
@@ -427,8 +383,8 @@ Blunt Forte
 	TYPE:Proficiency.Forte.BluntForte
 	PREABILITY:1,CATEGORY=Special Ability,Blunt Proficiency
 	AUTO:WEAPONPROF|TYPE=BluntForte
-	BONUS:WEAPONPROF=TYPE.Blunt|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.BluntForte|TOHIT|1|TYPE=Proficiency
+	MODIFYOTHER:EQUIPMENT|GROUP=Blunt|ToHit|ADD|1
+	MODIFYOTHER:EQUIPMENT|GROUP=BluntForte|ToHit|ADD|1
 Edged Forte
 	KEY:Granted Edged Forte
 	SORTKEY:Proficiency_a6
@@ -436,8 +392,8 @@ Edged Forte
 	TYPE:Proficiency.Forte.EdgedForte
 	PREABILITY:1,CATEGORY=Special Ability,Edged Proficiency
 	AUTO:WEAPONPROF|TYPE=EdgedForte
-	BONUS:WEAPONPROF=TYPE.Edged|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.EdgedForte|TOHIT|1|TYPE=Proficiency
+	MODIFYOTHER:EQUIPMENT|GROUP=Edged|ToHit|ADD|1
+	MODIFYOTHER:EQUIPMENT|GROUP=EdgedForte|ToHit|ADD|1
 Hurled Forte
 	KEY:Granted Hurled Forte
 	SORTKEY:Proficiency_a8
@@ -445,8 +401,8 @@ Hurled Forte
 	TYPE:Proficiency.Forte.HurledForte
 	PREABILITY:1,CATEGORY=Special Ability,Hurled Proficiency
 	AUTO:WEAPONPROF|TYPE=HurledForte
-	BONUS:WEAPONPROF=TYPE.Hurled|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.HurledForte|TOHIT|1|TYPE=Proficiency
+	MODIFYOTHER:EQUIPMENT|GROUP=Hurled|ToHit|ADD|1
+	MODIFYOTHER:EQUIPMENT|GROUP=HurledForte|ToHit|ADD|1
 Unarmed Forte
 	KEY:Granted Unarmed Forte
 	SORTKEY:Proficiency_b4
@@ -454,8 +410,8 @@ Unarmed Forte
 	TYPE:Proficiency.Forte.UnarmedForte
 	PREABILITY:1,CATEGORY=Special Ability,Unarmed Proficiency
 	AUTO:WEAPONPROF|TYPE=UnarmedForte
-	BONUS:WEAPONPROF=TYPE.Unarmed|TOHIT|1|TYPE=Proficiency
-	BONUS:WEAPONPROF=TYPE.UnarmedForte|TOHIT|1|TYPE=Proficiency
+	MODIFYOTHER:EQUIPMENT|GROUP=Unarmed|ToHit|ADD|1
+	MODIFYOTHER:EQUIPMENT|GROUP=UnarmedForte|ToHit|ADD|1
 
 # Included for PREREQ Purposes, but not enabled due to errors generated if missing the actual items.
 Siege
@@ -864,7 +820,7 @@ Darkvision
 	CATEGORY:Internal
 	TYPE:SpecialQuality
 	ABILITY:Special Ability|AUTOMATIC|Darkvision I|PREBOOL:context("VAR",DarkvisionLvl==1)
-	ABILITY:Special Ability|AUTOMATIC|Darkvision II|PREBOOL:context("VAR",DarkvisionLvl==2)
+	ABILITY:Special Ability|AUTOMATIC|Darkvision II|PREBOOL:context("VAR",DarkvisionLvl>=2)
 # - Display
 Darkvision I
 	CATEGORY:Special Ability
@@ -1100,73 +1056,73 @@ Bang Resistance
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:BangResistanceBonus|0
-	DESC:1%%|BangResistanceBonus
+	DESC:%1|BangResistanceBonus
 Blunt Resistance
 	KEY:Blunt ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:BluntResistanceBonus|0
-	DESC:1%%|BluntResistanceBonus
+	DESC:%1|BluntResistanceBonus
 Cold Resistance
 	KEY:Cold ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:ColdResistanceBonus|0
-	DESC:1%%|ColdResistanceBonus
+	DESC:%1|ColdResistanceBonus
 Divine Resistance
 	KEY:Divine ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:DivineResistanceBonus|0
-	DESC:1%%|DivineResistanceBonus
+	DESC:%1|DivineResistanceBonus
 Edged Resistance
 	KEY:Edged ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:EdgedResistanceBonus|0
-	DESC:1%%|EdgedResistanceBonus
+	DESC:%1|EdgedResistanceBonus
 Electrical Resistance
 	KEY:Electrical ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:ElectricalResistanceBonus|0
-	DESC:1%%|ElectricalResistanceBonus
+	DESC:%1|ElectricalResistanceBonus
 Falling Resistance
 	KEY:Falling ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:FallingResistanceBonus|0
-	DESC:1%%|FallingResistanceBonus
+	DESC:%1|FallingResistanceBonus
 Flash Resistance
 	KEY:Flash ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:FlashResistanceBonus|0
-	DESC:1%%|FlashResistanceBonus
+	DESC:%1|FlashResistanceBonus
 Fire Resistance
 	KEY:Fire ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:FireResistanceBonus|0
-	DESC:1%%|FireResistanceBonus
+	DESC:%1|FireResistanceBonus
 Ranged Resistance
 	KEY:Ranged ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:RangedResistanceBonus|0
-	DESC:1%%|RangedResistanceBonus
+	DESC:%1|RangedResistanceBonus
 Heat Resistance
 	KEY:Heat ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:HeatResistanceBonus|0
-	DESC:1%%|HeatResistanceBonus
+	DESC:%1|HeatResistanceBonus
 Spirit Resistance
 	KEY:Spirit ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
 	DEFINE:SpiritResistanceBonus|0
-	DESC:1%%|SpiritResistanceBonus
+	DESC:%1|SpiritResistanceBonus
 #
 Immunity to Bang Damage
 	CATEGORY:Special Ability
@@ -1211,8 +1167,7 @@ Evasion
 	CATEGORY:Internal
 	DEFINE:EvasionLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Evasion I|PREVAREQ:EvasionLvl,1
-#ABILITY:Special Ability|AUTOMATIC|Evasion II|PREVAREQ:EvasionLvl,2
-	ABILITY:Special Ability|AUTOMATIC|Evasion III|PREVAREQ:EvasionLvl,3
+#ABILITY:Special Ability|AUTOMATIC|Evasion II|PREVAREQ:EvasionLvl,2	ABILITY:Special Ability|AUTOMATIC|Evasion III|PREVAREQ:EvasionLvl,3
 
 Evasion I
 	CATEGORY:Special Ability
@@ -1231,8 +1186,7 @@ Uncanny Dodge
 	CATEGORY:Internal
 	DEFINE:UncannyDodgeLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge I|PREVAREQ:UncannyDodgeLvl,1
-#ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge II|PREVAREQ:UncannyDodgeLvl,2
-	ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge III|PREVAREQ:UncannyDodgeLvl,3
+#ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge II|PREVAREQ:UncannyDodgeLvl,2	ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge III|PREVAREQ:UncannyDodgeLvl,3
 
 Uncanny Dodge I
 	CATEGORY:Special Ability
@@ -1259,10 +1213,7 @@ Night-Blind
 #Block: Crafting Focuses ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Crafting Base
 	CATEGORY:Internal
-	DEFINE:CraftingLvl|0
-	BONUS:ABILITYPOOL|Crafting Focus|CraftingLvl
-	BONUS:VAR|CraftingLvl|skillinfo("TOTALRANK","Crafting")/4
-	BONUS:VAR|CraftingLvl|1|PRESKILL:1,Crafting=1
+	MODIFY:ABILITYPOOL=Crafting Focus|value()+1+namespace("SKLL","Crafting",Rank/4)
 #
 Crafting (Carving) Focus
 	CATEGORY:Special Ability
@@ -1323,8 +1274,8 @@ Crafting (Tailoring) Focus
 Ride Base
 	CATEGORY:Internal
 	DEFINE:RideFocusCount|0
-	BONUS:ABILITYPOOL|Ride Focus|RideFocusCount
-	BONUS:VAR|RideFocusCount|1+(skillinfo("TOTALRANK", "Ride")/4)
+	MODIFY:ABILITYPOOL=Ride Focus|SOLVE|value()+1+namespace("SKILL","Ride",Rank/4)
+	BONUS:VAR|RideFocusCount|
 #
 Ride (Air Vehicles) Focus
 	CATEGORY:Special Ability
@@ -1978,7 +1929,7 @@ Bonus Feat
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
 	DEFINE:BurglarFeatCount|0
-	BONUS:ABILITYPOOL|Burglar Feat|BurglarFeatCount
+	MODIFY:ABILITYPOOL=Burglar Feat|SOLVE|value()+BurglarFeatCount
 	SOURCEPAGE:p.32
 
 
@@ -2007,14 +1958,11 @@ Right-Hand Man
 	SOURCEPAGE:p.34
 Master and Commander
 	CATEGORY:Internal
-	DEFINE:MasterAndCommanderLvl|0
-	DEFINE:MasterAndCommanderTacticsBonus|0
-	DEFINE:MasterAndCommanderFeatCount|0
-	ABILITY:Special Ability|AUTOMATIC|Master and Commander I|PREVAREQ:MasterAndCommanderLvl,1
-	BONUS:ABILITYPOOL|Terrain Feat|MasterAndCommanderFeatCount
-	BONUS:VAR|MasterAndCommanderFeatCount|1
-	BONUS:VAR|MaxRankTactics|MasterAndCommanderTacticsBonus|TYPE=Enlightened
-	BONUS:VAR|MasterAndCommanderTacticsBonus|3
+	ABILITY:Special Ability|AUTOMATIC|Master and Commander I|PREBOOL:context("VAR",MasterAndCommanderLvl==1)
+	MODIFY:ABILITYPOOL=Terrain Feat|SOLVE|MasterAndCommanderFeatCount
+	MODIFY:MasterAndCommanderFeatCount|ADD|1
+	MODIFYOTHER:SKILL|Tactics|MaxRank|SOLVE|value()+MasterAndCommanderTacticsBonus
+	MODIFY:MasterAndCommanderTacticsBonus|ADD|3
 #
 Master and Commander I
 	CATEGORY:Special Ability
@@ -2023,11 +1971,9 @@ Master and Commander I
 #
 Battle Planning
 	CATEGORY:Internal
-	DEFINE:BattlePlanningCount|0
-	DEFINE:BattlePlanningLvl|0
-	ABILITY:Special Ability|AUTOMATIC|Battle Planning I|PREVAREQ:BattlePlanningLvl,1
+	ABILITY:Special Ability|AUTOMATIC|Battle Planning I|PREBOOL:context("VAR",BattlePlanningLvl==1)
 	BONUS:ABILITYPOOL|Battle Planning|BattlePlanningCount
-	BONUS:VAR|BattlePlanningCount|2|PREVAREQ:BattlePlanningLvl,1
+	MODIFY:BattlePlanningCount|MODIFY|value+if(context("VAR",BattlePlanningLvl>=1,2,value())
 #
 Battle Planning I
 	CATEGORY:Special Ability
@@ -2078,7 +2024,6 @@ Steady Now!
 Take Command
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:TakeCommandBonus|0
 	SOURCEPAGE:p.35
 
 
@@ -2103,7 +2048,6 @@ With a Word
 	SOURCEPAGE:p.36
 Gifts and Favors ~ City
 	CATEGORY:Internal
-	DEFINE:GiftsAndFavorsCityLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Gifts and Favors I (City)|PREVAREQ:GiftsAndFavorsCityLvl,1
 #
 Gifts and Favors I (City)
@@ -2117,8 +2061,7 @@ Obligations
 Eloquence
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:EloquenceCount|0
-	BONUS:ABILITYPOOL|Increase Lower of INT or CHA|EloquenceCount
+	MODIFY:ABILITYPOOL=Increase Lower of INT or CHA|SOLVE|EloquenceCount
 	SOURCEPAGE:p.36
 
 
@@ -2145,7 +2088,6 @@ Tomb Raider
 	SOURCEPAGE:p.38
 Bookworm
 	CATEGORY:Internal
-	DEFINE:BookwormLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Bookworm I|PREVAREQ:BookwormLvl,1
 #
 Bookworm I
@@ -2156,7 +2098,6 @@ Bonus Feat
 	KEY:Bonus Feat ~ Explorer
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:ExplorerFeatCount|0
 	BONUS:ABILITYPOOL|Explorer Feat|ExplorerFeatCount
 	SOURCEPAGE:p.38
 
