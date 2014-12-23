@@ -6,43 +6,27 @@ SOURCELONG:Fantasy Craft
 # Original Entry Date: 2011-03-01
 
 #Basic Core - All Classes
-# Ability Name
-	Unique Key
-	SORTKEY
-	Category of Ability
-	Type
-	Visible
-	Define
-	Description
-	Stackable?
-	Multiple?
-	Choose
-	Template
-	Auto Armor Prof
-	Ability
-	Bonus Ability Pool
-	Modify VAR
-	Benefits
 Default
 	CATEGORY:Internal
 	VISIBLE:NO
-
 	AUTO:ARMORPROF|ARMORTYPE=Armor
 	ABILITY:Special Ability|AUTOMATIC|Lifestyle ~ Display
 	ABILITY:Internal|AUTOMATIC|Basic Natural Attack Output|Racial Traits
-	BONUS:VAR|SpellCastingFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Spellcasting")
-	BONUS:VAR|BasicCombatFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Basic Combat")
-	BONUS:VAR|MeleeCombatFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Melee Combat")
-	BONUS:VAR|RangedCombatFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Ranged Combat")
-	BONUS:VAR|UnarmedCombatFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Unarmed Combat")
-	BONUS:VAR|ChanceFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Chance")
-	BONUS:VAR|CovertFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Covert")
-	BONUS:VAR|GearFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Gear")
-	BONUS:VAR|SkillFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Skill")
-	BONUS:VAR|SpeciesFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Species")
-	BONUS:VAR|StyleFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Style")
-	BONUS:VAR|TerrainFeatCount|count("ABILITIES","CATEGORY=FEAT","TYPE=Terrain")
+	MODIFY:VAR=SpellCastingFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Spellcasting")
+	MODIFY:VAR=BasicCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Basic Combat")
+	MODIFY:VAR=MeleeCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Melee Combat")
+	MODIFY:VAR=RangedCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Ranged Combat")
+	MODIFY:VAR=UnarmedCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Unarmed Combat")
+	MODIFY:VAR=ChanceFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Chance")
+	MODIFY:VAR=CovertFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Covert")
+	MODIFY:VAR=GearFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Gear")
+	MODIFY:VAR=SkillFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Skill")
+	MODIFY:VAR=SpeciesFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Species")
+	MODIFY:VAR=StyleFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Style")
+	MODIFY:VAR=TerrainFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Terrain")
 CATEGORY=Internal|Default.MOD
+CATEGORY=Internal|Default.MOD	ABILITY:Internal|AUTOMATIC|Tracker ~ Proficiency|PRECHARACTERTYPE:1,PC|!PREABILITY:1,CATEGORY=Special Ability,TYPE.AltProfProgression
+CATEGORY=Internal|Default.MOD	ABILITY:Internal|AUTOMATIC|Tracker ~ Interest|PRECHARACTERTYPE:1,PC|!PREABILITY:1,CATEGORY=Special Ability,TYPE.AltInterestProgression
 
 CATEGORY=Internal|Default.MOD
 	ABILITY:Internal|AUTOMATIC|1st Base Class|PRECLASS:1,TYPE.Base=1
@@ -67,18 +51,8 @@ CATEGORY=Internal|Default.MOD
 	ABILITY:Special Ability|AUTOMATIC|Granted Siege Forte|PREVARGTEQ:ProficiencySiegeLvl,2
 	ABILITY:Special Ability|AUTOMATIC|Granted Black Powder Forte|PREVARGTEQ:ProficiencyBlackPowderLvl,2
 CATEGORY=Internal|Default.MOD
-	BONUS:VAR|I|1
-	BONUS:VAR|II|2
-	BONUS:VAR|III|3
-	BONUS:VAR|IV|4
-	BONUS:VAR|V|5
-	BONUS:VAR|VI|6
-	BONUS:VAR|VII|7
-	BONUS:VAR|VIII|8
-	BONUS:VAR|IX|9
-	BONUS:VAR|X|10
-	ABILITY:Internal|AUTOMATIC|Crafting Base|PRESKILL:1,Crafting=1
-	ABILITY:Internal|AUTOMATIC|Ride Base|PRESKILL:1,Ride=1
+	ABILITY:Internal|AUTOMATIC|Crafting Base|PREBOOL:context("SKILL","Crafting",Rank>=1)
+	ABILITY:Internal|AUTOMATIC|Ride Base|PREBOOL:context("SKILL","Ride",Rank>=1)
 Display Weapon Proficiency Groups
 	CATEGORY:Internal
 	ABILITY:Special Ability|AUTOMATIC|TYPE=ProfOutput
@@ -90,8 +64,8 @@ Lifestyle
 	TYPE:SpecialQuality
 	DESC:Lifestyle %1 == Panache %2 (%4, %5s)/ Prudence %3 (%6 pct)|LifestyleTotal|Panache|Prudence|(Panache+1)/3|Panache*10|15+(Prudence*5)
 	BONUS:ABILITYPOOL|Lifestyle|LifestyleScore
-	BONUS:VAR|LifestyleScore|CHA
-	BONUS:VAR|LifestyleTotal|Panache+Prudence
+	MODIFY:VAR=LifestyleScore|CHA
+	MODIFY:VAR=LifestyleTotal|Panache+Prudence
 
 #
 Panache
@@ -101,7 +75,7 @@ Panache
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:VAR|Panache|1
+	MODIFY:VAR=Panache|1
 Prudence
 	KEY:Prudence+1
 	CATEGORY:Special Ability
@@ -109,7 +83,7 @@ Prudence
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:VAR|Prudence|1
+	MODIFY:VAR=Prudence|1
 #COMMENT: This changes the Description displays to the full content
 
 Reputation
@@ -117,7 +91,7 @@ Reputation
 	CATEGORY:Special Ability
 	DEFINE:ReputationScore|0
 	DESC:%1|ReputationScore
-	BONUS:VAR|ReputationScore|TL*10
+	MODIFY:VAR=ReputationScore|TL*10
 
 Renown
 	CATEGORY:Internal
@@ -209,21 +183,21 @@ Heroic Renown Bonus +1
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:VAR|HeroicRenown|1
+	MODIFY:VAR=HeroicRenown|1
 Military Renown Bonus +1
 	CATEGORY:Special Ability
 	TYPE:RenownTrackChoices
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:VAR|MilitaryRenown|1
+	MODIFY:VAR=MilitaryRenown|1
 Noble Renown Bonus +1
 	CATEGORY:Special Ability
 	TYPE:RenownTrackChoices
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:VAR|NobleRenown|1
+	MODIFY:VAR=NobleRenown|1
 #
 
 #-----------------------#
@@ -233,28 +207,7 @@ Noble Renown Bonus +1
 #-----------------------#
 
 ###Block: Universal Abilities
-# Ability Name
-	Unique Key
-	SORTKEY
-	Category of Ability
-	Type
-	Required Ability
-	Automatically Gained Weapon Prof.
-	Modify VAR
-	Weapon prof. bonus
-
 # Output Display
-# Ability Name
-	Unique Key
-	SORTKEY
-	Category of Ability
-	Type
-	Required Ability
-	Define
-	Auto Weapon Prof
-	Modify VAR
-	Weapon prof. bonus
-	Aspects
 Bow
 	KEY:Bow Proficiency Display
 	SORTKEY:Proficiency_a1
@@ -267,7 +220,7 @@ Blunt
 	CATEGORY:Special Ability
 	TYPE:ProfOutput
 	DEFINE:BluntForte|0
-	BONUS:VAR|BluntForte|1|PREVARGTEQ:ProficiencyBluntLvl,2
+	MODIFY:VAR=BluntForte|1|PREVARGTEQ:ProficiencyBluntLvl,2
 	ASPECT:Proficiency|%1|ProficiencyBluntLvl
 	ASPECT:Forte|%1|BluntForte
 Edged
@@ -308,32 +261,32 @@ Bow
 	SORTKEY:Proficiency_a1
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	BONUS:VAR|ProficiencyBowLvl|1
+	MODIFY:VAR=ProficiencyBowLvl|1
 	ASPECT:Proficiency|1
 Blunt
 	KEY:Blunt Proficiency
 	SORTKEY:Proficiency_a3
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	BONUS:VAR|ProficiencyBluntLvl|1
+	MODIFY:VAR=ProficiencyBluntLvl|1
 Edged
 	KEY:Edged Proficiency
 	SORTKEY:Proficiency_a5
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	BONUS:VAR|ProficiencyEdgedLvl|1
+	MODIFY:VAR=ProficiencyEdgedLvl|1
 Hurled
 	KEY:Hurled Proficiency
 	SORTKEY:Proficiency_a7
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	BONUS:VAR|ProficiencyHurledLvl|1
+	MODIFY:VAR=ProficiencyHurledLvl|1
 Unarmed
 	KEY:Unarmed Proficiency
 	SORTKEY:Proficiency_b3
 	CATEGORY:Special Ability
 	TYPE:ProficiencyDisplay
-	BONUS:VAR|ProficiencyUnarmedLvl|1
+	MODIFY:VAR=ProficiencyUnarmedLvl|1
 
 # Weapon Forte's
 Bow Forte
@@ -343,7 +296,7 @@ Bow Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Bow Proficiency
 	AUTO:WEAPONPROF|TYPE=BowForte
-	BONUS:VAR|ProficiencyBowLvl|1
+	MODIFY:VAR=ProficiencyBowLvl|1
 	BONUS:WEAPONPROF=TYPE.Bow|TOHIT|1|TYPE=Proficiency
 	BONUS:WEAPONPROF=TYPE.BowForte|TOHIT|1|TYPE=Proficiency
 Blunt Forte
@@ -353,7 +306,7 @@ Blunt Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Blunt Proficiency
 	AUTO:WEAPONPROF|TYPE=BluntForte
-	BONUS:VAR|ProficiencyBluntLvl|1
+	MODIFY:VAR=ProficiencyBluntLvl|1
 	BONUS:WEAPONPROF=TYPE.Blunt|TOHIT|1|TYPE=Proficiency
 	BONUS:WEAPONPROF=TYPE.BluntForte|TOHIT|1|TYPE=Proficiency
 Edged Forte
@@ -363,7 +316,7 @@ Edged Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Edged Proficiency
 	AUTO:WEAPONPROF|TYPE=EdgedForte
-	BONUS:VAR|ProficiencyEdgedLvl|1
+	MODIFY:VAR=ProficiencyEdgedLvl|1
 	BONUS:WEAPONPROF=TYPE.Edged|TOHIT|1|TYPE=Proficiency
 	BONUS:WEAPONPROF=TYPE.EdgedForte|TOHIT|1|TYPE=Proficiency
 Hurled Forte
@@ -373,7 +326,7 @@ Hurled Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Hurled Proficiency
 	AUTO:WEAPONPROF|TYPE=HurledForte
-	BONUS:VAR|ProficiencyHurledLvl|1
+	MODIFY:VAR=ProficiencyHurledLvl|1
 	BONUS:WEAPONPROF=TYPE.Hurled|TOHIT|1|TYPE=Proficiency
 	BONUS:WEAPONPROF=TYPE.HurledForte|TOHIT|1|TYPE=Proficiency
 Unarmed Forte
@@ -383,7 +336,7 @@ Unarmed Forte
 	TYPE:ProficiencyDisplay
 	PREABILITY:1,CATEGORY=Special Ability,Unarmed Proficiency
 	AUTO:WEAPONPROF|TYPE=UnarmedForte
-	BONUS:VAR|ProficiencyUnarmedLvl|1
+	MODIFY:VAR=ProficiencyUnarmedLvl|1
 	BONUS:WEAPONPROF=TYPE.Unarmed|TOHIT|1|TYPE=Proficiency
 	BONUS:WEAPONPROF=TYPE.UnarmedForte|TOHIT|1|TYPE=Proficiency
 
@@ -393,25 +346,25 @@ Siege
 	KEY:Siege Proficiency
 	SORTKEY:Proficiency_b1
 	CATEGORY:Special Ability
-	BONUS:VAR|ProficiencySiegeLvl|1
+	MODIFY:VAR=ProficiencySiegeLvl|1
 Black Powder
 	KEY:Black Powder Proficiency
 	SORTKEY:Proficiency_b5
 	CATEGORY:Special Ability
-	BONUS:VAR|ProficiencyBlackPowderLvl|1
+	MODIFY:VAR=ProficiencyBlackPowderLvl|1
 #
 Siege Forte
 	KEY:Siege Forte
 	SORTKEY:Proficiency_b2
 	CATEGORY:Special Ability
 	PREABILITY:1,CATEGORY=Special Ability,Siege Proficiency
-	BONUS:VAR|ProficiencySiegeLvl|1
+	MODIFY:VAR=ProficiencySiegeLvl|1
 Black Powder Forte
 	KEY:Black Powder Forte
 	SORTKEY:Proficiency_b6
 	CATEGORY:Special Ability
 	PREABILITY:1,CATEGORY=Special Ability,Black Powder Proficiency
-	BONUS:VAR|ProficiencyBlackPowderLvl|1
+	MODIFY:VAR=ProficiencyBlackPowderLvl|1
 
 
 # Weapon Proficiencies ~ Actual Ability
@@ -636,182 +589,165 @@ Tactics
 	CSKILL:Tactics
 
 ###Block: Prodigal Skills
-# Ability Name
-	Unique Key
-	Category of Ability
-	Type
-	Ability
-	Modify VAR
 Acrobatics
 	KEY:Acrobatics ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Acrobatics ~ Origin Skill
-	BONUS:VAR|MaxRanksAcrobatics|3
+	MODIFYOTHER:SKILL|Acrobatics|MaxRank|ADD|3
 Athletics
 	KEY:Athletics ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Athletics ~ Origin Skill
-	BONUS:VAR|MaxRanksAthletics|3
+	MODIFYOTHER:SKILL|Athletics|MaxRank|ADD|3
 Blend
 	KEY:Blend ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Blend ~ Origin Skill
-	BONUS:VAR|MaxRanksBlend|3
+	MODIFYOTHER:SKILL|Blend|MaxRank|ADD|3
 Bluff
 	KEY:Bluff ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Bluff ~ Origin Skill
-	BONUS:VAR|MaxRanksBluff|3
+	MODIFYOTHER:SKILL|Bluff|MaxRank|ADD|3
 Crafting
 	KEY:Crafting ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Crafting ~ Origin Skill
-	BONUS:VAR|MaxRanksCrafting|3
+	MODIFYOTHER:SKILL|Crafting|MaxRank|ADD|3
 Disguise
 	KEY:Disguise ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Disguise ~ Origin Skill
-	BONUS:VAR|MaxRanksDisguise|3
+	MODIFYOTHER:SKILL|Disguise|MaxRank|ADD|3
 Haggle
 	KEY:Haggle ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Haggle ~ Origin Skill
-	BONUS:VAR|MaxRanksHaggle|3
+	MODIFYOTHER:SKILL|Haggle|MaxRank|ADD|3
 Impress
 	KEY:Impress ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Impress ~ Origin Skill
-	BONUS:VAR|MaxRanksImpress|3
+	MODIFYOTHER:SKILL|Impress|MaxRank|ADD|3
 Intimidate
 	KEY:Intimidate ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Intimidate ~ Origin Skill
-	BONUS:VAR|MaxRanksIntimidate|3
+	MODIFYOTHER:SKILL|Intimidate|MaxRank|ADD|3
 Investigate
 	KEY:Investigate ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Investigate ~ Origin Skill
-	BONUS:VAR|MaxRanksInvestigate|3
+	MODIFYOTHER:SKILL|Investigate|MaxRank|ADD|3
 Medicine
 	KEY:Medicine ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Medicine ~ Origin Skill
-	BONUS:VAR|MaxRanksMedicine|3
+	MODIFYOTHER:SKILL|Medicine|MaxRank|ADD|3
 Notice
 	KEY:Notice ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Notice ~ Origin Skill
-	BONUS:VAR|MaxRanksNotice|3
+	MODIFYOTHER:SKILL|Notice|MaxRank|ADD|3
 Prestidigitation
 	KEY:Prestidigitation ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Prestidigitation ~ Origin Skill
-	BONUS:VAR|MaxRanksPrestidigitation|3
+	MODIFYOTHER:SKILL|Prestidigitation|MaxRank|ADD|3
 Resolve
 	KEY:Resolve ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Resolve ~ Origin Skill
-	BONUS:VAR|MaxRanksResolve|3
+	MODIFYOTHER:SKILL|Resolve|MaxRank|ADD|3
 Ride
 	KEY:Ride ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Ride ~ Origin Skill
-	BONUS:VAR|MaxRanksRide|3
+	MODIFYOTHER:SKILL|Ride|MaxRank|ADD|3
 Search
 	KEY:Search ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Search ~ Origin Skill
-	BONUS:VAR|MaxRanksSearch|3
+	MODIFYOTHER:SKILL|Search|MaxRank|ADD|3
 Sense Motive
 	KEY:Sense ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Sense Motive ~ Origin Skill
-	BONUS:VAR|MaxRanksSenseMotive|3
+	MODIFYOTHER:SKILL|Sense Motive|MaxRank|ADD|3
 Sneak
 	KEY:Sneak ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Sneak ~ Origin Skill
-	BONUS:VAR|MaxRanksSneak|3
+	MODIFYOTHER:SKILL|Sneak|MaxRank|ADD|3
 Survival
 	KEY:Survival ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Survival ~ Origin Skill
-	BONUS:VAR|MaxRanksSurvival|3
+	MODIFYOTHER:SKILL|Survival|MaxRank|ADD|3
 Tactics
 	KEY:Tactics ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Tactics ~ Origin Skill
-	BONUS:VAR|MaxRanksTactics|3
+	MODIFYOTHER:SKILL|Tactics|MaxRank|ADD|3
 
 
 ###Block: Positive Stat Choices
-# Ability Name
-	Unique Key
-	SORTKEY
-	Category of Ability
-	Type
-	Multiple Requirements
-	Var. Min. Value
-	Stackable?
-	Multiple?
-	Choose
-	Stat bonus
 +2 Strength
 	KEY:Strength +2
 	SORTKEY:STAT_1A
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice.DrakeChoice
-	BONUS:STAT|STR|2
+	MODIFYOTHER:STAT|STR|Value|ADD|2
 +2 Dexterity
 	KEY:Dexterity +2
 	SORTKEY:STAT_1B
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	BONUS:STAT|DEX|2
+	MODIFYOTHER:STAT|DEX|Value|ADD|2
 +2 Constitution
 	KEY:Constitution +2
 	SORTKEY:STAT_1C
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	BONUS:STAT|CON|2
+	MODIFYOTHER:STAT|CON|Value|ADD|2
 +2 Intelligence
 	KEY:Intelligence +2
 	SORTKEY:STAT_1D
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice.DrakeChoice
-	BONUS:STAT|INT|2
+	MODIFYOTHER:STAT|INT|Value|ADD|2
 +2 Wisdom
 	KEY:Wisdom +2
 	SORTKEY:STAT_1E
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	BONUS:STAT|WIS|2
+	MODIFYOTHER:STAT|WIS|Value|ADD|2
 +2 Charisma
 	KEY:Charisma +2
 	SORTKEY:STAT_1F
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	BONUS:STAT|CHA|2
+	MODIFYOTHER:STAT|CHA|Value|ADD|2
 
 # Low Score Pairings
 +1 Intelligence
@@ -823,7 +759,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:STAT|INT|1
+	MODIFYOTHER:STAT|INT|Value|ADD|1
 +1 Charisma
 	KEY:Low Stat ~ CHA
 	SORTKEY:STAT_1F
@@ -833,7 +769,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:STAT|CHA|1
+	MODIFYOTHER:STAT|CHA|Value|ADD|1
 #
 +1 Constitution
 	KEY:Low Stat ~ CON
@@ -844,7 +780,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:STAT|INT|1
+	MODIFYOTHER:STAT|INT|Value|ADD|1
 +1 Strength
 	KEY:Low Stat ~ STR
 	SORTKEY:STAT_1A
@@ -854,7 +790,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:STAT|CHA|1
+	MODIFYOTHER:STAT|CHA|Value|ADD|1
 
 # High Score Pairings
 +1 INT
@@ -866,7 +802,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:STAT|INT|1
+	MODIFYOTHER:STAT|INT|Value|ADD|1
 +1 WIS
 	KEY:High Stat ~ WIS
 	SORTKEY:STAT_1E
@@ -876,7 +812,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:STAT|WIS|1
+	MODIFYOTHER:STAT|WIS|Value|ADD|1
 +1 CHA
 	KEY:High Stat ~ CHA
 	SORTKEY:STAT_1F
@@ -886,7 +822,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:STAT|CHA|1
+	MODIFYOTHER:STAT|CHA|Value|ADD|1
 
 # Negative Stat Choices
 -2 Strength
@@ -921,34 +857,14 @@ Tactics
 	TYPE:NegativeStatChoice
 
 ###Block: Common Abilities:
-
-# Ability Name
-	Unique Key
-	SORTKEY
-	Category of Ability
-	Type
-	Required Ability
-	Define
-	Description
-	Stackable?
-	Multiple?
-	Choose
-	Auto Feat
-	Ability
-	Bonus Ability Pool
-	Combat bonus
-	Modify VAR
-	Damage Reduction
-	Source Page
 Cold-Blooded
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
 Darkvision
 	CATEGORY:Internal
 	TYPE:SpecialQuality
-	DEFINE:DarkvisionLvl|0
-	ABILITY:Special Ability|AUTOMATIC|Darkvision I|PREVAREQ:DarkvisionLvl,1
-	ABILITY:Special Ability|AUTOMATIC|Darkvision II|PREVAREQ:DarkvisionLvl,2
+	ABILITY:Special Ability|AUTOMATIC|Darkvision I|PREBOOL:context("VAR",DarkvisionLvl==1)
+	ABILITY:Special Ability|AUTOMATIC|Darkvision II|PREBOOL:context("VAR",DarkvisionLvl==2)
 # - Display
 Darkvision I
 	CATEGORY:Special Ability
@@ -973,7 +889,7 @@ Thick Hide
 	ABILITY:Special Ability|AUTOMATIC|Thick Hide IX|PREVAREQ:ThickHideLvl,9
 	ABILITY:Special Ability|AUTOMATIC|Thick Hide X|PREVAREQ:ThickHideLvl,10
 	BONUS:VAR|ThickHideLvl|ThickHideTakenCount
-	BONUS:VAR|ThickHideTakenCount|count("ABILITIES","CATEGORY=Special Ability","TYPE=ThickHide")-1
+	BONUS:VAR|ThickHideTakenCount|SOLVE|count("ABILITIES","CATEGORY=Special Ability","TYPE=ThickHide")-1
 	DR:ThickHideLvl/-
 # Actual Ability - Does the Calculations
 Thick Hide 1
