@@ -1,0 +1,31 @@
+
+
+MODIFYOTHER:SKILL|ALL|MaxRank|TL+3
+
+
+
+
+
+# Old Vars
+	BONUS:VAR|Allowed_Rank|TL+12|TYPE=BASE
+	BONUS:VAR|Allowed_RankSpellcasting|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankAcrobatics|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankAthletics|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankBlend|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankBluff|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankCrafting|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankDisguise|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankHaggle|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankImpress|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankIntimidate|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankInvestigate|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankMedicine|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankNotice|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankPrestidigitation|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankResolve|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankRide|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankSearch|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankSenseMotive|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankSneak|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankSurvival|Allowed_Rank-10
+	BONUS:VAR|Allowed_RankTactics|Allowed_Rank-10
