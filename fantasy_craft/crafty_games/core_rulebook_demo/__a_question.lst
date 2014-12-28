@@ -23,3 +23,14 @@ MODIFY:VAR=TOHIT.Grapple|SOLVE|namespace("SKILL","Athletics",Total)
 # Unless combat vars for Grapple is local ---
 MODIFYOTHER:EQUIPMENT|ToHit.Grapple|SOLVE|namespace("SKILL","Athletics",Total)
 
+
+###	HOW TO?
+	BONUS:COMBAT|AC|1|TYPE=ClassDefense|PREEQUIP:1,TYPE=Armor
+??	MODIFY:VAR=AC.ClassDefense|SOLVE|value()+if(count("EQUIP","TYPE=Armor")>0,1,0)
+
+??	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=0|1
+??	MODIFYOTHER:SKILL|XXX|MaxRank|MAX|	Acrobatics|5|TYPE=Enlightened
+??	Number changes from 3 to 5 to 8 but is the max of those values, which means this won't work:
+??	MODIFYOTHER:SKILL|CLASSLIST=Assassin|MaxRank|SOLVE|value()+CL+3|PRIORITY=1000
+
+

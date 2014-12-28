@@ -15,13 +15,13 @@ VARTYPEDEF:POINT|AREA				EXPLANATION:For objects like vectors 5,5
 VARTYPEDEF:BOOLEAN|FLAG				EXPLANATION:Boolean "Flag" for T/F - use in place of Archetypes and Race Traits
 VARTYPEDEF:BOOLEAN|RULE				EXPLANATION:Boolean "Rule" for the house rules
 
-VARTYPEDEF:BOOLEAN|ABILITY			EXPLANATION:Boolean "Ability" - ABILITY=Archetype referenced
+VARTYPEDEF:BOOLEAN|ABILITY			EXPLANATION:Boolean "Ability" - ABILITY=Archetype referenced???
 
 #VARTYPEDEF:NUMBER|OS				EXPLANATION:This is for controlling the OS
 VARTYPEDEF:NUMBER|VAR				EXPLANATION:This is our normal VARS
 VARTYPEDEF:NUMBER|MOVE				EXPLANATION:This is for Movement tracking - OPTIONAL: We may opt to not bother and instead use VAR for the movement types.
 
-VARTYPEDEF:NUMBER|ABILITYPOOL			EXPLANATION:This is for ability pools
+VARTYPEDEF:NUMBER|ABILITYPOOL			EXPLANATION:This is for ability pools??? Referenced by Tom
 
 # Based upon new design talks with Tom
 #VARTYPEDEF:NUMBER|CLASS				EXPLANATION:For Class specific items

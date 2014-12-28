@@ -12,18 +12,6 @@ Default
 	AUTO:ARMORPROF|ARMORTYPE=Armor
 	ABILITY:Special Ability|AUTOMATIC|Lifestyle ~ Display
 	ABILITY:Internal|AUTOMATIC|Basic Natural Attack Output|Racial Traits
-	MODIFY:VAR=SpellCastingFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Spellcasting")
-	MODIFY:VAR=BasicCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Basic Combat")
-	MODIFY:VAR=MeleeCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Melee Combat")
-	MODIFY:VAR=RangedCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Ranged Combat")
-	MODIFY:VAR=UnarmedCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Unarmed Combat")
-	MODIFY:VAR=ChanceFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Chance")
-	MODIFY:VAR=CovertFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Covert")
-	MODIFY:VAR=GearFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Gear")
-	MODIFY:VAR=SkillFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Skill")
-	MODIFY:VAR=SpeciesFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Species")
-	MODIFY:VAR=StyleFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Style")
-	MODIFY:VAR=TerrainFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Terrain")
 CATEGORY=Internal|Default.MOD
 CATEGORY=Internal|Default.MOD	ABILITY:Internal|AUTOMATIC|Tracker ~ Proficiency|PRECHARACTERTYPE:1,PC|!PREABILITY:1,CATEGORY=Special Ability,TYPE.AltProfProgression
 CATEGORY=Internal|Default.MOD	ABILITY:Internal|AUTOMATIC|Tracker ~ Interest|PRECHARACTERTYPE:1,PC|!PREABILITY:1,CATEGORY=Special Ability,TYPE.AltInterestProgression
@@ -63,7 +51,7 @@ Lifestyle
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
 	DESC:Lifestyle %1 == Panache %2 (%4, %5s)/ Prudence %3 (%6 pct)|LifestyleTotal|Panache|Prudence|(Panache+1)/3|Panache*10|15+(Prudence*5)
-	BONUS:ABILITYPOOL|Lifestyle|LifestyleScore
+	MODIFY:ABILITYPOOL=Lifestyle|LifestyleScore
 	MODIFY:VAR=LifestyleScore|SOLVE|CHA
 	MODIFY:VAR=LifestyleTotal|SOLVE|Panache+Prudence
 
@@ -89,20 +77,15 @@ Prudence
 Reputation
 	KEY:Reputation Display
 	CATEGORY:Special Ability
-	DEFINE:ReputationScore|0
 	DESC:%1|ReputationScore
 	MODIFY:VAR=ReputationScore|SOLVE|TL*10
 
 Renown
 	CATEGORY:Internal
-	DEFINE:HeroicRenown|0
-	DEFINE:MilitaryRenown|0
-	DEFINE:NobleRenown|0
-	DEFINE:RenownTotal|0
 	ABILITY:Special Ability|AUTOMATIC|Heroic Title|PREBOOL:context("VAR",HeroicRenown>=1)
 	ABILITY:Special Ability|AUTOMATIC|Military Title|PREBOOL:context("VAR",MilitaryRenown>=1)
 	ABILITY:Special Ability|AUTOMATIC|Noble Title|PREBOOL:context("VAR",NobleRenown>=1)
-	BONUS:ABILITYPOOL|Renown Choice|RenownTotal
+	MODIFY:ABILITYPOOL=Renown Choice|RenownTotal
 #
 Heroic Title
 	SORTKEY:ARenown
@@ -673,37 +656,37 @@ Tactics
 	SORTKEY:STAT_1A
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice.DrakeChoice
-	MODIFYOTHER:STAT|STR|Value|ADD|2
+	MODIFYOTHER:STAT|Strength|BaseValue|ADD|2
 +2 Dexterity
 	KEY:Dexterity +2
 	SORTKEY:STAT_1B
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	MODIFYOTHER:STAT|DEX|Value|ADD|2
+	MODIFYOTHER:STAT|DEX|BaseValue|ADD|2
 +2 Constitution
 	KEY:Constitution +2
 	SORTKEY:STAT_1C
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	MODIFYOTHER:STAT|CON|Value|ADD|2
+	MODIFYOTHER:STAT|CON|BaseValue|ADD|2
 +2 Intelligence
 	KEY:Intelligence +2
 	SORTKEY:STAT_1D
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice.DrakeChoice
-	MODIFYOTHER:STAT|INT|Value|ADD|2
+	MODIFYOTHER:STAT|INT|BaseValue|ADD|2
 +2 Wisdom
 	KEY:Wisdom +2
 	SORTKEY:STAT_1E
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	MODIFYOTHER:STAT|WIS|Value|ADD|2
+	MODIFYOTHER:STAT|WIS|BaseValue|ADD|2
 +2 Charisma
 	KEY:Charisma +2
 	SORTKEY:STAT_1F
 	CATEGORY:Special Ability
 	TYPE:PositiveStatChoice
-	MODIFYOTHER:STAT|CHA|Value|ADD|2
+	MODIFYOTHER:STAT|CHA|BaseValue|ADD|2
 
 # Low Score Pairings
 +1 Intelligence
@@ -715,7 +698,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFYOTHER:STAT|INT|Value|ADD|1
+	MODIFYOTHER:STAT|INT|BaseValue|ADD|1
 +1 Charisma
 	KEY:Low Stat ~ CHA
 	SORTKEY:STAT_1F
@@ -725,7 +708,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFYOTHER:STAT|CHA|Value|ADD|1
+	MODIFYOTHER:STAT|CHA|BaseValue|ADD|1
 #
 +1 Constitution
 	KEY:Low Stat ~ CON
@@ -736,7 +719,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFYOTHER:STAT|INT|Value|ADD|1
+	MODIFYOTHER:STAT|INT|BaseValue|ADD|1
 +1 Strength
 	KEY:Low Stat ~ STR
 	SORTKEY:STAT_1A
@@ -746,7 +729,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFYOTHER:STAT|CHA|Value|ADD|1
+	MODIFYOTHER:STAT|CHA|BaseValue|ADD|1
 
 # High Score Pairings
 +1 INT
@@ -758,7 +741,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFYOTHER:STAT|INT|Value|ADD|1
+	MODIFYOTHER:STAT|INT|BaseValue|ADD|1
 +1 WIS
 	KEY:High Stat ~ WIS
 	SORTKEY:STAT_1E
@@ -768,7 +751,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFYOTHER:STAT|WIS|Value|ADD|1
+	MODIFYOTHER:STAT|WIS|BaseValue|ADD|1
 +1 CHA
 	KEY:High Stat ~ CHA
 	SORTKEY:STAT_1F
@@ -778,7 +761,7 @@ Tactics
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	MODIFYOTHER:STAT|CHA|Value|ADD|1
+	MODIFYOTHER:STAT|CHA|BaseValue|ADD|1
 
 # Negative Stat Choices
 -2 Strength
@@ -844,8 +827,7 @@ Thick Hide
 	ABILITY:Special Ability|AUTOMATIC|Thick Hide VIII|PREVAREQ:ThickHideLvl,8
 	ABILITY:Special Ability|AUTOMATIC|Thick Hide IX|PREVAREQ:ThickHideLvl,9
 	ABILITY:Special Ability|AUTOMATIC|Thick Hide X|PREVAREQ:ThickHideLvl,10
-	BONUS:VAR|ThickHideLvl|ThickHideTakenCount
-	BONUS:VAR|ThickHideTakenCount|SOLVE|count("ABILITIES","CATEGORY=Special Ability","TYPE=ThickHide")-1
+	MODIFY:VAR=ThickHideLvl|SOLVE|value+(ThickHideTakenCount-1)
 	DR:ThickHideLvl/-
 # Actual Ability - Does the Calculations
 Thick Hide 1
@@ -856,7 +838,9 @@ Thick Hide 1
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|1|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|1
+	MODIFY:VAR=ThickHideTakenCount|ADD|1
+
 Thick Hide 2
 	SORTKEY:ThickHide_b
 	CATEGORY:Special Ability
@@ -865,7 +849,7 @@ Thick Hide 2
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|2|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|2
 Thick Hide 3
 	SORTKEY:ThickHide_c
 	CATEGORY:Special Ability
@@ -874,7 +858,7 @@ Thick Hide 3
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|3|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|3
 Thick Hide 4
 	SORTKEY:ThickHide_d
 	CATEGORY:Special Ability
@@ -883,7 +867,7 @@ Thick Hide 4
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|4|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|4
 Thick Hide 5
 	SORTKEY:ThickHide_e
 	CATEGORY:Special Ability
@@ -892,7 +876,7 @@ Thick Hide 5
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|5|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|5
 Thick Hide 6
 	SORTKEY:ThickHide_f
 	CATEGORY:Special Ability
@@ -901,7 +885,7 @@ Thick Hide 6
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|6|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|6
 Thick Hide 7
 	SORTKEY:ThickHide_g
 	CATEGORY:Special Ability
@@ -910,7 +894,7 @@ Thick Hide 7
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|7|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|7
 Thick Hide 8
 	SORTKEY:ThickHide_h
 	CATEGORY:Special Ability
@@ -919,7 +903,7 @@ Thick Hide 8
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|9|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|9
 Thick Hide 9
 	SORTKEY:ThickHide_i
 	CATEGORY:Special Ability
@@ -928,7 +912,7 @@ Thick Hide 9
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|9|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|9
 Thick Hide 10
 	SORTKEY:ThickHide_j
 	CATEGORY:Special Ability
@@ -937,7 +921,7 @@ Thick Hide 10
 	MULT:YES
 	CHOOSE:NOCHOICE
 	ABILITY:Internal|AUTOMATIC|Thick Hide
-	BONUS:VAR|ThickHideLvl|10|TYPE=ThickHide
+	MODIFY:VAR=ThickHideLvl|MAX|10
 # Display Option:
 Thick Hide I
 	SORTKEY:ThickHide
@@ -1055,73 +1039,61 @@ Bang Resistance
 	KEY:Bang ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:BangResistanceBonus|0
 	DESC:%1|BangResistanceBonus
 Blunt Resistance
 	KEY:Blunt ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:BluntResistanceBonus|0
 	DESC:%1|BluntResistanceBonus
 Cold Resistance
 	KEY:Cold ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:ColdResistanceBonus|0
 	DESC:%1|ColdResistanceBonus
 Divine Resistance
 	KEY:Divine ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:DivineResistanceBonus|0
 	DESC:%1|DivineResistanceBonus
 Edged Resistance
 	KEY:Edged ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:EdgedResistanceBonus|0
 	DESC:%1|EdgedResistanceBonus
 Electrical Resistance
 	KEY:Electrical ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:ElectricalResistanceBonus|0
 	DESC:%1|ElectricalResistanceBonus
 Falling Resistance
 	KEY:Falling ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:FallingResistanceBonus|0
 	DESC:%1|FallingResistanceBonus
 Flash Resistance
 	KEY:Flash ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:FlashResistanceBonus|0
 	DESC:%1|FlashResistanceBonus
 Fire Resistance
 	KEY:Fire ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:FireResistanceBonus|0
 	DESC:%1|FireResistanceBonus
 Ranged Resistance
 	KEY:Ranged ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:RangedResistanceBonus|0
 	DESC:%1|RangedResistanceBonus
 Heat Resistance
 	KEY:Heat ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:HeatResistanceBonus|0
 	DESC:%1|HeatResistanceBonus
 Spirit Resistance
 	KEY:Spirit ~ Display
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.Resistance
-	DEFINE:SpiritResistanceBonus|0
 	DESC:%1|SpiritResistanceBonus
 #
 Immunity to Bang Damage
@@ -1165,7 +1137,6 @@ Immunity to Spirit Damage
 #
 Evasion
 	CATEGORY:Internal
-	DEFINE:EvasionLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Evasion I|PREVAREQ:EvasionLvl,1
 #ABILITY:Special Ability|AUTOMATIC|Evasion II|PREVAREQ:EvasionLvl,2	ABILITY:Special Ability|AUTOMATIC|Evasion III|PREVAREQ:EvasionLvl,3
 
@@ -1184,7 +1155,6 @@ Evasion I
 
 Uncanny Dodge
 	CATEGORY:Internal
-	DEFINE:UncannyDodgeLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge I|PREVAREQ:UncannyDodgeLvl,1
 #ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge II|PREVAREQ:UncannyDodgeLvl,2	ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge III|PREVAREQ:UncannyDodgeLvl,3
 
@@ -1275,7 +1245,6 @@ Ride Base
 	CATEGORY:Internal
 	DEFINE:RideFocusCount|0
 	MODIFY:ABILITYPOOL=Ride Focus|SOLVE|value()+1+namespace("SKILL","Ride",Rank/4)
-	BONUS:VAR|RideFocusCount|
 #
 Ride (Air Vehicles) Focus
 	CATEGORY:Special Ability
@@ -1711,9 +1680,7 @@ Ricochet
 
 
 #-----------------------------#
-#
-	Unarmed Combat Tricks
-	#
+#	Unarmed Combat Tricks	#
 #-----------------------------#
 #Block: Unarmed Combat Tricks ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Shifting Footwork
@@ -1754,9 +1721,7 @@ Piledriver
 
 
 #-----------------------------#
-#
-	Covert Combat Tricks
-	#
+#	Covert Combat Tricks	#
 #-----------------------------#
 Crippling Strike
 	CATEGORY:Special Ability
@@ -1776,9 +1741,7 @@ Choke Out
 
 
 #-----------------------------#
-#
-	Spellcasting Tricks
-	#
+#	Spellcasting Tricks	#
 #-----------------------------#
 Confine Area
 	CATEGORY:Special Ability
@@ -1888,19 +1851,16 @@ Hand of Death
 Cold Read
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality.ClassAbilitySelectable
-	DEFINE:ColdReadTimes|0
 	DESC:%1/session|ColdReadTimes
 	SOURCEPAGE:p.30
 Quick on Your Feet
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:QuickOnYourFeetTimes|0
 	DESC:%1/session|QuickOnYourFeetTimes
 	SOURCEPAGE:p.30
 Unspoken Name
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:UnspokenNameBonus|0
 	DESC:+%1|UnspokenNameBonus
 	SOURCEPAGE:p.31
 
@@ -1928,7 +1888,6 @@ Bonus Feat
 	KEY:Bonus Feat ~ Burglar
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:BurglarFeatCount|0
 	MODIFY:ABILITYPOOL=Burglar Feat|SOLVE|value()+BurglarFeatCount
 	SOURCEPAGE:p.32
 
@@ -1972,8 +1931,8 @@ Master and Commander I
 Battle Planning
 	CATEGORY:Internal
 	ABILITY:Special Ability|AUTOMATIC|Battle Planning I|PREBOOL:context("VAR",BattlePlanningLvl==1)
-	BONUS:ABILITYPOOL|Battle Planning|BattlePlanningCount
-	MODIFY:BattlePlanningCount|MODIFY|value+if(context("VAR",BattlePlanningLvl>=1,2,value())
+	MODIFY:ABILITYPOOL=Battle Planning|BattlePlanningCount
+	MODIFY:BattlePlanningCount|MODIFY|if(context("VAR",BattlePlanningLvl>=1,2,value())
 #
 Battle Planning I
 	CATEGORY:Special Ability
@@ -2098,7 +2057,7 @@ Bonus Feat
 	KEY:Bonus Feat ~ Explorer
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	BONUS:ABILITYPOOL|Explorer Feat|ExplorerFeatCount
+	MODIFY:ABILITYPOOL=Explorer Feat|SOLVE|ExplorerFeatCount
 	SOURCEPAGE:p.38
 
 
@@ -2125,104 +2084,101 @@ Man of Reason
 Trade Secrets
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:TradeSecretsCount|0
-	BONUS:ABILITYPOOL|Trade Secrets|TradeSecretsCount
+	MODIFY:ABILITYPOOL=Trade Secrets|SOLVE|TradeSecretsCount
 	SOURCEPAGE:p.40
 Bright Idea
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:BrightIdeaTimes|0
 	DESC:%1/session|BrightIdeaTimes
 	SOURCEPAGE:p.40
 Bonus Feat
 	KEY:Bonus Feat ~ Keeper
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:KeeperFeatCount|0
-	BONUS:ABILITYPOOL|Keeper Feat|KeeperFeatCount
+	MODIFY:ABILITYPOOL=Keeper Feat|SOLVE|KeeperFeatCount
 	SOURCEPAGE:p.40
 
 # Trade Secrets Selection
 Trade Secrets (Acrobatics)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankAcrobatics|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Acrobatics|5|TYPE=Enlightened
 Trade Secrets (Athletics)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankAthletics|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Athletics|5|TYPE=Enlightened
 Trade Secrets (Blend)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankBlend|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Blend|5|TYPE=Enlightened
 Trade Secrets (Bluff)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankBluff|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Bluff|5|TYPE=Enlightened
 Trade Secrets (Crafting)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankCrafting|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Crafting|5|TYPE=Enlightened
 Trade Secrets (Disguise)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankDisguise|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Disguise|5|TYPE=Enlightened
 Trade Secrets (Haggle)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankHaggle|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Haggle|5|TYPE=Enlightened
 Trade Secrets (Impress)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankImpress|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Impress|5|TYPE=Enlightened
 Trade Secrets (Intimidate)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankIntimidate|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Intimidate|5|TYPE=Enlightened
 Trade Secrets (Investigate)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankInvestigate|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Investigate|5|TYPE=Enlightened
 Trade Secrets (Medicine)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankMedicine|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Medicine|5|TYPE=Enlightened
 Trade Secrets (Notice)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankNotice|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Notice|5|TYPE=Enlightened
 Trade Secrets (Prestidigitation)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankPrestidigitation|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Prestidigitation|5|TYPE=Enlightened
 Trade Secrets (Resolve)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankResolve|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Resolve|5|TYPE=Enlightened
 Trade Secrets (Ride)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankRide|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Ride|5|TYPE=Enlightened
 Trade Secrets (Search)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankSearch|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Search|5|TYPE=Enlightened
 Trade Secrets (Sense Motive)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankSenseMotive|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	SenseMotive|5|TYPE=Enlightened
 Trade Secrets (Sneak)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankSneak|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Sneak|5|TYPE=Enlightened
 Trade Secrets (Survival)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankSurvival|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Survival|5|TYPE=Enlightened
 Trade Secrets (Tactics)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	BONUS:VAR|MaxRankTactics|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Tactics|5|TYPE=Enlightened
 
 
 ###Block: Lancer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2250,12 +2206,10 @@ Born in the Saddle
 	SOURCEPAGE:p.42
 Mettle
 	CATEGORY:Internal
-	DEFINE:MettleLvl|0
-	DEFINE:MettleResolveRankBonus|0
 	AUTO:FEAT|Armor Basics
 	ABILITY:Special Ability|AUTOMATIC|Mettle I|PREVAREQ:MettleLvl,1
-	BONUS:VAR|MaxRankResolve|MettleResolveRankBonus|TYPE=Enlightened
-	BONUS:VAR|MettleResolveRankBonus|3
+	MODIFYOTHER:SKILL=Resolve|MaxRank|SOLVE|max(value(),MettleResolveRankBonus)
+	MODIFY:VAR=MettleResolveRankBonus|ADD|3
 #
 Mettle I
 	CATEGORY:Special Ability
@@ -2265,13 +2219,11 @@ Bonus Feat
 	KEY:Bonus Feat ~ Lancer
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:LancerFeatCount|0
-	BONUS:ABILITYPOOL|Lancer Feat|LancerFeatCount
+	MODIFY:ABILITYPOOL=Lancer Feat|SOLVE|LancerFeatCount
 	SOURCEPAGE:p.42
 Bred for War
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:BredForWarBonus|0
 	DESC:%1|BredForWarBonus
 	SOURCEPAGE:p.42
 
@@ -2294,8 +2246,7 @@ Arcane Adept
 	KEY:Arcane Adept ~ Mage
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:ArcaneAdeptCount|0
-	BONUS:VAR|ArcaneAdeptCount|4
+	MODIFY:VAR=ArcaneAdeptCount|ADD|4
 #
 Subtle and Quick to Anger
 	CATEGORY:Special Ability
@@ -2305,13 +2256,11 @@ Subtle and Quick to Anger
 Arcane Might
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:ArcaneMightCount|0
-	BONUS:ABILITYPOOL|Increase Highest of INT/WIS/CHA|ArcaneMightCount
+	MODIFY:ABILITYPOOL=Increase Highest of INT/WIS/CHA|SOLVE|ArcaneMightCount
 	SOURCEPAGE:p.43
 #
 Circle of Power
 	CATEGORY:Internal
-	DEFINE:CircleOfPowerLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Circle of Power I|PREVAREQ:CircleOfPowerLvl,1
 #
 Circle of Power I
@@ -2322,9 +2271,8 @@ Bonus Feat
 	KEY:Bonus Feat ~ Mage
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:MageFeatCount|0
-	BONUS:ABILITYPOOL|Mage Feat|MageFeatCount
-	BONUS:VAR|MageFeatCount|1
+	MODIFY:ABILITYPOOL=Mage Feat|SOLVE|MageFeatCount
+	MODIFY:VAR=MageFeatCount|ADD|1
 	SOURCEPAGE:p.44
 
 # Mage Workaround due to Hardcoded D&D Reliance in PCGen ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2420,7 +2368,6 @@ Acolyte
 	SOURCEPAGE:p.44
 Signs and Portents
 	CATEGORY:Internal
-	DEFINE:SignsAndPortentsLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Signs and Portents I|PREVAREQ:SignsAndPortentsLvl,1
 #
 Signs & Portents I
@@ -2431,15 +2378,13 @@ Signs & Portents I
 Path of the Devoted
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:PathOfTheDevotedStepLvl|0
-	BONUS:ABILITYPOOL|Alignment Path Steps|PathOfTheDevotedStepLvl
+	MODIFY:ABILITYPOOL=Alignment Path Steps|SOLVE|PathOfTheDevotedStepLvl
 	SOURCEPAGE:p.45
 Bonus Feat
 	KEY:Bonus Feat ~ Priest
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:PriestFeatCount|0
-	BONUS:ABILITYPOOL|Priest Feat|PriestFeatCount
+	MODIFY:ABILITYPOOL=Priest Feat|SOLVE|PriestFeatCount
 	SOURCEPAGE:p.45
 
 
@@ -2479,8 +2424,7 @@ Best of the Best
 Cross-Training
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:CrossTrainingCount|0
-	BONUS:ABILITYPOOL|Cross-Training Choice|CrossTrainingCount
+	MODIFY:ABILITYPOOL=Cross-Training Choice|SOLVE|CrossTrainingCount
 	SOURCEPAGE:p.47
 #
 Class Ability (Assassin / Hand of Death)
@@ -2492,19 +2436,19 @@ Class Ability (Assassin / Cold Read)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Cold Read
-	BONUS:VAR|ColdReadTimes|1
+	MODIFY:VAR=ColdReadTimes|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Assassin / Quick On Your Feet)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Quick On Your Feet
-	BONUS:VAR|QuickOnYourFeetTimes|1
+	MODIFY:VAR=QuickOnYourFeetTimes|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Assassin / Unspoken Name)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Unspoken Name
-	BONUS:VAR|UnspokenNameBonus|1
+	MODIFY:VAR=UnspokenNameBonus|ADD|1
 	SOURCEPAGE:p.47
 #
 Class Ability (Burglar / Very, Very Sneaky)
@@ -2517,19 +2461,19 @@ Class Ability (Burglar / Evasion)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Evasion
-	BONUS:VAR|EvasionLvl|1
+	MODIFY:VAR=EvasionLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Burglar / Bonus Feat)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Burglar
-	BONUS:VAR|BonusFeatBurglarCount|1
+	MODIFY:VAR=BonusFeatBurglarCount|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Burglar / Uncanny Dodge)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Uncanny Dodge
-	BONUS:VAR|Uncanny DodgeLvl|1
+	MODIFY:VAR=Uncanny DodgeLvl|ADD|1
 	SOURCEPAGE:p.47
 #
 Class Ability (Captain / Right-hand Man)
@@ -2541,19 +2485,19 @@ Class Ability (Captain / Master and Commander)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Master and Commander
-	BONUS:VAR|MasterAndCommanderLvl|1
+	MODIFY:VAR=MasterAndCommanderLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Captain / Battle Planning)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Battle Planning
-	BONUS:VAR|BattlePlanningLvl|1
+	MODIFY:VAR=BattlePlanningLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Captain / Take Command)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Take Command
-	BONUS:VAR|TakeCommandBonus|1
+	MODIFY:VAR=TakeCommandBonus|ADD|1
 	SOURCEPAGE:p.47
 #
 Class Ability (Courtier / With a Word)
@@ -2565,7 +2509,7 @@ Class Ability (Courtier / Gifts and Favors)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Gifts and Favors ~ City
-	BONUS:VAR|GiftsAndFavorsCityLvl|1
+	MODIFY:VAR=GiftsAndFavorsCityLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Courtier / Obligations)
 	CATEGORY:Special Ability
@@ -2587,19 +2531,19 @@ Class Ability (Explorer / Bookworm)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Bookworm
-	BONUS:VAR|BookwormLvl|1
+	MODIFY:VAR=BookwormLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Explorer / Bonus Feat)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Explorer
-	BONUS:VAR|BonusFeatExplorerCount|1
+	MODIFY:VAR=BonusFeatExplorerCount|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Explorer / Uncanny Dodge)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Uncanny Dodge
-	BONUS:VAR|UncannyDodgeLvl|1
+	MODIFY:VAR=UncannyDodgeLvl|ADD|1
 	SOURCEPAGE:p.47
 #
 Class Ability (Keeper / Man of Reason)
@@ -2611,20 +2555,19 @@ Class Ability (Keeper / Trade Secrets)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Trade Secrets
-	BONUS:VAR|TradeSecretsCount|1
-	BONUS:VAR|TradeSecretsCount|1
+	MODIFY:VAR=TradeSecretsCount|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Keeper / Bright Idea)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bright Idea
-	BONUS:VAR|BrightIdeaLvl|1
+	MODIFY:VAR=BrightIdeaLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Keeper / Bonus Feat)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Keeper
-	BONUS:VAR|KeeperFeatCount|1
+	MODIFY:VAR=KeeperFeatCount|ADD|1
 	SOURCEPAGE:p.47
 #
 Class Ability (Lancer / Born in the Saddle)
@@ -2636,13 +2579,13 @@ Class Ability (Lancer / Mettle)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Mettle
-	BONUS:VAR|MettleLvl|1
+	MODIFY:VAR=MettleLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Lancer / Bonus Feat)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Lancer
-	BONUS:VAR|LancerFeatCount|1
+	MODIFY:VAR=LancerFeatCount|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Lancer / Bred for War)
 	CATEGORY:Special Ability
@@ -2664,7 +2607,7 @@ Class Ability (Mage / Bonus Feat)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Mage
-	BONUS:VAR|MageFeatCount|1
+	MODIFY:VAR=MageFeatCount|ADD|1
 	SOURCEPAGE:p.47
 #
 Class Ability (Priest / Acolyte)
@@ -2677,21 +2620,21 @@ Class Ability (Priest / Signs & Portents I)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Signs and Portents
-	BONUS:VAR|SignsAndPortentsLvl|1
+	MODIFY:VAR=SignsAndPortentsLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Priest / Path of the Devoted)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Path of the Devoted
-	BONUS:VAR|PathOfTheDevotedCount|1
-	BONUS:VAR|PathOfTheDevotedStepLvl|1
+	MODIFY:VAR=PathOfTheDevotedCount|ADD|1
+	MODIFY:VAR=PathOfTheDevotedStepLvl|ADD|1
 	SOURCEPAGE:p.47
 Class Ability (Priest / Bonus Feat)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Priest
-	BONUS:VAR|BonusFeatPriestCount|1
-	BONUS:VAR|PriestFeatCount|1
+	MODIFY:VAR=BonusFeatPriestCount|ADD|1
+	MODIFY:VAR=PriestFeatCount|ADD|1
 	SOURCEPAGE:p.47
 #
 Class Ability (Scout / Stalker)
@@ -2703,40 +2646,39 @@ Class Ability (Scout / Rough Living)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Rough Living
-	BONUS:VAR|RoughLivingBonus|2
+	MODIFY:VAR=RoughLivingBonus|ADD|2
 	SOURCEPAGE:p.48
 Class Ability (Scout / Bonus Feat)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Scout
-	BONUS:VAR|BonusFeatScoutCount|1
-	BONUS:VAR|ScoutFeatCount|1
+	MODIFY:VAR=BonusFeatScoutCount|ADD|1
+	MODIFY:VAR=ScoutFeatCount|ADD|1
 	SOURCEPAGE:p.48
 Class Ability (Scout / Sneak Attack)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Sneak Attack
-	BONUS:VAR|SneakAttackDice|1
-	BONUS:VAR|SneakAttackDice|1
+	MODIFY:VAR=SneakAttackDice|ADD|1
 	SOURCEPAGE:p.48
 #
 Class Ability (Soldier / Fight on)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Special Ability|AUTOMATIC|Fight On
-	BONUS:VAR|FightOnCount|2
+	MODIFY:VAR=FightOnCount|ADD|2
 	SOURCEPAGE:p.48
 Class Ability (Soldier / Fortunes of War)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Fortunes of War
-	BONUS:VAR|FortunesOfWarLvl|1
+	MODIFY:VAR=FortunesOfWarLvl|ADD|1
 	SOURCEPAGE:p.48
 Class Ability (Soldier / Armor Use)
 	CATEGORY:Special Ability
 	TYPE:CrossTraining
 	ABILITY:Internal|AUTOMATIC|Armor Use
-	BONUS:VAR|ArmorUseLvl|1
+	MODIFY:VAR=ArmorUseLvl|ADD|1
 	SOURCEPAGE:p.48
 
 
@@ -2763,23 +2705,19 @@ Stalker
 Rough Living
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:RoughLivingBonus|0
 	DESC:+%1|RoughLivingBonus
 	SOURCEPAGE:p.49
 Bonus Feat
 	KEY:Bonus Feat ~ Scout
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:ScoutFeatCount|0
-	BONUS:ABILITYPOOL|Scout Feat|ScoutFeatCount
+	MODIFY:ABILITYPOOL=Scout Feat|SOLVE|ScoutFeatCount
 	SOURCEPAGE:p.49
 Sneak Attack
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	DEFINE:SneakAttackDice|0
-	DEFINE:SneakAttackSize|0
 	DESC:%1d%2|SneakAttackDice|SneakAttackSize
-	BONUS:VAR|SneakAttackSize|6|TYPE=Base
+	MODIFY:VAR=SneakAttackSize|6|TYPE=Base
 	SOURCEPAGE:p.49
 
 
@@ -2802,31 +2740,29 @@ Accurate
 Fight On
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	BONUS:ABILITYPOOL|Fight On Choice|FightOnLvl
+	MODIFY:ABILITYPOOL=Fight On Choice|FightOnLvl
 	SOURCEPAGE:p.51
 # Fight On Choices
 +2 Proficiecies
 	KEY:Prof_Choice
 	CATEGORY:Special Ability
 	TYPE:FightOnChoice
-	BONUS:ABILITYPOOL|Proficiencies and Tricks|2
+	MODIFY:ABILITYPOOL=Proficiencies and Tricks|2
 +1 Combat Feat
 	KEY:Feat_Choice
 	CATEGORY:Special Ability
 	TYPE:FightOnChoice
-	BONUS:ABILITYPOOL|Combat Feat|1
+	MODIFY:ABILITYPOOL=Combat Feat|1
 #
 
 Fortunes of War
 	CATEGORY:Internal
-	DEFINE:FortunesOfWarLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Fortunes of War I|PREVAREQ:FortunesOfWarLvl,1
 	DR:1/-
 Armor Use
 	CATEGORY:Internal
-	DEFINE:ArmorUseLvl|0
 	ABILITY:Special Ability|AUTOMATIC|Armor Use I|PREVAREQ:ArmorUseLvl,1
-	BONUS:COMBAT|AC|1|TYPE=ClassDefense|PREEQUIP:1,TYPE=Armor
+	MODIFY:VAR=AC.ClassDefense|SOLVE|value()+if(count("EQUIP","TYPE=Armor")>0,1,0)
 #
 Fortunes of War I
 	CATEGORY:Special Ability
@@ -2880,7 +2816,7 @@ Mix-Up
 	TYPE:SpecialQuality.Trick
 	STACK:NO
 	MULT:YES
-	CHOOSE:STRING|Anticipate|Bull Rush|Disarm|Distract|Feint|Grapple|Pummel|TITLE=Choice|Taunt|Threaten|Tire|Trip
+	CHOOSE:STRING|Anticipate|Bull Rush|Disarm|Distract|Feint|Grapple|Pummel|Taunt|Threaten|Tire|Trip|TITLE=Choice
 	SOURCEPAGE:p.221
 Parry
 	CATEGORY:Special Ability

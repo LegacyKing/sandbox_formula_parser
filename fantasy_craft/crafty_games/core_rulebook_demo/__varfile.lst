@@ -13,7 +13,11 @@ LOCAL:SKILL|VAR=MaxRank
 LOCAL:SKILL|Rank
 LOCAL:SKILL|Bonus
 LOCAL:SKILL|Stat
+LOCAL:SKILL|VAR=MaxRank.Mod
 
+
+TL
+LOCAL:CLASS|ECL
 
 # Global Vars
 AC.Total		
@@ -146,3 +150,47 @@ GiftsAndFavorsCityLvl
 EloquenceCount
 BookwormLvl
 ExplorerFeatCount
+	DEFINE:HeroicRenown|0
+	DEFINE:MilitaryRenown|0
+	DEFINE:NobleRenown|0
+	DEFINE:RenownTotal|0
+	DEFINE:ReputationScore|0
+	DEFINE:BangResistanceBonus|0
+	DEFINE:BluntResistanceBonus|0
+	DEFINE:ColdResistanceBonus|0
+	DEFINE:DivineResistanceBonus|0
+	DEFINE:EdgedResistanceBonus|0
+	DEFINE:ElectricalResistanceBonus|0
+	DEFINE:FallingResistanceBonus|0
+	DEFINE:FlashResistanceBonus|0
+	DEFINE:FireResistanceBonus|0
+	DEFINE:RangedResistanceBonus|0
+	DEFINE:HeatResistanceBonus|0
+	DEFINE:SpiritResistanceBonus|0
+	DEFINE:EvasionLvl|0
+	DEFINE:UncannyDodgeLvl|0
+	DEFINE:ColdReadTimes|0
+	DEFINE:QuickOnYourFeetTimes|0
+	DEFINE:UnspokenNameBonus|0
+	DEFINE:BurglarFeatCount|0
+	DEFINE:TradeSecretsCount|0
+	DEFINE:BrightIdeaTimes|0
+	DEFINE:KeeperFeatCount|0
+	DEFINE:MettleLvl|0
+	DEFINE:MettleResolveRankBonus|0
+	DEFINE:LancerFeatCount|0
+	DEFINE:BredForWarBonus|0
+	DEFINE:CircleOfPowerLvl|0
+	DEFINE:ArcaneAdeptCount|0
+	DEFINE:ArcaneMightCount|0
+	DEFINE:SignsAndPortentsLvl|0
+	DEFINE:PathOfTheDevotedStepLvl|0
+	DEFINE:PriestFeatCount|0
+	DEFINE:CrossTrainingCount|0
+	DEFINE:RoughLivingBonus|0
+	DEFINE:ScoutFeatCount|0
+	DEFINE:SneakAttackDice|0
+	DEFINE:SneakAttackSize|0
+	DEFINE:FortunesOfWarLvl|0
+	DEFINE:ArmorUseLvl|0
+
