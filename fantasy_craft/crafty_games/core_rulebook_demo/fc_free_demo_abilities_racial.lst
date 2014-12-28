@@ -7,9 +7,17 @@ SOURCELONG:Fantasy Craft	SOURCESHORT:FC	SOURCEDATE:2009-07
 #Block: Drake ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Ability Name				Unique Key						SORTKEY		Category of Ability		Type							Visible	Define																											Description																						Stackable?	Multiple?	Choose		Template				Move		Virtual Feat		Ability																				Bonus Ability Pool					Modify VAR																											Source Page		Natural Attacks							Aspects
 Drake Racial				KEY:Drake Racial					SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																				SOURCEPAGE:p.9
-Breath Weapon				KEY:Breath Weapon ~ Drake			SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialAttack						DEFINE:DrakeBreathWeaponDice|0	DEFINE:DrakeBreathWeaponSize|0	DEFINE:DrakeBreathWeaponBonus|0	DEFINE:DrakeBreathWeaponDC|0	DEFINE:DrakeSpeciesFeat|0	DESC:%1d%2+%3, DC %4|DrakeBreathWeaponDice|DrakeBreathWeaponSize|DrakeBreathWeaponBonus|DrakeBreathWeaponDC|PREVAREQ:DisplayVersion,0																																																BONUS:VAR|DrakeBreathWeaponDC|10+CON+DrakeSpeciesFeat	BONUS:VAR|DrakeBreathWeaponDice|2	BONUS:VAR|DrakeBreathWeaponSize|6	BONUS:VAR|DrakeBreathWeaponBonus|CON	SOURCEPAGE:p.9
-Inquisitive Mind				KEY:Inquisitive Mind				SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																BONUS:ABILITYPOOL|Interests|2																																SOURCEPAGE:p.12
-Natural Attack				KEY:Natural Attack ~ Drake			SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialAttack																																																																																																								BONUS:VAR|BiteGrade|1	BONUS:VAR|ClawGrade|1	BONUS:VAR|ClawAttacks|1																	SOURCEPAGE:p.12
+Breath Weapon				KEY:Breath Weapon ~ Drake			SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialAttack						DEFINE:DrakeBreathWeaponDice|0	DEFINE:DrakeBreathWeaponSize|0	DEFINE:DrakeBreathWeaponBonus|0	DEFINE:DrakeBreathWeaponDC|0	DEFINE:DrakeSpeciesFeat|0	DESC:%1d%2+%3, DC %4|DrakeBreathWeaponDice|DrakeBreathWeaponSize|DrakeBreathWeaponBonus|DrakeBreathWeaponDC|PREVAREQ:DisplayVersion,0																																																
+BONUS:VAR|DrakeBreathWeaponDC|10+CON+DrakeSpeciesFeat	
+BONUS:VAR|DrakeBreathWeaponDice|2	
+BONUS:VAR|DrakeBreathWeaponSize|6	
+BONUS:VAR|DrakeBreathWeaponBonus|CON	SOURCEPAGE:p.9
+Inquisitive Mind				KEY:Inquisitive Mind				SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																
+BONUS:ABILITYPOOL|Interests|2																																SOURCEPAGE:p.12
+Natural Attack				KEY:Natural Attack ~ Drake			SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialAttack																																																																																																								
+BONUS:VAR|BiteGrade|1	
+BONUS:VAR|ClawGrade|1	
+BONUS:VAR|ClawAttacks|1																	SOURCEPAGE:p.12
 Reviled					KEY:Reviled ~ Drake				SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																				SOURCEPAGE:p.12
 Winged Flight				KEY:Winged Flight					SORTKEY:1-Racial	CATEGORY:Special Ability	TYPE:SpecialQuality																																																																					MOVE:Fly,40																																																														SOURCEPAGE:p.12
 
@@ -28,7 +36,8 @@ Restricted Actions (Swim)												CATEGORY:Special Ability	TYPE:SpecialQualit
 Aloof						KEY:Aloof									CATEGORY:Special Ability	TYPE:SpecialQuality
 Burden of Ages				KEY:Burden of Ages							CATEGORY:Special Ability	TYPE:SpecialQuality
 Keen Sight					KEY:Keen Sight								CATEGORY:Special Ability	TYPE:SpecialQuality
-Natural Elegance				KEY:Natural Elegance							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																								BONUS:VAR|AppearanceBonus|1
+Natural Elegance				KEY:Natural Elegance							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																								
+BONUS:VAR|AppearanceBonus|1
 Sharp Hearing				KEY:Sharp Hearing								CATEGORY:Special Ability	TYPE:SpecialQuality
 
 
@@ -44,11 +53,13 @@ Tenacious Spirit				KEY:Tenacious Spirit							CATEGORY:Special Ability	TYPE:Spe
 
 
 #Block: Human ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Talent					KEY:Talent ~ Human							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																BONUS:ABILITYPOOL|Talent|1
+Talent					KEY:Talent ~ Human							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																
+BONUS:ABILITYPOOL|Talent|1
 
 
 #Block: Ogre ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#Enlightened Athletics			KEY:Enlightened Athletics							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																																																																																																																												BONUS:VAR|MaxRankAthletics|2|TYPE=Enlightened
+#Enlightened Athletics			KEY:Enlightened Athletics							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																																																																																																																												
+BONUS:VAR|MaxRankAthletics|2|TYPE=Enlightened
 No Pain					KEY:No Pain									CATEGORY:Special Ability	TYPE:SpecialQuality
 Reviled					KEY:Reviled ~ Ogre							CATEGORY:Special Ability	TYPE:SpecialQuality
 Restricted Actions			KEY:Restricted Actions ~ Ogre						CATEGORY:Special Ability	TYPE:SpecialQuality																																																																											ABILITY:Special Ability|AUTOMATIC|Restricted Actions (Influence)|Restricted Actions (Outmaneuver)|Restricted Actions (Tumble)
@@ -61,7 +72,8 @@ Unbreakable					KEY:Unbreakable								CATEGORY:Special Ability	TYPE:SpecialQual
 
 #Block: Orc ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Always Ready				KEY:Always Ready								CATEGORY:Special Ability	TYPE:SpecialQuality
-#Enlightened Intimidate			KEY:Enlightened Intimidate							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																																																																																																																												BONUS:VAR|MaxRankIntimidate|2|TYPE=Enlightened
+#Enlightened Intimidate			KEY:Enlightened Intimidate							CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																																																																																																																												
+BONUS:VAR|MaxRankIntimidate|2|TYPE=Enlightened
 Grueling Combatant			KEY:Grueling Combatant							CATEGORY:Special Ability	TYPE:SpecialQuality
 Restricted Actions			KEY:Restricted Actions ~ Orc						CATEGORY:Special Ability	TYPE:SpecialQuality																																																																											ABILITY:Special Ability|AUTOMATIC|Restricted Actions (Calm)|Restricted Actions (Decipher)|Restricted Actions (Influence)
 #
@@ -71,7 +83,8 @@ Restricted Actions (Decipher)												CATEGORY:Special Ability	TYPE:SpecialQu
 
 
 #Block: Pech ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#Enlightened Resolve			KEY:Enlightened Resolve								CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																																																																																																																												BONUS:VAR|MaxRankResolve|2|TYPE=Enlightened
+#Enlightened Resolve			KEY:Enlightened Resolve								CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																																																																																																																																																												
+BONUS:VAR|MaxRankResolve|2|TYPE=Enlightened
 Hearty Appetite				KEY:Hearty Appetite							CATEGORY:Special Ability	TYPE:SpecialQuality
 
 
@@ -79,43 +92,68 @@ Hearty Appetite				KEY:Hearty Appetite							CATEGORY:Special Ability	TYPE:Speci
 Achilles Heel (Fire)			KEY:Achilles Heel (Fire)						CATEGORY:Special Ability	TYPE:SpecialQuality
 Bleeding Immunity				KEY:Bleeding Immunity							CATEGORY:Special Ability	TYPE:SpecialQuality
 Lean Season					KEY:Lean Season ~ Rootwalker						CATEGORY:Special Ability	TYPE:SpecialQuality
-Natural Camouflage			KEY:Natural Camouflage ~ Rootwalker					CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																BONUS:ABILITYPOOL|Natural Camouflage Choice|1
+Natural Camouflage			KEY:Natural Camouflage ~ Rootwalker					CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																
+BONUS:ABILITYPOOL|Natural Camouflage Choice|1
 #
 Natural Camouflage / Forest/Jungle	KEY:Natural Camouflage ~ Forest Jungle				CATEGORY:Special Ability	TYPE:NaturalCamouflageChoice
 Natural Camouflage / Swamp		KEY:Natural Camouflage ~ Swamp					CATEGORY:Special Ability	TYPE:NaturalCamouflageChoice
 
 
 #Block: Saurian ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Natural Attack				KEY:Natural Attack ~ Saurian						CATEGORY:Special Ability																																																																															ABILITY:Internal|AUTOMATIC|Bite 1|Tail Slap 1|PREABILITY:1,CATEGORY=Special Ability,TYPE.NaturalAttack												BONUS:VAR|Bite|1	BONUS:VAR|Tail|1
+Natural Attack				KEY:Natural Attack ~ Saurian						CATEGORY:Special Ability																																																																															ABILITY:Internal|AUTOMATIC|Bite 1|Tail Slap 1|PREABILITY:1,CATEGORY=Special Ability,TYPE.NaturalAttack												
+BONUS:VAR|Bite|1	
+BONUS:VAR|Tail|1
 Bite 1															CATEGORY:Internal																																																																																																																																													NATURALATTACKS:Bite,Natural.Weapon.Melee,*1,1d8
 Tail Slap 1															CATEGORY:Internal																																																																																																																																													NATURALATTACKS:Tail Slap,Natural.Weapon.Melee,*1,1d8
 
 
 #Block: Unborn ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Enlightened Skill				KEY:Enlightened Skill							CATEGORY:Special Ability	TYPE:SpecialQuality																																																									STACK:YES	MULT:YES	CHOOSE:NOCHOICE																																	BONUS:ABILITYPOOL|Enlightened Skill|1
-Limited Proficiencies			KEY:Limited Proficiencies						CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																								BONUS:VAR|Proficiency|-2|PREPCLEVEL:MIN=1
+Enlightened Skill				KEY:Enlightened Skill							CATEGORY:Special Ability	TYPE:SpecialQuality																																																									STACK:YES	MULT:YES	CHOOSE:NOCHOICE																																	
+BONUS:ABILITYPOOL|Enlightened Skill|1
+Limited Proficiencies			KEY:Limited Proficiencies						CATEGORY:Special Ability	TYPE:SpecialQuality																																																																																																								
+BONUS:VAR|Proficiency|-2|PREPCLEVEL:MIN=1
 
 # Enlightened Skill Choice
-Enlightened Acrobatics													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankAcrobatics|2|TYPE=Enlightened
-Enlightened Athletics													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankAthletics|2|TYPE=Enlightened
-Enlightened Blend														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankBlend|2|TYPE=Enlightened
-Enlightened Bluff														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankBluff|2|TYPE=Enlightened
-Enlightened Crafting													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankCrafting|2|TYPE=Enlightened
-Enlightened Disguise													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankDisguise|2|TYPE=Enlightened
-Enlightened Haggle													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankHaggle|2|TYPE=Enlightened
-Enlightened Impress													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankImpress|2|TYPE=Enlightened
-Enlightened Intimidate													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankIntimidate|2|TYPE=Enlightened
-Enlightened Investigate													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankInvestigate|2|TYPE=Enlightened
-Enlightened Medicine													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankMedicine|2|TYPE=Enlightened
-Enlightened Notice													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankNotice|2|TYPE=Enlightened
-Enlightened Prestidigitation												CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankPrestidigitation|2|TYPE=Enlightened
-Enlightened Resolve													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankResolve|2|TYPE=Enlightened
-Enlightened Ride														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankRide|2|TYPE=Enlightened
-Enlightened Search													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankSearch|2|TYPE=Enlightened
-Enlightened Sense Motive												CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankSenseMotive|2|TYPE=Enlightened
-Enlightened Sneak														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankSneak|2|TYPE=Enlightened
-Enlightened Survival													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankSurvival|2|TYPE=Enlightened
-Enlightened Tactics													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								BONUS:VAR|MaxRankTactics|2|TYPE=Enlightened
+Enlightened Acrobatics													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankAcrobatics|2|TYPE=Enlightened
+Enlightened Athletics													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankAthletics|2|TYPE=Enlightened
+Enlightened Blend														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankBlend|2|TYPE=Enlightened
+Enlightened Bluff														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankBluff|2|TYPE=Enlightened
+Enlightened Crafting													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankCrafting|2|TYPE=Enlightened
+Enlightened Disguise													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankDisguise|2|TYPE=Enlightened
+Enlightened Haggle													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankHaggle|2|TYPE=Enlightened
+Enlightened Impress													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankImpress|2|TYPE=Enlightened
+Enlightened Intimidate													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankIntimidate|2|TYPE=Enlightened
+Enlightened Investigate													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankInvestigate|2|TYPE=Enlightened
+Enlightened Medicine													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankMedicine|2|TYPE=Enlightened
+Enlightened Notice													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankNotice|2|TYPE=Enlightened
+Enlightened Prestidigitation												CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankPrestidigitation|2|TYPE=Enlightened
+Enlightened Resolve													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankResolve|2|TYPE=Enlightened
+Enlightened Ride														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankRide|2|TYPE=Enlightened
+Enlightened Search													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankSearch|2|TYPE=Enlightened
+Enlightened Sense Motive												CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankSenseMotive|2|TYPE=Enlightened
+Enlightened Sneak														CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankSneak|2|TYPE=Enlightened
+Enlightened Survival													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankSurvival|2|TYPE=Enlightened
+Enlightened Tactics													CATEGORY:Special Ability	TYPE:EnlightenedSkill																																																																																																								
+BONUS:VAR|MaxRankTactics|2|TYPE=Enlightened
 
 #Block: Splinter Feats ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Default Races:

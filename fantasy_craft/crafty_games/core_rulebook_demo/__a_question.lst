@@ -34,3 +34,14 @@ MODIFYOTHER:EQUIPMENT|ToHit.Grapple|SOLVE|namespace("SKILL","Athletics",Total)
 ??	MODIFYOTHER:SKILL|CLASSLIST=Assassin|MaxRank|SOLVE|value()+CL+3|PRIORITY=1000
 
 
+
+
+
+
+# Conversions
+BONUS:STAT|STR|			>>>>	MODIFYOTHER:STAT|Strength|BaseValue|ADD|
+
+
+
+
+

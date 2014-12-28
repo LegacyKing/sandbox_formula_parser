@@ -417,15 +417,48 @@ MODIFYOTHER:EQUIPMENT|Grapple|SOLVE|namespace("SKILL","Athletics",Total)
 
 MODIFY:VAR=Loadscore|SOLVE|STRSCORE+LoadScoreSizeMod	
 
-	MODIFY:VAR=SpellCastingFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Spellcasting")
-	MODIFY:VAR=BasicCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Basic Combat")
-	MODIFY:VAR=MeleeCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Melee Combat")
-	MODIFY:VAR=RangedCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Ranged Combat")
-	MODIFY:VAR=UnarmedCombatFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Unarmed Combat")
-	MODIFY:VAR=ChanceFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Chance")
-	MODIFY:VAR=CovertFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Covert")
-	MODIFY:VAR=GearFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Gear")
-	MODIFY:VAR=SkillFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Skill")
-	MODIFY:VAR=SpeciesFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Species")
-	MODIFY:VAR=StyleFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Style")
-	MODIFY:VAR=TerrainFeatCount|SOLVE|count("ABILITIES","CATEGORY=FEAT","TYPE=Terrain")
+# This Adds 1 to the indicated Var based upon Group - Solution #4
+MODIFYOTHER:ABILITY=FEAT|GROUP=Spellcasting|SpellCastingFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Basic Combat|BasicCombatFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Melee Combat|MeleeCombatFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Ranged Combat|RangedCombatFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Unarmed Combat|UnarmedCombatFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Chance|ChanceFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Covert|CovertFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Gear|GearFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Skill|SkillFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Species|SpeciesFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Style|StyleFeatCount|ADD|1
+MODIFYOTHER:ABILITY=FEAT|GROUP=Terrain|TerrainFeatCount|ADD|1
+
+###Block: Path Count
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Air
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Beasts
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Beauty
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Chaos
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Curses
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Darkness
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Death
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Deceit
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Destruction
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Earth
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Evil
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Fire
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Fortune
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Good
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Heroism
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Knowledge
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Life
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Light
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Magic
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Metal
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Nature
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Order
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Protection
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Secrets
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Spirits
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Strength
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Travel
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_War
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Water
+MODIFY:VAR=PathTaken|SOLVE|value()+Path_Wilderness

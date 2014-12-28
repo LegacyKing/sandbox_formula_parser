@@ -16,7 +16,8 @@ Bleed				KEY:BLEED					VISIBLE:NO																																															
 Bludgeon			KEY:BLUDGEON				VISIBLE:NO																																																				SPROP:Bludgeon|PREVAREQ:DisplayVersion,0
 Cavalry			KEY:CAVALRY					VISIBLE:NO																																																				SPROP:Cavalry|PREVAREQ:DisplayVersion,0
 Cord				KEY:CORD					VISIBLE:NO																																																				SPROP:Cord|PREVAREQ:DisplayVersion,0
-Finesse			KEY:FINESSE					VISIBLE:NO																																											BONUS:WEAPON|TOHIT|min(STR-DEX),0				SPROP:Finesse|PREVAREQ:DisplayVersion,0
+Finesse			KEY:FINESSE					VISIBLE:NO																																											
+BONUS:WEAPON|TOHIT|min(STR-DEX),0				SPROP:Finesse|PREVAREQ:DisplayVersion,0
 Grip				KEY:GRIP					VISIBLE:NO																																																				SPROP:Grip|PREVAREQ:DisplayVersion,0
 Hook				KEY:HOOK					VISIBLE:NO																																																				SPROP:Hook|PREVAREQ:DisplayVersion,0
 Hurl				KEY:HURL					VISIBLE:NO																																																				SPROP:Hurl|PREVAREQ:DisplayVersion,0
@@ -32,9 +33,11 @@ Aligned			KEY:ALIGNED					VISIBLE:NO																																												
 Blast				KEY:BLAST					VISIBLE:NO																																																				SPROP:Blast|PREVAREQ:DisplayVersion,0
 Double			KEY:DOUBLE					VISIBLE:NO																																																				SPROP:Double|PREVAREQ:DisplayVersion,0
 Excruciating		KEY:EXCRUCIATING				VISIBLE:NO																																																				SPROP:Excruciating|PREVAREQ:DisplayVersion,0
-Guard				KEY:GUARD					VISIBLE:NO					BONUS:COMBAT|AC|%CHOICE|TYPE=Gear																																										SPROP:Guard +[%CHOICE]|PREVAREQ:DisplayVersion,0														CHOOSE:STRING|1|2|3|4|5|6|7|8|9|10|11|12|13|14|TITLE=Guard
+Guard				KEY:GUARD					VISIBLE:NO					
+BONUS:COMBAT|AC|%CHOICE|TYPE=Gear																																										SPROP:Guard +[%CHOICE]|PREVAREQ:DisplayVersion,0														CHOOSE:STRING|1|2|3|4|5|6|7|8|9|10|11|12|13|14|TITLE=Guard
 Heavy				KEY:HEAVY					VISIBLE:NO																																																				SPROP:Heavy|PREVAREQ:DisplayVersion,0
-Inaccurate			KEY:INACCURATE				VISIBLE:NO																																											BONUS:WEAPON|TOHIT|-2|!PRETYPE:1,EQMOD=NEGATE_INACCUR	SPROP:Inaccurate|!PRETYPE:1,EQMOD=NEGATE_INACCUR|PREVAREQ:DisplayVersion,0
+Inaccurate			KEY:INACCURATE				VISIBLE:NO																																											
+BONUS:WEAPON|TOHIT|-2|!PRETYPE:1,EQMOD=NEGATE_INACCUR	SPROP:Inaccurate|!PRETYPE:1,EQMOD=NEGATE_INACCUR|PREVAREQ:DisplayVersion,0
 Indirect			KEY:INDIRECT				VISIBLE:NO																																																				SPROP:Indirect|PREVAREQ:DisplayVersion,0
 Lightweight			KEY:LIGHTWEIGHT				VISIBLE:NO																																																				SPROP:Lightweight|PREVAREQ:DisplayVersion,0
 Pummeling			KEY:PUMMELING				VISIBLE:NO																																																				SPROP:Pummeling|PREVAREQ:DisplayVersion,0
@@ -50,13 +53,24 @@ Fire				KEY:RES_FIRE				VISIBLE:NO																																														
 Edged				KEY:RES_EDGED				VISIBLE:NO																																																				SPROP:Edged %CHOICE																			CHOOSE:STRING|1|2|3|4|5|TITLE=Resistance
 Blunt				KEY:RES_BLUNT				VISIBLE:NO																																																				SPROP:Blunt %CHOICE																			CHOOSE:STRING|1|2|3|4|5|TITLE=Resistance
 
-Def				KEY:DP					VISIBLE:NO					BONUS:COMBAT|AC|ArmorDPValue|TYPE=Armor													BONUS:SAVE|Reflex|ArmorDPValue|TYPE=Armor							BONUS:VAR|ArmorDPValue|%CHOICE																																CHOOSE:STRING|-1|-2|-3|-4|-5|TITLE=DP						DEFINE:ArmorDPValue|0
-Dis				KEY:DISGUISE				VISIBLE:NO																															BONUS:SKILL|Disguise|DiguisePenalty	BONUS:VAR|DisguisePenalty|%CHOICE										SPROP:Disguise %CHOICE																			CHOOSE:STRING|0|-1|-2|-3|-4|-5|-6|-7|-8|Obvious|TITLE=Disguise		DEFINE:DisguisePenalty|0
+Def				KEY:DP					VISIBLE:NO					
+BONUS:COMBAT|AC|ArmorDPValue|TYPE=Armor													
+BONUS:SAVE|Reflex|ArmorDPValue|TYPE=Armor							
+BONUS:VAR|ArmorDPValue|%CHOICE																																CHOOSE:STRING|-1|-2|-3|-4|-5|TITLE=DP						DEFINE:ArmorDPValue|0
+Dis				KEY:DISGUISE				VISIBLE:NO																															
+BONUS:SKILL|Disguise|DiguisePenalty	
+BONUS:VAR|DisguisePenalty|%CHOICE										SPROP:Disguise %CHOICE																			CHOOSE:STRING|0|-1|-2|-3|-4|-5|-6|-7|-8|Obvious|TITLE=Disguise		DEFINE:DisguisePenalty|0
 
 #
 # Fittings
-Light Fittings		KEY:FITTINGS_LT		TYPE:Armor	VISIBLE:QUALIFY	SOURCEPAGE:p.174								BONUS:DR|-|1	BONUS:MISC|ACCHECK|-1
-Heavy Fittings		KEY:FITTINGS_HVY		TYPE:Armor	VISIBLE:QUALIFY	SOURCEPAGE:p.174								BONUS:DR|-|2	BONUS:MISC|ACCHECK|-1	BONUS:MOVEADD|TYPE.Walk|-5														BONUS:VAR|ArmorDPValue|-1
+Light Fittings		KEY:FITTINGS_LT		TYPE:Armor	VISIBLE:QUALIFY	SOURCEPAGE:p.174								
+BONUS:DR|-|1	
+BONUS:MISC|ACCHECK|-1
+Heavy Fittings		KEY:FITTINGS_HVY		TYPE:Armor	VISIBLE:QUALIFY	SOURCEPAGE:p.174								
+BONUS:DR|-|2	
+BONUS:MISC|ACCHECK|-1	
+BONUS:MOVEADD|TYPE.Walk|-5														
+BONUS:VAR|ArmorDPValue|-1
 
 
 # Required for Support:

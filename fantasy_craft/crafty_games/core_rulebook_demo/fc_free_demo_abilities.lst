@@ -12,7 +12,6 @@ Default
 	AUTO:ARMORPROF|ARMORTYPE=Armor
 	ABILITY:Special Ability|AUTOMATIC|Lifestyle ~ Display
 	ABILITY:Internal|AUTOMATIC|Basic Natural Attack Output|Racial Traits
-CATEGORY=Internal|Default.MOD
 CATEGORY=Internal|Default.MOD	ABILITY:Internal|AUTOMATIC|Tracker ~ Proficiency|PRECHARACTERTYPE:1,PC|!PREABILITY:1,CATEGORY=Special Ability,TYPE.AltProfProgression
 CATEGORY=Internal|Default.MOD	ABILITY:Internal|AUTOMATIC|Tracker ~ Interest|PRECHARACTERTYPE:1,PC|!PREABILITY:1,CATEGORY=Special Ability,TYPE.AltInterestProgression
 
@@ -52,9 +51,8 @@ Lifestyle
 	TYPE:SpecialQuality
 	DESC:Lifestyle %1 == Panache %2 (%4, %5s)/ Prudence %3 (%6 pct)|LifestyleTotal|Panache|Prudence|(Panache+1)/3|Panache*10|15+(Prudence*5)
 	MODIFY:ABILITYPOOL=Lifestyle|LifestyleScore
-	MODIFY:VAR=LifestyleScore|SOLVE|CHA
-	MODIFY:VAR=LifestyleTotal|SOLVE|Panache+Prudence
-
+	MODIFY:VAR=LifestyleScore|SOLVE|value()+CHA
+	MODIFY:VAR=LifestyleTotal|SOLVE|value()+Panache+Prudence
 #
 Panache
 	KEY:Panache+1
@@ -78,14 +76,14 @@ Reputation
 	KEY:Reputation Display
 	CATEGORY:Special Ability
 	DESC:%1|ReputationScore
-	MODIFY:VAR=ReputationScore|SOLVE|TL*10
+	MODIFY:VAR=ReputationScore|SOLVE|value()+TL*10
 
 Renown
 	CATEGORY:Internal
 	ABILITY:Special Ability|AUTOMATIC|Heroic Title|PREBOOL:context("VAR",HeroicRenown>=1)
 	ABILITY:Special Ability|AUTOMATIC|Military Title|PREBOOL:context("VAR",MilitaryRenown>=1)
 	ABILITY:Special Ability|AUTOMATIC|Noble Title|PREBOOL:context("VAR",NobleRenown>=1)
-	MODIFY:ABILITYPOOL=Renown Choice|RenownTotal
+	MODIFY:ABILITYPOOL=Renown Choice|SOLVE|value()+RenownTotal
 #
 Heroic Title
 	SORTKEY:ARenown
@@ -533,121 +531,121 @@ Acrobatics
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Acrobatics ~ Origin Skill
-	MODIFYOTHER:SKILL|Acrobatics|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Acrobatics|MaxRank.Mod|ADD|3
 Athletics
 	KEY:Athletics ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Athletics ~ Origin Skill
-	MODIFYOTHER:SKILL|Athletics|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Athletics|MaxRank.Mod|ADD|3
 Blend
 	KEY:Blend ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Blend ~ Origin Skill
-	MODIFYOTHER:SKILL|Blend|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Blend|MaxRank.Mod|ADD|3
 Bluff
 	KEY:Bluff ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Bluff ~ Origin Skill
-	MODIFYOTHER:SKILL|Bluff|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Bluff|MaxRank.Mod|ADD|3
 Crafting
 	KEY:Crafting ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Crafting ~ Origin Skill
-	MODIFYOTHER:SKILL|Crafting|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Crafting|MaxRank.Mod|ADD|3
 Disguise
 	KEY:Disguise ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Disguise ~ Origin Skill
-	MODIFYOTHER:SKILL|Disguise|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Disguise|MaxRank.Mod|ADD|3
 Haggle
 	KEY:Haggle ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Haggle ~ Origin Skill
-	MODIFYOTHER:SKILL|Haggle|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Haggle|MaxRank.Mod|ADD|3
 Impress
 	KEY:Impress ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Impress ~ Origin Skill
-	MODIFYOTHER:SKILL|Impress|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Impress|MaxRank.Mod|ADD|3
 Intimidate
 	KEY:Intimidate ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Intimidate ~ Origin Skill
-	MODIFYOTHER:SKILL|Intimidate|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Intimidate|MaxRank.Mod|ADD|3
 Investigate
 	KEY:Investigate ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Investigate ~ Origin Skill
-	MODIFYOTHER:SKILL|Investigate|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Investigate|MaxRank.Mod|ADD|3
 Medicine
 	KEY:Medicine ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Medicine ~ Origin Skill
-	MODIFYOTHER:SKILL|Medicine|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Medicine|MaxRank.Mod|ADD|3
 Notice
 	KEY:Notice ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Notice ~ Origin Skill
-	MODIFYOTHER:SKILL|Notice|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Notice|MaxRank.Mod|ADD|3
 Prestidigitation
 	KEY:Prestidigitation ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Prestidigitation ~ Origin Skill
-	MODIFYOTHER:SKILL|Prestidigitation|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Prestidigitation|MaxRank.Mod|ADD|3
 Resolve
 	KEY:Resolve ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Resolve ~ Origin Skill
-	MODIFYOTHER:SKILL|Resolve|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Resolve|MaxRank.Mod|ADD|3
 Ride
 	KEY:Ride ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Ride ~ Origin Skill
-	MODIFYOTHER:SKILL|Ride|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Ride|MaxRank.Mod|ADD|3
 Search
 	KEY:Search ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Search ~ Origin Skill
-	MODIFYOTHER:SKILL|Search|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Search|MaxRank.Mod|ADD|3
 Sense Motive
 	KEY:Sense ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Sense Motive ~ Origin Skill
-	MODIFYOTHER:SKILL|Sense Motive|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Sense Motive|MaxRank.Mod|ADD|3
 Sneak
 	KEY:Sneak ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Sneak ~ Origin Skill
-	MODIFYOTHER:SKILL|Sneak|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Sneak|MaxRank.Mod|ADD|3
 Survival
 	KEY:Survival ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Survival ~ Origin Skill
-	MODIFYOTHER:SKILL|Survival|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Survival|MaxRank.Mod|ADD|3
 Tactics
 	KEY:Tactics ~ Prodigal Skill
 	CATEGORY:Special Ability
 	TYPE:ProdigalSkill
 	ABILITY:Special Ability|AUTOMATIC|Tactics ~ Origin Skill
-	MODIFYOTHER:SKILL|Tactics|MaxRank|ADD|3
+	MODIFYOTHER:SKILL|Tactics|MaxRank.Mod|ADD|3
 
 
 ###Block: Positive Stat Choices
@@ -1918,9 +1916,9 @@ Right-Hand Man
 Master and Commander
 	CATEGORY:Internal
 	ABILITY:Special Ability|AUTOMATIC|Master and Commander I|PREBOOL:context("VAR",MasterAndCommanderLvl==1)
-	MODIFY:ABILITYPOOL=Terrain Feat|SOLVE|MasterAndCommanderFeatCount
+	MODIFY:ABILITYPOOL=Terrain Feat|SOLVE|value()+MasterAndCommanderFeatCount
 	MODIFY:MasterAndCommanderFeatCount|ADD|1
-	MODIFYOTHER:SKILL|Tactics|MaxRank|SOLVE|value()+MasterAndCommanderTacticsBonus
+	MODIFYOTHER:SKILL|Tactics|MaxRank.Mod|SOLVE|value()+MasterAndCommanderTacticsBonus
 	MODIFY:MasterAndCommanderTacticsBonus|ADD|3
 #
 Master and Commander I
@@ -2020,7 +2018,7 @@ Obligations
 Eloquence
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Increase Lower of INT or CHA|SOLVE|EloquenceCount
+	MODIFY:ABILITYPOOL=Increase Lower of INT or CHA|SOLVE|value()+EloquenceCount
 	SOURCEPAGE:p.36
 
 
@@ -2057,7 +2055,7 @@ Bonus Feat
 	KEY:Bonus Feat ~ Explorer
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Explorer Feat|SOLVE|ExplorerFeatCount
+	MODIFY:ABILITYPOOL=Explorer Feat|SOLVE|value()+ExplorerFeatCount
 	SOURCEPAGE:p.38
 
 
@@ -2084,7 +2082,7 @@ Man of Reason
 Trade Secrets
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Trade Secrets|SOLVE|TradeSecretsCount
+	MODIFY:ABILITYPOOL=Trade Secrets|SOLVE|value()+TradeSecretsCount
 	SOURCEPAGE:p.40
 Bright Idea
 	CATEGORY:Special Ability
@@ -2095,90 +2093,90 @@ Bonus Feat
 	KEY:Bonus Feat ~ Keeper
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Keeper Feat|SOLVE|KeeperFeatCount
+	MODIFY:ABILITYPOOL=Keeper Feat|SOLVE|value()+KeeperFeatCount
 	SOURCEPAGE:p.40
 
 # Trade Secrets Selection
 Trade Secrets (Acrobatics)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Acrobatics|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Acrobatics|MaxRank.Mod|MAX|8	
 Trade Secrets (Athletics)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Athletics|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Athletics|MaxRank.Mod|MAX|8	
 Trade Secrets (Blend)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Blend|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Blend|MaxRank.Mod|MAX|8	
 Trade Secrets (Bluff)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Bluff|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Bluff|MaxRank.Mod|MAX|8	
 Trade Secrets (Crafting)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Crafting|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Crafting|MaxRank.Mod|MAX|8	
 Trade Secrets (Disguise)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Disguise|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Disguise|MaxRank.Mod|MAX|8	
 Trade Secrets (Haggle)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Haggle|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Haggle|MaxRank.Mod|MAX|8	
 Trade Secrets (Impress)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Impress|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Impress|MaxRank.Mod|MAX|8	
 Trade Secrets (Intimidate)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Intimidate|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Intimidate|MaxRank.Mod|MAX|8	
 Trade Secrets (Investigate)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Investigate|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Investigate|MaxRank.Mod|MAX|8	
 Trade Secrets (Medicine)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Medicine|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Medicine|MaxRank.Mod|MAX|8	
 Trade Secrets (Notice)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Notice|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Notice|MaxRank.Mod|MAX|8	
 Trade Secrets (Prestidigitation)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Prestidigitation|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Prestidigitation|MaxRank.Mod|MAX|8	
 Trade Secrets (Resolve)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Resolve|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Resolve|MaxRank.Mod|MAX|8	
 Trade Secrets (Ride)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Ride|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Ride|MaxRank.Mod|MAX|8	
 Trade Secrets (Search)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Search|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Search|MaxRank.Mod|MAX|8	
 Trade Secrets (Sense Motive)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	SenseMotive|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Sense Motive|MaxRank.Mod|MAX|8	
 Trade Secrets (Sneak)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Sneak|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Sneak|MaxRank.Mod|MAX|8	
 Trade Secrets (Survival)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Survival|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Survival|MaxRank.Mod|MAX|8	
 Trade Secrets (Tactics)
 	CATEGORY:Special Ability
 	TYPE:TradeSecretsSkill
-	MODIFYOTHER:SKILL|XXX|MaxRank.Mod|MAX|	Tactics|5|TYPE=Enlightened
+	MODIFYOTHER:SKILL|Tactics|MaxRank.Mod|MAX|8	
 
 
 ###Block: Lancer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2219,7 +2217,7 @@ Bonus Feat
 	KEY:Bonus Feat ~ Lancer
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Lancer Feat|SOLVE|LancerFeatCount
+	MODIFY:ABILITYPOOL=Lancer Feat|SOLVE|value()+LancerFeatCount
 	SOURCEPAGE:p.42
 Bred for War
 	CATEGORY:Special Ability
@@ -2256,7 +2254,7 @@ Subtle and Quick to Anger
 Arcane Might
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Increase Highest of INT/WIS/CHA|SOLVE|ArcaneMightCount
+	MODIFY:ABILITYPOOL=Increase Highest of INT/WIS/CHA|SOLVE|value()+ArcaneMightCount
 	SOURCEPAGE:p.43
 #
 Circle of Power
@@ -2271,7 +2269,7 @@ Bonus Feat
 	KEY:Bonus Feat ~ Mage
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Mage Feat|SOLVE|MageFeatCount
+	MODIFY:ABILITYPOOL=Mage Feat|SOLVE|value()+MageFeatCount
 	MODIFY:VAR=MageFeatCount|ADD|1
 	SOURCEPAGE:p.44
 
@@ -2282,70 +2280,70 @@ Mage Spell Level 0
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=0|1
+	MODIFYOTHER:CLASS|Mage|Known.0|ADD|1
 Mage Spell Level 1
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=1|1
+	MODIFYOTHER:CLASS|Mage|Known.1|ADD|1
 Mage Spell Level 2
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=2|1
+	MODIFYOTHER:CLASS|Mage|Known.2|ADD|1
 Mage Spell Level 3
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=3|1
+	MODIFYOTHER:CLASS|Mage|Known.3|ADD|1
 Mage Spell Level 4
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=4|1
+	MODIFYOTHER:CLASS|Mage|Known.4|ADD|1
 Mage Spell Level 5
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=5|1
+	MODIFYOTHER:CLASS|Mage|Known.5|ADD|1
 Mage Spell Level 6
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=6|1
+	MODIFYOTHER:CLASS|Mage|Known.6|ADD|1
 Mage Spell Level 7
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=7|1
+	MODIFYOTHER:CLASS|Mage|Known.7|ADD|1
 Mage Spell Level 8
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=8|1
+	MODIFYOTHER:CLASS|Mage|Known.8|ADD|1
 Mage Spell Level 9
 	CATEGORY:Special Ability
 	TYPE:BonusSpellKnownMage
 	STACK:YES
 	MULT:YES
 	CHOOSE:NOCHOICE
-	BONUS:SPELLKNOWN|CLASS=Mage;LEVEL=9|1
+	MODIFYOTHER:CLASS|Mage|Known.9|ADD|1
 
 
 ###Block: Priest ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2378,13 +2376,13 @@ Signs & Portents I
 Path of the Devoted
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Alignment Path Steps|SOLVE|PathOfTheDevotedStepLvl
+	MODIFY:ABILITYPOOL=Alignment Path Steps|SOLVE|value()+PathOfTheDevotedStepLvl
 	SOURCEPAGE:p.45
 Bonus Feat
 	KEY:Bonus Feat ~ Priest
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Priest Feat|SOLVE|PriestFeatCount
+	MODIFY:ABILITYPOOL=Priest Feat|SOLVE|value()+PriestFeatCount
 	SOURCEPAGE:p.45
 
 
@@ -2424,7 +2422,7 @@ Best of the Best
 Cross-Training
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Cross-Training Choice|SOLVE|CrossTrainingCount
+	MODIFY:ABILITYPOOL=Cross-Training Choice|SOLVE|value()+CrossTrainingCount
 	SOURCEPAGE:p.47
 #
 Class Ability (Assassin / Hand of Death)
@@ -2711,7 +2709,7 @@ Bonus Feat
 	KEY:Bonus Feat ~ Scout
 	CATEGORY:Special Ability
 	TYPE:SpecialQuality
-	MODIFY:ABILITYPOOL=Scout Feat|SOLVE|ScoutFeatCount
+	MODIFY:ABILITYPOOL=Scout Feat|SOLVE|value()+ScoutFeatCount
 	SOURCEPAGE:p.49
 Sneak Attack
 	CATEGORY:Special Ability

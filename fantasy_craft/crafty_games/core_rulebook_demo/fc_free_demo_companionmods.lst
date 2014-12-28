@@ -10,19 +10,30 @@ DEFINE:PersonalLieutenantXP|0
 
 # Animal Partner
 # Class of the Master			Type					Ability														Define				Bonus Ability Pool					Modify VAR
-FOLLOWER:AnimalPartnerLvl=0		TYPE:Animal Partner		ABILITY:NPC Ability|AUTOMATIC|Special Character																		BONUS:VAR|NPCThreatLvl|1|TYPE=Base
+FOLLOWER:AnimalPartnerLvl=0		TYPE:Animal Partner		ABILITY:NPC Ability|AUTOMATIC|Special Character																		
+BONUS:VAR|NPCThreatLvl|1|TYPE=Base
 
 # Personal Lieutenant
-FOLLOWER:PersonalLieutenantLvl=0	TYPE:Personal Lieutenant	ABILITY:Internal|AUTOMATIC|NPC Basics	ABILITY:NPC Ability|AUTOMATIC|Special Character			BONUS:ABILITYPOOL|Personal Lieutenant Choice|1	BONUS:VAR|NPCThreatLvl|1|TYPE=Base
-FOLLOWER:PersonalLieutenantLvl=0	TYPE:Personal Lieutenant																									BONUS:VAR|PersonalLieutenantXP|50
+FOLLOWER:PersonalLieutenantLvl=0	TYPE:Personal Lieutenant	ABILITY:Internal|AUTOMATIC|NPC Basics	ABILITY:NPC Ability|AUTOMATIC|Special Character			
+BONUS:ABILITYPOOL|Personal Lieutenant Choice|1	
+BONUS:VAR|NPCThreatLvl|1|TYPE=Base
+FOLLOWER:PersonalLieutenantLvl=0	TYPE:Personal Lieutenant																									
+BONUS:VAR|PersonalLieutenantXP|50
 ###Block:
-FOLLOWER:PersonalLieutenantXP=55	TYPE:Personal Lieutenant	BONUS:VAR|PersonalLieutenantXP|5
-FOLLOWER:PersonalLieutenantXP=60	TYPE:Personal Lieutenant	BONUS:VAR|PersonalLieutenantXP|5
-FOLLOWER:PersonalLieutenantXP=65	TYPE:Personal Lieutenant	BONUS:VAR|PersonalLieutenantXP|5
-FOLLOWER:PersonalLieutenantXP=70	TYPE:Personal Lieutenant	BONUS:VAR|PersonalLieutenantXP|5
-FOLLOWER:PersonalLieutenantXP=75	TYPE:Personal Lieutenant	BONUS:VAR|PersonalLieutenantXP|5
-FOLLOWER:PersonalLieutenantXP=80	TYPE:Personal Lieutenant	BONUS:VAR|PersonalLieutenantXP|5
-FOLLOWER:PersonalLieutenantXP=85	TYPE:Personal Lieutenant	BONUS:VAR|PersonalLieutenantXP|5
+FOLLOWER:PersonalLieutenantXP=55	TYPE:Personal Lieutenant	
+BONUS:VAR|PersonalLieutenantXP|5
+FOLLOWER:PersonalLieutenantXP=60	TYPE:Personal Lieutenant	
+BONUS:VAR|PersonalLieutenantXP|5
+FOLLOWER:PersonalLieutenantXP=65	TYPE:Personal Lieutenant	
+BONUS:VAR|PersonalLieutenantXP|5
+FOLLOWER:PersonalLieutenantXP=70	TYPE:Personal Lieutenant	
+BONUS:VAR|PersonalLieutenantXP|5
+FOLLOWER:PersonalLieutenantXP=75	TYPE:Personal Lieutenant	
+BONUS:VAR|PersonalLieutenantXP|5
+FOLLOWER:PersonalLieutenantXP=80	TYPE:Personal Lieutenant	
+BONUS:VAR|PersonalLieutenantXP|5
+FOLLOWER:PersonalLieutenantXP=85	TYPE:Personal Lieutenant	
+BONUS:VAR|PersonalLieutenantXP|5
 
 
 #

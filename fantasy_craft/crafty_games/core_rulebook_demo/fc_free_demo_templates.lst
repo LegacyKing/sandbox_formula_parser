@@ -4,7 +4,8 @@ SOURCELONG:Fantasy Craft	SOURCESHORT:FC	SOURCEDATE:2009-07
 # Original Entry Date: 2011-03-01
 
 # Template Name		Visible	Template																	Required Class		Maximum Level	Bonus to Ability Pool					Modify VAR			Ability															Subrace
-#Bite OS Test																																					BONUS:VAR|BiteGrade|1	ABILITY:Natural Attack|AUTOMATIC|Bite
+#Bite OS Test																																					
+BONUS:VAR|BiteGrade|1	ABILITY:Natural Attack|AUTOMATIC|Bite
 
 #-----------------------#
 #	Core Ability	#
@@ -13,19 +14,19 @@ SOURCELONG:Fantasy Craft	SOURCESHORT:FC	SOURCEDATE:2009-07
 # Template Name		Visible	Template		Choose						Removable?
 Base Class Core Ability	VISIBLE:NO	TEMPLATE:%LIST	CHOOSE:TEMPLATE|QUALIFIED[TYPE=BaseClass]	REMOVABLE:NO
 ###Block: Choices
-# Template Name	Visible	Required Class		Modify VAR				Ability										Removable?		Type
-Assassin		VISIBLE:NO	PRECLASS:1,Assassin=1	BONUS:VAR|ProficiencyCount|4	ABILITY:Special Ability|AUTOMATIC|Heartseeker ~ Assassin		REMOVABLE:NO	TYPE:BaseClass
-Burglar		VISIBLE:NO	PRECLASS:1,Burglar=1	BONUS:VAR|ProficiencyCount|3	ABILITY:Special Ability|AUTOMATIC|Dexterous ~ Burglar			REMOVABLE:NO	TYPE:BaseClass
-Captain		VISIBLE:NO	PRECLASS:1,Captain=1	BONUS:VAR|ProficiencyCount|4	ABILITY:Special Ability|AUTOMATIC|Cadre ~ Captain			REMOVABLE:NO	TYPE:BaseClass
-Courtier		VISIBLE:NO	PRECLASS:1,Courtier=1	BONUS:VAR|ProficiencyCount|3	ABILITY:Special Ability|AUTOMATIC|Only the Finest ~ Courtier	REMOVABLE:NO	TYPE:BaseClass
-Explorer		VISIBLE:NO	PRECLASS:1,Explorer=1	BONUS:VAR|ProficiencyCount|4	ABILITY:Special Ability|AUTOMATIC|Friends All Over ~ Explorer	REMOVABLE:NO	TYPE:BaseClass
-Keeper		VISIBLE:NO	PRECLASS:1,Keeper=1	BONUS:VAR|ProficiencyCount|2	ABILITY:Special Ability|AUTOMATIC|Teacher ~ Keeper			REMOVABLE:NO	TYPE:BaseClass
-Lancer		VISIBLE:NO	PRECLASS:1,Lancer=1	BONUS:VAR|ProficiencyCount|6	ABILITY:Special Ability|AUTOMATIC|Lifetime Companion ~ Lancer	REMOVABLE:NO	TYPE:BaseClass
-Mage			VISIBLE:NO	PRECLASS:1,Mage=1		BONUS:VAR|ProficiencyCount|2	ABILITY:Special Ability|AUTOMATIC|Arcane Adept ~ Mage			REMOVABLE:NO	TYPE:BaseClass
-Priest		VISIBLE:NO	PRECLASS:1,Priest=1	BONUS:VAR|ProficiencyCount|4	ABILITY:Special Ability|AUTOMATIC|Devout ~ Priest			REMOVABLE:NO	TYPE:BaseClass
-Sage			VISIBLE:NO	PRECLASS:1,Sage=1		BONUS:VAR|ProficiencyCount|4	ABILITY:Special Ability|AUTOMATIC|Breadth of Experience ~ Sage	REMOVABLE:NO	TYPE:BaseClass
-Scout			VISIBLE:NO	PRECLASS:1,Scout=1	BONUS:VAR|ProficiencyCount|4	ABILITY:Special Ability|AUTOMATIC|Trailblazer ~ Scout			REMOVABLE:NO	TYPE:BaseClass
-Soldier		VISIBLE:NO	PRECLASS:1,Soldier=1	BONUS:VAR|ProficiencyCount|6	ABILITY:Special Ability|AUTOMATIC|Accurate ~ Soldier			REMOVABLE:NO	TYPE:BaseClass
+# Template Name	Visible	Required Class		Modify VAR					Ability										Removable?		Type
+Assassin		VISIBLE:NO	PRECLASS:1,Assassin=1	MODIFY:VAR=ProficiencyCount|ADD|4	ABILITY:Special Ability|AUTOMATIC|Heartseeker ~ Assassin		REMOVABLE:NO	TYPE:BaseClass
+Burglar		VISIBLE:NO	PRECLASS:1,Burglar=1	MODIFY:VAR=ProficiencyCount|ADD|3	ABILITY:Special Ability|AUTOMATIC|Dexterous ~ Burglar			REMOVABLE:NO	TYPE:BaseClass
+Captain		VISIBLE:NO	PRECLASS:1,Captain=1	MODIFY:VAR=ProficiencyCount|ADD|4	ABILITY:Special Ability|AUTOMATIC|Cadre ~ Captain			REMOVABLE:NO	TYPE:BaseClass
+Courtier		VISIBLE:NO	PRECLASS:1,Courtier=1	MODIFY:VAR=ProficiencyCount|ADD|3	ABILITY:Special Ability|AUTOMATIC|Only the Finest ~ Courtier	REMOVABLE:NO	TYPE:BaseClass
+Explorer		VISIBLE:NO	PRECLASS:1,Explorer=1	MODIFY:VAR=ProficiencyCount|ADD|4	ABILITY:Special Ability|AUTOMATIC|Friends All Over ~ Explorer	REMOVABLE:NO	TYPE:BaseClass
+Keeper		VISIBLE:NO	PRECLASS:1,Keeper=1	MODIFY:VAR=ProficiencyCount|ADD|2	ABILITY:Special Ability|AUTOMATIC|Teacher ~ Keeper			REMOVABLE:NO	TYPE:BaseClass
+Lancer		VISIBLE:NO	PRECLASS:1,Lancer=1	MODIFY:VAR=ProficiencyCount|ADD|6	ABILITY:Special Ability|AUTOMATIC|Lifetime Companion ~ Lancer	REMOVABLE:NO	TYPE:BaseClass
+Mage			VISIBLE:NO	PRECLASS:1,Mage=1		MODIFY:VAR=ProficiencyCount|ADD|2	ABILITY:Special Ability|AUTOMATIC|Arcane Adept ~ Mage			REMOVABLE:NO	TYPE:BaseClass
+Priest		VISIBLE:NO	PRECLASS:1,Priest=1	MODIFY:VAR=ProficiencyCount|ADD|4	ABILITY:Special Ability|AUTOMATIC|Devout ~ Priest			REMOVABLE:NO	TYPE:BaseClass
+Sage			VISIBLE:NO	PRECLASS:1,Sage=1		MODIFY:VAR=ProficiencyCount|ADD|4	ABILITY:Special Ability|AUTOMATIC|Breadth of Experience ~ Sage	REMOVABLE:NO	TYPE:BaseClass
+Scout			VISIBLE:NO	PRECLASS:1,Scout=1	MODIFY:VAR=ProficiencyCount|ADD|4	ABILITY:Special Ability|AUTOMATIC|Trailblazer ~ Scout			REMOVABLE:NO	TYPE:BaseClass
+Soldier		VISIBLE:NO	PRECLASS:1,Soldier=1	MODIFY:VAR=ProficiencyCount|ADD|6	ABILITY:Special Ability|AUTOMATIC|Accurate ~ Soldier			REMOVABLE:NO	TYPE:BaseClass
 
 #-----------------------#
 #	Subrace		#
@@ -68,7 +69,7 @@ Magma			VISIBLE:NO	SUBRACE:Magma
 # Elf
 High			VISIBLE:NO	SUBRACE:High
 #
-#Wood				VISIBLE:NO																																														SUBRACE:Wood
+#Wood			VISIBLE:NO	SUBRACE:Wood
 Gray			VISIBLE:NO	SUBRACE:Gray
 Dark			VISIBLE:NO	SUBRACE:Dark
 
