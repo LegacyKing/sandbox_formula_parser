@@ -6,14 +6,14 @@ SOURCELONG:Fantasy Craft	SOURCESHORT:FC	SOURCEDATE:2009-07
 
 # Ability Name			Category of Ability	Type							Define				Auto Weapon Prof										Ability															Bonus to HP								Modify VAR
 Special Character			CATEGORY:NPC Ability	TYPE:SpecialQuality.NPCTypeSelection	DEFINE:IsSpecialCharacter|0																													
-BONUS:HP|CURRENTMAX|NPCHealthBonus*NPCThreatLvl*5	
-BONUS:VAR|IsSpecialCharacter|1
+MODIFY:VAR=HP|SOLVE|value()+NPCHealthBonus*NPCThreatLvl*5	
+MODIFY:VAR=IsSpecialCharacter|ADD|1
 
 # COMMENT: All Creatures / NPCS and PCs should have 'Default' to allow for expansion or additions.
 
 
 NPC Basics				CATEGORY:Internal									DEFINE:NPCThreatLvl|0														ABILITY:Internal|AUTOMATIC|Attack|Competence|Defense|Health|Initiative|Resilience|Weapon Offset										
-BONUS:VAR|NPCThreatLvl|1|TYPE=Base
+MODIFY:VAR=NPCThreatLvl|SET|1
 # COMMENT: Handles the Master List for NPCs - Mounts and Rogue Gallery
 Weapon Offset			CATEGORY:Internal														AUTO:WEAPONPROF|TYPE=Bow|TYPE=Blunt|TYPE=Edged|TYPE=Hurled|TYPE=Unarmed
 

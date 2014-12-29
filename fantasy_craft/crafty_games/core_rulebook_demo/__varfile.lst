@@ -229,3 +229,14 @@ PathOfMetalLVL
 
 NPCThreatLvl
 PersonalLieutenantXP
+
+
+
+
+LOCAL:SKILL=Bonus.Insight
+
+DrakeBreathWeaponDice	
+DrakeBreathWeaponSize	
+DrakeBreathWeaponBonus	
+DrakeBreathWeaponDC	
+DrakeSpeciesFeat

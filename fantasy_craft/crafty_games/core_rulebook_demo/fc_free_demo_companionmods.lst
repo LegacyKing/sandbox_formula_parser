@@ -20,7 +20,7 @@ FOLLOWER:PersonalLieutenantXP=75	TYPE:Personal Lieutenant	MODIFY:VAR=PersonalLie
 FOLLOWER:PersonalLieutenantXP=80	TYPE:Personal Lieutenant	MODIFY:VAR=PersonalLieutenantXP|ADD|5
 FOLLOWER:PersonalLieutenantXP=85	TYPE:Personal Lieutenant	MODIFY:VAR=PersonalLieutenantXP|ADD|5
 
-
+FOLLOWER:PersonalLieutenantLvl=0	TYPE:Personal Lieutenant	MODIFY:VAR=PersonalLieutenantXP|solve|value()+mastervar("PersonalLieutenantXP")
 #
 # END
 #
