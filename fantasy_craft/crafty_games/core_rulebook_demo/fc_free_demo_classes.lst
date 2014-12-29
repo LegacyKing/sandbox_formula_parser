@@ -22,20 +22,20 @@ CLASS:Assassin	STARTSKILLPTS:6	CSKILL:Blend|Bluff|Crafting|Disguise|Intimidate|N
 ###Block: Class Progression
 1																							ABILITY:Special Ability|AUTOMATIC|Hand of Death
 2														
-BONUS:VAR|ColdReadTimes|ADD|1					ABILITY:Special Ability|AUTOMATIC|Cold Read
+MODIFY:VAR=ColdReadTimes|ADD|1					ABILITY:Special Ability|AUTOMATIC|Cold Read
 3														
-BONUS:VAR|QuickOnYourFeetTimes|ADD|1				ABILITY:Special Ability|AUTOMATIC|Quick on your Feet
+MODIFY:VAR=QuickOnYourFeetTimes|ADD|1				ABILITY:Special Ability|AUTOMATIC|Quick on your Feet
 4														
-BONUS:VAR|UnspokenNameBonus|ADD|1					ABILITY:Special Ability|AUTOMATIC|Unspoken Name
+MODIFY:VAR=UnspokenNameBonus|ADD|1					ABILITY:Special Ability|AUTOMATIC|Unspoken Name
 #Block:
 1	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
+MODIFY:VAR=AC.ClassDefense|ADD|1	
 BONUS:COMBAT|INITIATIVE|ADD|2	
-BONUS:VAR|LifestyleScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1
 2	
 BONUS:COMBAT|INITIATIVE|ADD|1									
-BONUS:VAR|LifestyleScore|ADD|1	
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1	
+MODIFY:VAR=LegendScore|ADD|1
 3	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE	
 BONUS:COMBAT|INITIATIVE|ADD|1
@@ -57,23 +57,23 @@ CLASS:Burglar	STARTSKILLPTS:8	CSKILL:Acrobatics|Athletics|Bluff|Crafting|Haggle|
 ###Block: Class Progression
 1																							ABILITY:Special Ability|AUTOMATIC|Very Very Sneaky
 2														
-BONUS:VAR|EvasionLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Evasion
+MODIFY:VAR=EvasionLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Evasion
 3														
-BONUS:VAR|BurglarFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Burglar
+MODIFY:VAR=BurglarFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Burglar
 4														
-BONUS:VAR|UncannyDodgeLvl|ADD|1					ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge I
+MODIFY:VAR=UncannyDodgeLvl|ADD|1					ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge I
 #Block:
 1	
 BONUS:COMBAT|INITIATIVE|ADD|2	
 BONUS:COMBAT|AC|ADD|2|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LegendScore|ADD|1
 2	
 BONUS:COMBAT|INITIATIVE|ADD|1	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE
 3	
 BONUS:COMBAT|INITIATIVE|ADD|1									
-BONUS:VAR|LegendScore|ADD|1	
-BONUS:VAR|LifestyleScore|ADD|1
+MODIFY:VAR=LegendScore|ADD|1	
+MODIFY:VAR=LifestyleScore|ADD|1
 4	
 BONUS:COMBAT|INITIATIVE|ADD|1	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE
@@ -94,24 +94,24 @@ CLASS:Captain	STARTSKILLPTS:6	CSKILL:Athletics|Impress|Intimidate|Medicine|Notic
 ###Block: Class Progression
 1																				ABILITY:Special Ability|AUTOMATIC|Right-Hand Man
 2									
-BONUS:VAR|MasterAndCommanderLvl|ADD|-1						ABILITY:Internal|AUTOMATIC|Master and Commander
+MODIFY:VAR=MasterAndCommanderLvl|ADD|-1						ABILITY:Internal|AUTOMATIC|Master and Commander
 3									
-BONUS:VAR|BattlePlanningLvl|ADD|1	
-BONUS:VAR|BattlePlanningCount|ADD|1	ABILITY:Internal|AUTOMATIC|Battle Planning
+MODIFY:VAR=BattlePlanningLvl|ADD|1	
+MODIFY:VAR=BattlePlanningCount|ADD|1	ABILITY:Internal|AUTOMATIC|Battle Planning
 4									
-BONUS:VAR|TakeCommandBonus|ADD|1							ABILITY:Special Ability|AUTOMATIC|Take Command
+MODIFY:VAR=TakeCommandBonus|ADD|1							ABILITY:Special Ability|AUTOMATIC|Take Command
 #Block:
 1	
 BONUS:COMBAT|INITIATIVE|ADD|1				
-BONUS:VAR|LifestyleScore|ADD|1	
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1	
+MODIFY:VAR=LegendScore|ADD|1
 2	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|ADD|1	
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1	
+MODIFY:VAR=LegendScore|ADD|1
 3	
 BONUS:COMBAT|INITIATIVE|ADD|1				
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LegendScore|ADD|1
 4	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE
 
@@ -131,26 +131,26 @@ CLASS:Courtier	STARTSKILLPTS:6	CSKILL:Bluff|Haggle|Impress|Intimidate|Investigat
 ###Block: Class Progression
 1																							ABILITY:Special Ability|AUTOMATIC|With a Word
 2														
-BONUS:VAR|GiftsAndFavorsCityLvl|ADD|1				ABILITY:Internal|AUTOMATIC|Gifts and Favors ~ City
+MODIFY:VAR=GiftsAndFavorsCityLvl|ADD|1				ABILITY:Internal|AUTOMATIC|Gifts and Favors ~ City
 3																							ABILITY:Special Ability|AUTOMATIC|Obligations
 4														
-BONUS:VAR|EloquenceCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Eloquence
+MODIFY:VAR=EloquenceCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Eloquence
 #Block:
 1	
 BONUS:COMBAT|INITIATIVE|ADD|2									
-BONUS:VAR|LifestyleScore|ADD|2	
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|2	
+MODIFY:VAR=LegendScore|ADD|1
 2	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE	
 BONUS:COMBAT|INITIATIVE|ADD|1	
-BONUS:VAR|LifestyleScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1
 3	
 BONUS:COMBAT|INITIATIVE|ADD|1									
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LegendScore|ADD|1
 4	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE	
 BONUS:COMBAT|INITIATIVE|ADD|1	
-BONUS:VAR|LifestyleScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1
 
 ###Block: Explorer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -168,23 +168,23 @@ CLASS:Explorer	STARTSKILLPTS:6	CSKILL:Bluff|Crafting|Haggle|Impress|Investigate|
 ###Block: Class Progression
 1																							ABILITY:Special Ability|AUTOMATIC|Tomb Raider
 2														
-BONUS:VAR|BookwormLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Bookworm
+MODIFY:VAR=BookwormLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Bookworm
 3														
-BONUS:VAR|ExplorerFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Explorer
+MODIFY:VAR=ExplorerFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Explorer
 4														
-BONUS:VAR|UncannyDodgeLvl|ADD|1					ABILITY:Internal|AUTOMATIC|Uncanny Dodge
+MODIFY:VAR=UncannyDodgeLvl|ADD|1					ABILITY:Internal|AUTOMATIC|Uncanny Dodge
 #Block:
 1	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE	
 BONUS:COMBAT|INITIATIVE|ADD|1	
-BONUS:VAR|LifestyleScore|ADD|1	
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1	
+MODIFY:VAR=LegendScore|ADD|1
 2														
-BONUS:VAR|LifestyleScore|ADD|1
+MODIFY:VAR=LifestyleScore|ADD|1
 3	
 BONUS:COMBAT|AC|ADD|1|TYPE=ClassDefense.REPLACE	
 BONUS:COMBAT|INITIATIVE|ADD|1	
-BONUS:VAR|LegendScore|ADD|1
+MODIFY:VAR=LegendScore|ADD|1
 
 ###Block: Keeper ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -202,26 +202,26 @@ CLASS:Keeper	STARTSKILLPTS:8	CSKILL:Bluff|Crafting|Haggle|Impress|Investigate|Me
 ###Block: Class Progression
 1																		ABILITY:Special Ability|AUTOMATIC|Man of Reason
 2									
-BONUS:VAR|TradeSecretsCount|1					ABILITY:Special Ability|AUTOMATIC|Trade Secrets
+MODIFY:VAR=TradeSecretsCount|1					ABILITY:Special Ability|AUTOMATIC|Trade Secrets
 3									
-BONUS:VAR|BrightIdeaTimes|1					ABILITY:Special Ability|AUTOMATIC|Bright Idea
+MODIFY:VAR=BrightIdeaTimes|1					ABILITY:Special Ability|AUTOMATIC|Bright Idea
 4									
-BONUS:VAR|KeeperFeatCount|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Keeper
+MODIFY:VAR=KeeperFeatCount|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Keeper
 #Block:
 1	
-BONUS:COMBAT|AC|2|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|2	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=AC.ClassDefense|ADD|2	
+MODIFY:VAR=LifestyleScore|2	
+MODIFY:VAR=LegendScore|1
 2	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=AC.ClassDefense|ADD|1	
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 3	
 BONUS:COMBAT|INITIATIVE|1				
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LegendScore|1
 4	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|1
+MODIFY:VAR=AC.ClassDefense|ADD|1	
+MODIFY:VAR=LifestyleScore|1
 
 ###Block: Lancer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -238,26 +238,26 @@ CLASS:Lancer	STARTSKILLPTS:4	CSKILL:Athletics|Impress|Intimidate|Notice|Resolve|
 ###Block: Class Progression
 1																							ABILITY:Special Ability|AUTOMATIC|Born in the Saddle
 2														
-BONUS:VAR|MettleLvl|1						ABILITY:Internal|AUTOMATIC|Mettle
+MODIFY:VAR=MettleLvl|1						ABILITY:Internal|AUTOMATIC|Mettle
 3														
-BONUS:VAR|LancerFeatCount|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Lancer
+MODIFY:VAR=LancerFeatCount|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Lancer
 4														
-BONUS:VAR|BredForWarBonus|2					ABILITY:Special Ability|AUTOMATIC|Bred for War
+MODIFY:VAR=BredForWarBonus|2					ABILITY:Special Ability|AUTOMATIC|Bred for War
 #Block:
 1	
 BONUS:COMBAT|INITIATIVE|2									
-BONUS:VAR|LifestyleScore|2
+MODIFY:VAR=LifestyleScore|2
 2	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
+MODIFY:VAR=AC.ClassDefense|ADD|1	
 BONUS:COMBAT|INITIATIVE|1	
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 3	
 BONUS:COMBAT|INITIATIVE|1
 4	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
+MODIFY:VAR=AC.ClassDefense|ADD|1	
 BONUS:COMBAT|INITIATIVE|1	
-BONUS:VAR|LifestyleScore|1
+MODIFY:VAR=LifestyleScore|1
 
 ###Block: Mage ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -267,8 +267,8 @@ BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")*1/2
 BONUS:HP|CURRENTMAX|CON+CL*6	
 BONUS:SAVE|BASE.Fortitude,BASE.Reflex|classlevel("APPLIEDAS=NONEPIC")/3	
 BONUS:SAVE|BASE.Will|classlevel("APPLIEDAS=NONEPIC")+2/2	
-BONUS:VAR|SpellPoints|classlevel("APPLIEDAS=NONEPIC")*2	
-BONUS:VAR|TotalCasterLvl|1
+MODIFY:VAR=SpellPoints|classlevel("APPLIEDAS=NONEPIC")*2	
+MODIFY:VAR=TotalCasterLvl|1
 # Class Name	Required Non-Monster Lvl
 CLASS:Mage		PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
@@ -279,11 +279,11 @@ BONUS:CASTERLEVEL|Mage|TotalCasterLvl
 ###Block: Class Progression
 1						ABILITY:Special Ability|AUTOMATIC|Subtle and Quick to Anger
 2	
-BONUS:VAR|ArcaneMightCount|1	ABILITY:Special Ability|AUTOMATIC|Arcane Might
+MODIFY:VAR=ArcaneMightCount|1	ABILITY:Special Ability|AUTOMATIC|Arcane Might
 3	
-BONUS:VAR|CircleOfPowerLvl|1	ABILITY:Internal|AUTOMATIC|Circle of Power
+MODIFY:VAR=CircleOfPowerLvl|1	ABILITY:Internal|AUTOMATIC|Circle of Power
 4	
-BONUS:VAR|MageFeatCount|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Mage
+MODIFY:VAR=MageFeatCount|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Mage
 ###Block:
 1	CAST:0,0,0,0,0,0,0,0,0,0	KNOWN:ArcaneAdept,0,0,0,0,0,0,0,0,0
 2	CAST:0,0,0,0,0,0,0,0,0,0	KNOWN:ArcaneAdept,0,0,0,0,0,0,0,0,0
@@ -292,17 +292,17 @@ BONUS:VAR|MageFeatCount|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Mage
 #Block:
 1												
 BONUS:COMBAT|INITIATIVE|1				
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 2												
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=AC.ClassDefense|ADD|1	
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 3												
 BONUS:COMBAT|INITIATIVE|1				
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LegendScore|1
 4												
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE
+MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Priest ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -312,7 +312,7 @@ BONUS:COMBAT|BASEAB|classlevel("APPLIEDAS=NONEPIC")*3/4|TYPE=Base.REPLACE
 BONUS:HP|CURRENTMAX|CON+CL*9	
 BONUS:SAVE|BASE.Fortitude,,BASE.Will|(classlevel("APPLIEDAS=NONEPIC")+3)*2/5	
 BONUS:SAVE|BASE.Reflex|classlevel("APPLIEDAS=NONEPIC")/3	
-BONUS:VAR|TotalCasterLVL|CL
+MODIFY:VAR=TotalCasterLVL|CL
 # Class Name	Required Non-Monster Lvl
 CLASS:Priest	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
@@ -320,25 +320,25 @@ CLASS:Priest	STARTSKILLPTS:6	CSKILL:Impress|Intimidate|Medicine|Notice|Resolve|S
 ###Block: Class Progression
 1																		ABILITY:Special Ability|AUTOMATIC|Acolyte
 2									
-BONUS:VAR|SignsAndPortentsLvl|1				ABILITY:Internal|AUTOMATIC|Signs and Portents
+MODIFY:VAR=SignsAndPortentsLvl|1				ABILITY:Internal|AUTOMATIC|Signs and Portents
 3									
-BONUS:VAR|PathOfTheDevotedStepLvl|1				ABILITY:Special Ability|AUTOMATIC|Path of the Devoted
+MODIFY:VAR=PathOfTheDevotedStepLvl|1				ABILITY:Special Ability|AUTOMATIC|Path of the Devoted
 4									
-BONUS:VAR|PriestFeatCount|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Priest
+MODIFY:VAR=PriestFeatCount|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Priest
 #Block:
 1	
-BONUS:COMBAT|AC|2|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=AC.ClassDefense|ADD|2	
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 2	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=AC.ClassDefense|ADD|1	
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 3	
 BONUS:COMBAT|INITIATIVE|1				
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LegendScore|1
 4	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE
+MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Sage ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -357,25 +357,25 @@ SUBCLASS:Sage 2nd	OUTPUTNAME:Sage	COST:0									PREPCLEVEL:MIN=2
 ###Block: Class Progression
 1																		ABILITY:Special Ability|AUTOMATIC|Wise Counsel
 2									
-BONUS:VAR|AssistanceLvl|1					ABILITY:Internal|AUTOMATIC|Assistance
+MODIFY:VAR=AssistanceLvl|1					ABILITY:Internal|AUTOMATIC|Assistance
 3									
-BONUS:VAR|BestOfTheBestTimes|1				ABILITY:Special Ability|AUTOMATIC|Best of the Best
+MODIFY:VAR=BestOfTheBestTimes|1				ABILITY:Special Ability|AUTOMATIC|Best of the Best
 4									
-BONUS:VAR|CrossTrainingCount|1				ABILITY:Special Ability|AUTOMATIC|Cross-Training
+MODIFY:VAR=CrossTrainingCount|1				ABILITY:Special Ability|AUTOMATIC|Cross-Training
 #Block:
 1	
 BONUS:COMBAT|INITIATIVE|1				
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 2	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=AC.ClassDefense|ADD|1	
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|1
 3	
 BONUS:COMBAT|INITIATIVE|1				
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LegendScore|1
 4	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE
+MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Scout ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -392,22 +392,22 @@ CLASS:Scout		STARTSKILLPTS:6	CSKILL:Acrobatics|Athletics|Blend|Medicine|Notice|R
 ###Block: Class Progression
 1																			ABILITY:Special Ability|AUTOMATIC|Stalker
 2														
-BONUS:VAR|RoughLivingBonus|2	ABILITY:Special Ability|AUTOMATIC|Rough Living
+MODIFY:VAR=RoughLivingBonus|2	ABILITY:Special Ability|AUTOMATIC|Rough Living
 3														
-BONUS:VAR|ScoutFeatCount|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Scout
+MODIFY:VAR=ScoutFeatCount|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Scout
 4														
-BONUS:VAR|SneakAttackDice|1	ABILITY:Special Ability|AUTOMATIC|Sneak Attack
+MODIFY:VAR=SneakAttackDice|1	ABILITY:Special Ability|AUTOMATIC|Sneak Attack
 #Block:
 1	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
+MODIFY:VAR=AC.ClassDefense|ADD|1	
 BONUS:COMBAT|INITIATIVE|2
 2	
 BONUS:COMBAT|INITIATIVE|1									
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LegendScore|1
 3	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
+MODIFY:VAR=AC.ClassDefense|ADD|1	
 BONUS:COMBAT|INITIATIVE|1	
-BONUS:VAR|LifestyleScore|1
+MODIFY:VAR=LifestyleScore|1
 4	
 BONUS:COMBAT|INITIATIVE|1
 
@@ -427,23 +427,23 @@ CLASS:Soldier	STARTSKILLPTS:4	CSKILL:Athletics|Crafting|Intimidate|Notice|Resolv
 1
 ###Block: Class Progression
 1														
-BONUS:VAR|FightOnCount|1					ABILITY:Special Ability|AUTOMATIC|Fight On
+MODIFY:VAR=FightOnCount|1					ABILITY:Special Ability|AUTOMATIC|Fight On
 2														
-BONUS:VAR|FortunesOfWarLvl|1					ABILITY:Internal|AUTOMATIC|Fortunes of War
+MODIFY:VAR=FortunesOfWarLvl|1					ABILITY:Internal|AUTOMATIC|Fortunes of War
 3														
-BONUS:VAR|FightOnCount|1
+MODIFY:VAR=FightOnCount|1
 4														
-BONUS:VAR|ArmorUseLvl|1						ABILITY:Internal|AUTOMATIC|Armor Use
+MODIFY:VAR=ArmorUseLvl|1						ABILITY:Internal|AUTOMATIC|Armor Use
 #Block:
 1	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
+MODIFY:VAR=AC.ClassDefense|ADD|1	
 BONUS:COMBAT|INITIATIVE|1	
-BONUS:VAR|LegendScore|1
+MODIFY:VAR=LegendScore|1
 3	
-BONUS:COMBAT|AC|1|TYPE=ClassDefense.REPLACE	
+MODIFY:VAR=AC.ClassDefense|ADD|1	
 BONUS:COMBAT|INITIATIVE|1	
-BONUS:VAR|LifestyleScore|1	
-BONUS:VAR|LegendScore|2
+MODIFY:VAR=LifestyleScore|1	
+MODIFY:VAR=LegendScore|2
 
 
 #

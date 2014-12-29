@@ -295,8 +295,6 @@ MODIFYOTHER:ABILITY=Archetype|GROUP=WizardBonusFeats|FLAG=WizardBonusFeats|SET|T
 
 
 
-# Pathfinder MaxRank
-MODIFYOTHER:SKILL|ALL|MaxRank|SOLVE|TL
 
 
 #is the correct MODIFYOTEHR statement
@@ -347,7 +345,10 @@ MODIFYOTHER:CLASS|ALL|TL|ADD|classlevel()
 
 
 
-MODIFYOTHER:SKILL|ALL|MaxRank|TL+3	EXPLANATION:This sets MaxRank for all skills to Total Level +3 -- Assuming that Tom Parker redoes how the Gamemode Caps Rank and VISIBILITY.
+#MODIFYOTHER:SKILL|ALL|MaxRank|TL+3	EXPLANATION:This sets MaxRank for all skills to Total Level +3 -- Assuming that Tom Parker redoes how the Gamemode Caps Rank and VISIBILITY.
+MODIFYOTHER:SKILL|ALL|MaxRank.Mod|SOLVE|value()+MaxRank.Enlightened
+
+
 #BONUS:VAR|MaxRank|TL+12|TYPE=BASE	
 
 
