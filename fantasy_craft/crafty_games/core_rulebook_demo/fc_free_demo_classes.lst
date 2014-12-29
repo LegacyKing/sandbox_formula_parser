@@ -206,11 +206,11 @@ CLASS:Keeper	STARTSKILLPTS:8	CSKILL:Bluff|Crafting|Haggle|Impress|Investigate|Me
 ###Block: Class Progression
 1																		ABILITY:Special Ability|AUTOMATIC|Man of Reason
 2									
-MODIFY:VAR=TradeSecretsCount|1					ABILITY:Special Ability|AUTOMATIC|Trade Secrets
+MODIFY:VAR=TradeSecretsCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Trade Secrets
 3									
-MODIFY:VAR=BrightIdeaTimes|1					ABILITY:Special Ability|AUTOMATIC|Bright Idea
+MODIFY:VAR=BrightIdeaTimes|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bright Idea
 4									
-MODIFY:VAR=KeeperFeatCount|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Keeper
+MODIFY:VAR=KeeperFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Keeper
 #Block:
 1	
 MODIFY:VAR=AC.ClassDefense|ADD|2	
