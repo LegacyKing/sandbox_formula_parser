@@ -93,16 +93,6 @@ SqueezeGrade
 SwallowGrade
 TailSlapGrade
 TrampleGrade
-I
-II
-III
-IV
-V
-VI
-VII
-VIII
-IX
-X
 LifestyleScore
 Panache
 Prudence
@@ -236,3 +226,6 @@ PathOfEvilLVL
 PathOfFireLVL
 MagicPathSaveBonus
 PathOfMetalLVL
+
+NPCThreatLvl
+PersonalLieutenantXP

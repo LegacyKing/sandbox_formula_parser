@@ -11,270 +11,142 @@ SOURCELONG:Fantasy Craft	SOURCESHORT:FC	SOURCEDATE:2009-07
 ###Block: Assassin ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Assassin	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.30	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	
-MODIFY:HP.Class|SET|9	
+CLASS:Assassin	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.30	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	MODIFY:HP.Class|SET|9	
 # Class Name	Required Non-Monster Lvl
 CLASS:Assassin	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Assassin	STARTSKILLPTS:6	CSKILL:Blend|Bluff|Crafting|Disguise|Intimidate|Notice|Prestidigitation|Resolve|Sense Motive|Tactics
 ###Block: Class Progression
-1																							ABILITY:Special Ability|AUTOMATIC|Hand of Death
-2														
-MODIFY:VAR=ColdReadTimes|ADD|1					ABILITY:Special Ability|AUTOMATIC|Cold Read
-3														
-MODIFY:VAR=QuickOnYourFeetTimes|ADD|1				ABILITY:Special Ability|AUTOMATIC|Quick on your Feet
-4														
-MODIFY:VAR=UnspokenNameBonus|ADD|1					ABILITY:Special Ability|AUTOMATIC|Unspoken Name
-#Block:
-1	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|2	
-MODIFY:VAR=LifestyleScore|ADD|1
-2	
-MODIFY:VAR=Initiative|ADD|1									
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1
-4	
-MODIFY:VAR=Initiative|ADD|1
+1								ABILITY:Special Ability|AUTOMATIC|Hand of Death
+2	MODIFY:VAR=ColdReadTimes|ADD|1		ABILITY:Special Ability|AUTOMATIC|Cold Read
+3	MODIFY:VAR=QuickOnYourFeetTimes|ADD|1	ABILITY:Special Ability|AUTOMATIC|Quick on your Feet
+4	MODIFY:VAR=UnspokenNameBonus|ADD|1		ABILITY:Special Ability|AUTOMATIC|Unspoken Name
+###Block:
+1	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|2	MODIFY:VAR=LifestyleScore|ADD|1
+2	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1
+4	MODIFY:VAR=Initiative|ADD|1
 
 ###Block: Burglar ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Burglar	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.32	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL/2)+2	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/3	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	
-MODIFY:HP.Class|SET|6	
+CLASS:Burglar	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.32	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL/2)+2	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/3	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	MODIFY:HP.Class|SET|6	
 # Class Name	Required Non-Monster Lvl
 CLASS:Burglar	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Burglar	STARTSKILLPTS:8	CSKILL:Acrobatics|Athletics|Bluff|Crafting|Haggle|Investigate|Notice|Prestidigitation|Ride|Search|Sneak|Tactics
 ###Block: Class Progression
-1																							ABILITY:Special Ability|AUTOMATIC|Very Very Sneaky
-2														
-MODIFY:VAR=EvasionLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Evasion
-3														
-MODIFY:VAR=BurglarFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Burglar
-4														
-MODIFY:VAR=UncannyDodgeLvl|ADD|1					ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge I
-#Block:
-1	
-MODIFY:VAR=Initiative|ADD|2	
-MODIFY:VAR=AC.ClassDefense|ADD|2	
-MODIFY:VAR=LegendScore|ADD|1
-2	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=AC.ClassDefense|ADD|1
-3	
-MODIFY:VAR=Initiative|ADD|1									
-MODIFY:VAR=LegendScore|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1
-4	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=AC.ClassDefense|ADD|1
+1											ABILITY:Special Ability|AUTOMATIC|Very Very Sneaky
+2	MODIFY:VAR=EvasionLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Evasion
+3	MODIFY:VAR=BurglarFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Burglar
+4	MODIFY:VAR=UncannyDodgeLvl|ADD|1					ABILITY:Special Ability|AUTOMATIC|Uncanny Dodge I
+###Block:
+1	MODIFY:VAR=Initiative|ADD|2	MODIFY:VAR=AC.ClassDefense|ADD|2	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=AC.ClassDefense|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1									MODIFY:VAR=LegendScore|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1
+4	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Captain ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Captain	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.34	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+((ECL+3)*2)/5	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/2+2	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	
-MODIFY:HP.Class|SET|9	
+CLASS:Captain	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.34	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+((ECL+3)*2)/5	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/2+2	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	MODIFY:HP.Class|SET|9	
 # Class Name	Required Non-Monster Lvl
 CLASS:Captain	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Captain	STARTSKILLPTS:6	CSKILL:Athletics|Impress|Intimidate|Medicine|Notice|Resolve|Ride|Sense Motive|Survival|Tactics
 ###Block: Class Progression
-1																				ABILITY:Special Ability|AUTOMATIC|Right-Hand Man
-2									
-MODIFY:VAR=MasterAndCommanderLvl|ADD|-1						ABILITY:Internal|AUTOMATIC|Master and Commander
-3									
-MODIFY:VAR=BattlePlanningLvl|ADD|1	
-MODIFY:VAR=BattlePlanningCount|ADD|1	ABILITY:Internal|AUTOMATIC|Battle Planning
-4									
-MODIFY:VAR=TakeCommandBonus|ADD|1							ABILITY:Special Ability|AUTOMATIC|Take Command
-#Block:
-1	
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-2	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LegendScore|ADD|1
-4	
-MODIFY:VAR=AC.ClassDefense|ADD|1
+1														ABILITY:Special Ability|AUTOMATIC|Right-Hand Man
+2	MODIFY:VAR=MasterAndCommanderLvl|ADD|-1							ABILITY:Internal|AUTOMATIC|Master and Commander
+3	MODIFY:VAR=BattlePlanningLvl|ADD|1	MODIFY:VAR=BattlePlanningCount|ADD|1	ABILITY:Internal|AUTOMATIC|Battle Planning
+4	MODIFY:VAR=TakeCommandBonus|ADD|1								ABILITY:Special Ability|AUTOMATIC|Take Command
+###Block:
+1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+4	MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Courtier ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Courtier	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.36	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*1/2	
-MODIFY:HP.Class|SET|9	
+CLASS:Courtier	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.36	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*1/2	MODIFY:HP.Class|SET|9	
 # Class Name	Required Non-Monster Lvl
 CLASS:Courtier	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Courtier	STARTSKILLPTS:6	CSKILL:Bluff|Haggle|Impress|Intimidate|Investigate|Notice|Prestidigitation|Resolve|Ride|Sense Motive
 ###Block: Class Progression
-1																							ABILITY:Special Ability|AUTOMATIC|With a Word
-2														
-MODIFY:VAR=GiftsAndFavorsCityLvl|ADD|1				ABILITY:Internal|AUTOMATIC|Gifts and Favors ~ City
-3																							ABILITY:Special Ability|AUTOMATIC|Obligations
-4														
-MODIFY:VAR=EloquenceCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Eloquence
-#Block:
-1	
-MODIFY:VAR=Initiative|ADD|2									
-MODIFY:VAR=LifestyleScore|ADD|2	
-MODIFY:VAR=LegendScore|ADD|1
-2	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1
-3	
-MODIFY:VAR=Initiative|ADD|1									
-MODIFY:VAR=LegendScore|ADD|1
-4	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1
+1										ABILITY:Special Ability|AUTOMATIC|With a Word
+2	MODIFY:VAR=GiftsAndFavorsCityLvl|ADD|1				ABILITY:Internal|AUTOMATIC|Gifts and Favors ~ City
+3										ABILITY:Special Ability|AUTOMATIC|Obligations
+4	MODIFY:VAR=EloquenceCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Eloquence
+###Block:
+1	MODIFY:VAR=Initiative|ADD|2									MODIFY:VAR=LifestyleScore|ADD|2	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1									MODIFY:VAR=LegendScore|ADD|1
+4	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1
 
 ###Block: Explorer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Explorer	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.38	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL/2)+2	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/3	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	
-MODIFY:HP.Class|SET|9	
+CLASS:Explorer	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.38	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL/2)+2	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/3	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	MODIFY:HP.Class|SET|9	
 # Class Name	Required Non-Monster Lvl
 CLASS:Explorer	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Explorer	STARTSKILLPTS:6	CSKILL:Bluff|Crafting|Haggle|Impress|Investigate|Medicine|Notice|Resolve|Search|Sense Motive|Survival|Tactics
 ###Block: Class Progression
-1																							ABILITY:Special Ability|AUTOMATIC|Tomb Raider
-2														
-MODIFY:VAR=BookwormLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Bookworm
-3														
-MODIFY:VAR=ExplorerFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Explorer
-4														
-MODIFY:VAR=UncannyDodgeLvl|ADD|1					ABILITY:Internal|AUTOMATIC|Uncanny Dodge
-#Block:
-1	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-2														
-MODIFY:VAR=LifestyleScore|ADD|1
-3	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
+1							ABILITY:Special Ability|AUTOMATIC|Tomb Raider
+2	MODIFY:VAR=BookwormLvl|ADD|1		ABILITY:Internal|AUTOMATIC|Bookworm
+3	MODIFY:VAR=ExplorerFeatCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Explorer
+4	MODIFY:VAR=UncannyDodgeLvl|ADD|1	ABILITY:Internal|AUTOMATIC|Uncanny Dodge
+###Block:
+1	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=LifestyleScore|ADD|1
+3	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LegendScore|ADD|1
 
 ###Block: Keeper ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Keeper	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.39	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*1/2	
-MODIFY:HP.Class|SET|6	
+CLASS:Keeper	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.39	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*1/2	MODIFY:HP.Class|SET|6	
 # Class Name	Required Non-Monster Lvl
 CLASS:Keeper	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Keeper	STARTSKILLPTS:8	CSKILL:Bluff|Crafting|Haggle|Impress|Investigate|Medicine|Notice|Resolve|Search|Sense Motive|Survival|Tactics
-1
 ###Block: Class Progression
-1																		ABILITY:Special Ability|AUTOMATIC|Man of Reason
-2									
-MODIFY:VAR=TradeSecretsCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Trade Secrets
-3									
-MODIFY:VAR=BrightIdeaTimes|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bright Idea
-4									
-MODIFY:VAR=KeeperFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Keeper
-#Block:
-1	
-MODIFY:VAR=AC.ClassDefense|ADD|2	
-MODIFY:VAR=LifestyleScore|ADD|2	
-MODIFY:VAR=LegendScore|ADD|1
-2	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LegendScore|ADD|1
-4	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1
+1	ABILITY:Special Ability|AUTOMATIC|Man of Reason
+2	ABILITY:Special Ability|AUTOMATIC|Trade Secrets
+3	ABILITY:Special Ability|AUTOMATIC|Bright Idea
+4	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Keeper
+###Block:
+2	MODIFY:VAR=TradeSecretsCount|ADD|1
+3	MODIFY:VAR=BrightIdeaTimes|ADD|1	
+4	MODIFY:VAR=KeeperFeatCount|ADD|1	
+1	MODIFY:VAR=AC.ClassDefense|ADD|2	MODIFY:VAR=LifestyleScore|ADD|2	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1				MODIFY:VAR=LegendScore|ADD|1
+4	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1
 
 ###Block: Lancer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus										Bonus to HP				Save bonus
-CLASS:Lancer	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.41	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL	
-MODIFY:HP.Class|SET|12	
+CLASS:Lancer	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.41	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	MODIFY:VAR=BASEAB|SOLVE|value()+ECL	MODIFY:HP.Class|SET|12	
 # Class Name	Required Non-Monster Lvl
 CLASS:Lancer	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Lancer	STARTSKILLPTS:4	CSKILL:Athletics|Impress|Intimidate|Notice|Resolve|Ride|Survival|Tactics
 ###Block: Class Progression
-1																							ABILITY:Special Ability|AUTOMATIC|Born in the Saddle
-2														
-MODIFY:VAR=MettleLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Mettle
-3														
-MODIFY:VAR=LancerFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Lancer
-4														
-MODIFY:VAR=BredForWarBonus|ADD|2					ABILITY:Special Ability|AUTOMATIC|Bred for War
-#Block:
-1	
-MODIFY:VAR=Initiative|ADD|2									
-MODIFY:VAR=LifestyleScore|ADD|2
-2	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=Initiative|ADD|1
-4	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1
+1							ABILITY:Special Ability|AUTOMATIC|Born in the Saddle
+2	MODIFY:VAR=MettleLvl|ADD|1		ABILITY:Internal|AUTOMATIC|Mettle
+3	MODIFY:VAR=LancerFeatCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Lancer
+4	MODIFY:VAR=BredForWarBonus|ADD|2	ABILITY:Special Ability|AUTOMATIC|Bred for War
+###Block:
+1	MODIFY:VAR=Initiative|ADD|2									MODIFY:VAR=LifestyleScore|ADD|2
+2	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1
+4	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1
 
 ###Block: Mage ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Class Name	Type			Max Level	Source Page		Define							Combat bonus								Bonus to HP				Save bonus																					Modify VAR
-CLASS:Mage		TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.43	DEFINE:ArcaneAdept|0	DEFINE:ArcaneKnown|0	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*1/2	
-MODIFY:HP.Class|SET|6	
-MODIFY:VAR=SpellPoints|SOLVE|value()+ECL*2	
-MODIFY:VAR=TotalCasterLVL|SOLVE|value()+ECL
+# Class Name	Type			Max Level	Source Page		Define							Combat bonus								Bonus to HP				Save bonus								Modify VAR
+CLASS:Mage		TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.43	DEFINE:ArcaneAdept|0	DEFINE:ArcaneKnown|0	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*1/2	MODIFY:HP.Class|SET|6	MODIFY:VAR=SpellPoints|SOLVE|value()+ECL*2	MODIFY:VAR=TotalCasterLVL|SOLVE|value()+ECL
 # Class Name	Required Non-Monster Lvl
 CLASS:Mage		PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
@@ -283,79 +155,44 @@ CLASS:Mage		STARTSKILLPTS:8	CSKILL:Bluff|Crafting|Impress|Intimidate|Investigate
 CLASS:Mage		SPELLSTAT:WIS	SPELLTYPE:Arcane	MEMORIZE:NO	
 BONUS:CASTERLEVEL|Mage|TotalCasterLvl
 ###Block: Class Progression
-1						ABILITY:Special Ability|AUTOMATIC|Subtle and Quick to Anger
-2	
-MODIFY:VAR=ArcaneMightCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Arcane Might
-3	
-MODIFY:VAR=CircleOfPowerLvl|ADD|1	ABILITY:Internal|AUTOMATIC|Circle of Power
-4	
-MODIFY:VAR=MageFeatCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Mage
+1							ABILITY:Special Ability|AUTOMATIC|Subtle and Quick to Anger
+2	MODIFY:VAR=ArcaneMightCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Arcane Might
+3	MODIFY:VAR=CircleOfPowerLvl|ADD|1	ABILITY:Internal|AUTOMATIC|Circle of Power
+4	MODIFY:VAR=MageFeatCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Mage
 ###Block:
 1	CAST:0,0,0,0,0,0,0,0,0,0	KNOWN:ArcaneAdept,0,0,0,0,0,0,0,0,0
 2	CAST:0,0,0,0,0,0,0,0,0,0	KNOWN:ArcaneAdept,0,0,0,0,0,0,0,0,0
 3	CAST:0,0,0,0,0,0,0,0,0,0	KNOWN:ArcaneAdept,0,0,0,0,0,0,0,0,0
 4	CAST:0,0,0,0,0,0,0,0,0,0	KNOWN:ArcaneAdept,0,0,0,0,0,0,0,0,0
-#Block:
-1												
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-2												
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3												
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LegendScore|ADD|1
-4												
-MODIFY:VAR=AC.ClassDefense|ADD|1
+###Block:
+1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+4	MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Priest ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus																						Modify VAR
-CLASS:Priest	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.44	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	
-MODIFY:HP.Class|SET|9	
-MODIFY:VAR=TotalCasterLVL|SOLVE|value()+ECL
+# Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus									Modify VAR
+CLASS:Priest	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.44	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	MODIFY:HP.Class|SET|9	MODIFY:VAR=TotalCasterLVL|SOLVE|value()+ECL
 # Class Name	Required Non-Monster Lvl
 CLASS:Priest	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Priest	STARTSKILLPTS:6	CSKILL:Impress|Intimidate|Medicine|Notice|Resolve|Sense Motive
 ###Block: Class Progression
-1																		ABILITY:Special Ability|AUTOMATIC|Acolyte
-2									
-MODIFY:VAR=SignsAndPortentsLvl|ADD|1				ABILITY:Internal|AUTOMATIC|Signs and Portents
-3									
-MODIFY:VAR=PathOfTheDevotedStepLvl|ADD|1				ABILITY:Special Ability|AUTOMATIC|Path of the Devoted
-4									
-MODIFY:VAR=PriestFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Priest
-#Block:
-1	
-MODIFY:VAR=AC.ClassDefense|ADD|2	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-2	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LegendScore|ADD|1
-4	
-MODIFY:VAR=AC.ClassDefense|ADD|1
+1	ABILITY:Special Ability|AUTOMATIC|Acolyte
+2	MODIFY:VAR=SignsAndPortentsLvl|ADD|1				ABILITY:Internal|AUTOMATIC|Signs and Portents
+3	MODIFY:VAR=PathOfTheDevotedStepLvl|ADD|1				ABILITY:Special Ability|AUTOMATIC|Path of the Devoted
+4	MODIFY:VAR=PriestFeatCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Priest
+###Block:
+1	MODIFY:VAR=AC.ClassDefense|ADD|2	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1				MODIFY:VAR=LegendScore|ADD|1
+4	MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Sage ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Base class as subclass?	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Sage		TYPE:PC.Base.Core	MAXLEVEL:4	ALLOWBASECLASS:NO		SOURCEPAGE:p.46	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	
-MODIFY:HP.Class|SET|9	
+CLASS:Sage		TYPE:PC.Base.Core	MAXLEVEL:4	ALLOWBASECLASS:NO		SOURCEPAGE:p.46	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL+3)*2/5	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	MODIFY:HP.Class|SET|9	
 # Class Name	Required Non-Monster Lvl
 CLASS:Sage		PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
@@ -364,96 +201,52 @@ SUBCLASS:Sage 1st	OUTPUTNAME:Sage	COST:0	PREMULT:1,[!PRECLASS:1,%=1],[PRECLASS:1
 SUBCLASSLEVEL:1	ADD:CLASSSKILLS|4|CROSSCLASSSKILLS,AUTORANK=2
 SUBCLASS:Sage 2nd	OUTPUTNAME:Sage	COST:0									PREPCLEVEL:MIN=2
 ###Block: Class Progression
-1																		ABILITY:Special Ability|AUTOMATIC|Wise Counsel
-2									
-MODIFY:VAR=AssistanceLvl|ADD|1					ABILITY:Internal|AUTOMATIC|Assistance
-3									
-MODIFY:VAR=BestOfTheBestTimes|ADD|1				ABILITY:Special Ability|AUTOMATIC|Best of the Best
-4									
-MODIFY:VAR=CrossTrainingCount|ADD|1				ABILITY:Special Ability|AUTOMATIC|Cross-Training
-#Block:
-1	
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-2	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=Initiative|ADD|1				
-MODIFY:VAR=LegendScore|ADD|1
-4	
-MODIFY:VAR=AC.ClassDefense|ADD|1
+1							ABILITY:Special Ability|AUTOMATIC|Wise Counsel
+2	MODIFY:VAR=AssistanceLvl|ADD|1	ABILITY:Internal|AUTOMATIC|Assistance
+3	MODIFY:VAR=BestOfTheBestTimes|ADD|1	ABILITY:Special Ability|AUTOMATIC|Best of the Best
+4	MODIFY:VAR=CrossTrainingCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Cross-Training
+###Block:
+1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+2	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+4	MODIFY:VAR=AC.ClassDefense|ADD|1
 
 ###Block: Scout ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus											Bonus to HP				Save bonus
-CLASS:Scout		TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.48	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL/2)+2	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL/2)+2	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/3	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	
-MODIFY:HP.Class|SET|9	
+CLASS:Scout		TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.48	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL/2)+2	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+(ECL/2)+2	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+ECL/3	MODIFY:VAR=BASEAB|SOLVE|value()+ECL*3/4	MODIFY:HP.Class|SET|9	
 # Class Name	Required Non-Monster Lvl
 CLASS:Scout		PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Scout		STARTSKILLPTS:6	CSKILL:Acrobatics|Athletics|Blend|Medicine|Notice|Resolve|Ride|Sneak|Survival|Tactics
 ###Block: Class Progression
-1																			ABILITY:Special Ability|AUTOMATIC|Stalker
-2														
-MODIFY:VAR=RoughLivingBonus|ADD|2	ABILITY:Special Ability|AUTOMATIC|Rough Living
-3														
-MODIFY:VAR=ScoutFeatCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Scout
-4														
-MODIFY:VAR=SneakAttackDice|ADD|1	ABILITY:Special Ability|AUTOMATIC|Sneak Attack
-#Block:
-1	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|2
-2	
-MODIFY:VAR=Initiative|ADD|1									
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1
-4	
-MODIFY:VAR=Initiative|ADD|1
+1							ABILITY:Special Ability|AUTOMATIC|Stalker
+2	MODIFY:VAR=RoughLivingBonus|ADD|2	ABILITY:Special Ability|AUTOMATIC|Rough Living
+3	MODIFY:VAR=ScoutFeatCount|ADD|1	ABILITY:Special Ability|AUTOMATIC|Bonus Feat ~ Scout
+4	MODIFY:VAR=SneakAttackDice|ADD|1	ABILITY:Special Ability|AUTOMATIC|Sneak Attack
+###Block:
+1	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|2
+2	MODIFY:VAR=Initiative|ADD|1		MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1
+4	MODIFY:VAR=Initiative|ADD|1
 
 ###Block: Soldier ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Class Name	Type			Max Level	Source Page		Combat bonus										Bonus to HP				Save bonus
-CLASS:Soldier	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.50	
-MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	
-MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	
-MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	
-MODIFY:VAR=BASEAB|SOLVE|value()+ECL	
-MODIFY:HP.Class|SET|12	
+CLASS:Soldier	TYPE:PC.Base.Core	MAXLEVEL:4	SOURCEPAGE:p.50	MODIFYOTHER:CHECK|Fortitude|Base|SOLVE|value()+(ECL+3)*2/5	MODIFYOTHER:CHECK|Reflex|Base|SOLVE|value()+ECL/3	MODIFYOTHER:CHECK|Will|Base|SOLVE|value()+(ECL/2)+2	MODIFY:VAR=BASEAB|SOLVE|value()+ECL	MODIFY:HP.Class|SET|12	
 # Class Name	Required Non-Monster Lvl
 CLASS:Soldier	PREPCLEVEL:MAX=4
 # Class Name	Skill Pts/Lvl	Class Skill
 CLASS:Soldier	STARTSKILLPTS:4	CSKILL:Athletics|Crafting|Intimidate|Notice|Resolve|Search|Survival|Tactics
 1
 ###Block: Class Progression
-1														
-MODIFY:VAR=FightOnCount|ADD|1					ABILITY:Special Ability|AUTOMATIC|Fight On
-2														
-MODIFY:VAR=FortunesOfWarLvl|ADD|1					ABILITY:Internal|AUTOMATIC|Fortunes of War
-3														
-MODIFY:VAR=FightOnCount|ADD|1
-4														
-MODIFY:VAR=ArmorUseLvl|ADD|1						ABILITY:Internal|AUTOMATIC|Armor Use
-#Block:
-1	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LegendScore|ADD|1
-3	
-MODIFY:VAR=AC.ClassDefense|ADD|1	
-MODIFY:VAR=Initiative|ADD|1	
-MODIFY:VAR=LifestyleScore|ADD|1	
-MODIFY:VAR=LegendScore|ADD|2
+1	MODIFY:VAR=FightOnCount|ADD|1		ABILITY:Special Ability|AUTOMATIC|Fight On
+2	MODIFY:VAR=FortunesOfWarLvl|ADD|1	ABILITY:Internal|AUTOMATIC|Fortunes of War
+3	MODIFY:VAR=FightOnCount|ADD|1
+4	MODIFY:VAR=ArmorUseLvl|ADD|1		ABILITY:Internal|AUTOMATIC|Armor Use
+###Block:
+1	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LegendScore|ADD|1
+3	MODIFY:VAR=AC.ClassDefense|ADD|1	MODIFY:VAR=Initiative|ADD|1	MODIFY:VAR=LifestyleScore|ADD|1	MODIFY:VAR=LegendScore|ADD|2
 
 
 #
